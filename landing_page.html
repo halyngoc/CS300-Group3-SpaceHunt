@@ -1,0 +1,35 @@
+<!-- SpaceHunt Browser Landing Page -->
+<!doctype html>
+<html>
+	<head>
+		<title>Group 3 SpaceHunt</title>
+	</head>
+
+	<!-- unloading of this body tag will trigger state save-->
+	<body onunload="offline_data_manager.store_data()">
+
+		<!-- US-8 Data Restore System Demo-->
+		<script src="/Users/Jamie/Documents/GitHub/CS300-Group3-SpaceHunt/US_8_files/US_8_javascript.js"></script>
+		<script>
+			// if user wants to restore data -> restore
+			offline_data_manager.restore_data()
+
+			console.log("Restore test: if changed -> merlin engine, otherwise -> raptor engine: " + module_1_demo.parameter_3)
+			
+			// startup state check
+			console.log("gameplay startup state: ")
+			module_1_demo.print_data()
+
+			// optional module_1 runtime change
+			var confirm_box = confirm("Would you like to edit game variables?")
+			if (confirm_box == true) {
+				module_1_demo.parameter_2 = 2
+				module_1_demo.parameter_3 = "raptor engine"
+				module_1_demo.values[2] = 10
+				console.log("gameplay state changed to :")
+				module_1_demo.print_data()
+			}
+		</script>
+
+	</body>
+</html>
