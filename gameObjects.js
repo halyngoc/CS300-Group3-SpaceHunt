@@ -10,13 +10,48 @@ function spaceship() {
 	this.sensor = 0;
 	this.engine = 0;
 	this.damaged = false;
+	this.wormholeRandom = true;
 	
-	this.move = function(x,y) {
-		location[0] += x;
-		location[1] += y;
+	this.move = function(direction,distance) {	
+	
+	    switch (direction)
+	    {
+	    case "0":
+		this.location[0] += distance;
+		break;
 		
-		//If out of bounds call Wormhole?
+		case "90":
+		this.location[1] += distance;
+		break;
+		
+		case "180":
+		this.location[0] -= distance;
+		break;
+		
+		case "270":
+		this.location[1] -= distance;
+		break;
+		
+		default:
+		console.log("Invalid direction.");
+		break;
 		}
+		
+		if (inWormhole())
+		{
+			warmholeWarp();
+		}
+	}
+	
+	this.inWormhole() {
+		if (this.location[0] < 0 || this.location[0] > 127 || this.location[1] < 0 || this.location[1] > 127)
+			return true;
+		return false;
+	}
+	
+	this.wormholeWarp() {
+	//TODO WRITE FUNCTION
+	}
 		
 }
 
