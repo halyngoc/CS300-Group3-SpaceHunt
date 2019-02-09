@@ -1,77 +1,57 @@
 <!doctype html>
 <html>
 <head>
-	<title>
-		CS300 SpaceHunt Dream Team 3
+    <title>
+	CS300 SpaceHunt Dream Team 3
 	</title>
-	
-	<script src="spaceMovement.js"></script>
 </head>
 
 <body>
 	<h1>
-		<b>
-			Galactic Schooner OldSpice Bridge Display
-		</b>
+		<b>Galactic Schooner OldSpice Bridge Display</b>
 	</h1>
 	
-	<center><form name=distance>
-		<label for=Distance>Distance </label>
-		<input type=text name=distance value=0>
-	</form></center>	
-	<br>
-	
-	<center><form name=direction>
-		<label for=Direction>Direction </label>
-		<select name=direction>
+	<center>
+	<form name="newTurn" onSubmit="spaceship.move(direction, distance)">
+		<label for="distance">Distance </label>
+		<input type="text" name="distance" id="distance" value=""> <br> <br>
+		
+		<label for="direction">Direction </label>
+		<select name="direction" id="direction"> <br>
 		<option> 0
 		<option> 90
 		<option> 180
 		<option> 270
-		</select>
-	</form></center>
-	<br>
-	
-	<center><form action="" method="">
-		<button name="Proceed" type="submit" value="Proceed">Proceed</button>
-	</form></center>
+		</select> <br> <br>
+		
+		<input name="proceed" type="submit" id="proceed" value="Proceed">
+		<br>
+	</form>
+	</center>	
 
 	<hr>
 	<h1> 
-		<em> Current Status </em>
+		<em>Current Status</em>
 	</h1>
 	
-	<form name=location>
-		<label for=Location>Current Location: </label>
-		<input type=text name=location value="(000,000)">
+	<form name="currentStatus">
+		<label for="location">Current Location:  </label>
+		
+		<output type="text" name="location" id="location">(0, 0)<br> <br>
+		
+		<label for="energy">Energy: </label>	
+		<output type="text" name="energy" id="energy">1000</output> <br> <br>
+		
+		<label for="supplies">Supplies: </label>
+		<output type="text" name="supplies" id="supplies">100%</output> <br> <br>
+		
+		<label for="credits">Credits: </label>
+		<output type="text" name="credits" id="credits">1000</output> <br> <br>
+		
+		<label for="message">Message: </label>
+		<output type="text" name="message" id="message"tml>All systems ready<br> <br>
 	</form>
-	<br>
 	
-	<form name=energy>
-		<label for=Energy>Energy: </label>
-		<input type=text name=energy value=1000>
-	</form>
-	<br>
-	
-	<form name=supplies>
-		<label for=Supplies>Supplies: </label>
-		<input type=text name=supplies value="100%">
-	</form>
-	<br>
-	
-	<form name=credits>
-		<label for=Credits>Credits: </label>
-		<input type=text name=credits value=1000>
-	</form>
-	<br>
-	
-	<form name=message>
-		<label for=Message>Message: </label>
-		<input type=text name=message value="All Systems Ready">
-	</form>
-	<br>
-	
-	
-	
+	<script src="gameObjects.js"></script>
 </body>
 </html>
