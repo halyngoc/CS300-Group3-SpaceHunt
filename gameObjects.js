@@ -11,6 +11,7 @@ var spaceship = {
   energyPerDistance : 10,
   damaged : false,
   wormholeRandom : false,
+  maxCoord : 127,
 		
   move : function() {	
     console.log("newTurn.direction.value is " + newTurn.direction.value);
@@ -47,7 +48,7 @@ var spaceship = {
     this.energy = this.energy - this.energyPerDistance * intDistance;
 
     //Wormhole check
-    if (this.location[0] < 0 || this.location[0] > 127 || this.location[1] < 0 || this.location[1] > 127)
+    if (this.location[0] < 0 || this.location[0] > this.maxCoord || this.location[1] < 0 || this.location[1] > this.maxCoord)
     {
       alert("You've entered a wormhole!");
       //Random wormhole behavior is between 1 and 100
@@ -80,7 +81,7 @@ function setData() {
 
 //Map could contain 128x128 celestialPoint() objects
 var gameSpace = {
-  map : [128][128]
+  map : [spaceship.maxCoord + 1][spaceship.maxCoord + 1]
 }
 
 function celestialPoint() {
