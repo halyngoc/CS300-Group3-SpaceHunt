@@ -14,12 +14,8 @@ var spaceship = {
   maxCoord : 127,
 		
   move : function() {	
-    console.log("newTurn.direction.value is " + newTurn.direction.value);
-    console.log("newTurn.distance.value is " + newTurn.distance.value);
 
     intDistance = parseInt(newTurn.distance.value);
-	
-    console.log("at the start of move x coord is " + this.location[0] + " and y coord is " + this.location[1]);
 
     switch (newTurn.direction.value)
     {
@@ -66,7 +62,6 @@ var spaceship = {
 
     setData();
 		
-    console.log("at the END of move x coord is " + this.location[0] + " and y coord is " + this.location[1]);
     return false;
   }
 
