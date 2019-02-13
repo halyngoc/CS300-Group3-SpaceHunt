@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<body bgcolor="EOFF63"></body> <!--background color -->
+<head>
+
+<title>
+  Dev Config
+  </title>
+
+<style>
+body {font-family: Arial;}
+
+/* Style the tab */
+.tab {
+  overflow: hidden;
+  border: 1px solid #218311; 
+  background-color: #218311;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #31C718;
+}
+
+/* Create an active/current tabItem shade  */
+.tab button.active {
+  background-color: #31C718;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 3px solid #31C718;
+  border-top: none;
+}
+</style>
+</head>
+
+<!-- Titles -->
+<body>
+
+<h1>
+  <b>Developer Game Configuration Options</b>
+</h1>
+
+<h3>
+  <b>State Varibles</b>
+</h3>
+
+<!-- This will call the openTab function so it can display the tab names and the content within them as buttons -->
+<div class="tab">
+  <button class="tabItem" onclick="openTab(event, 'Game Size')">Game Size</button>
+  
+  <button class="tabItem" onclick="openTab(event, 'Current Location')">Current Location</button>
+  
+  <button class="tabItem" onclick="openTab(event, 'Energy')">Energy</button>
+
+  <button class="tabItem" onclick="openTab(event, 'Supplies')">Supplies</button>
+
+  <button class="tabItem" onclick="openTab(event, 'Credits')">Credits</button>
+
+  <button class="tabItem" onclick="openTab(event, 'Wormholes')">Wormholes</button>
+
+  <button class="tabItem" onclick="openTab(event, 'Play Type')">Play Type</button>
+
+</div>
+
+
+<!-- These are the contents of the tab blocks State Varibles-->
+<div id="Game Size" class="tabcontent">
+   <p>Please enter the width and height of the desired game board below:</p>
+        <label for=width>Width:  </label>
+        <input type="text" name="width" id="width" value=""><br><br>
+        <label for=height>Height: </label>
+        <input type="text" name="height" id="height" value=""><br><br>
+</div>
+
+<div id="Current Location" class="tabcontent">
+  <p>Please enter the location you would like the ship to begin at: </p>
+      <label for=width>X-coordinate:  </label>
+      <input type="text" name="xcoor" id="xcoor" value=""><br><br>
+      <label for=height>Y-coordinate: </label>
+      <input type="text" name="ycoor" id="ycoor" value=""><br><br>   
+</div>
+
+<div id="Energy" class="tabcontent">
+  <p>Please enter the amount of energy you would like to begin with:</p>
+    <label for="energy">Energy: </label>    
+    <input type="text" name="energy" id="energy" value=""><br><br>
+</div>
+
+<div id="Supplies" class="tabcontent">
+  <p>Please enter the amount of supplies you would like to begin with:</p>
+    <label for="supplies">Supplies: </label>
+    <input type="text" name="supplies" id="supplies" value=""><br><br>
+</div>
+
+<div id="Credits" class="tabcontent">
+  <p>Please enter the amount of credits you would like to begin with:</p>
+      <label for="credits">Credits: </label>
+      <input type="text" name="credits" id="credits" value=""><br><br>
+</div>
+
+<div id="Wormholes" class="tabcontent">
+  <p>Please choose if you like the wormholes to relocate the ship to random location or a specified fixed location:</p>
+      <label for="wormhole">Wormhole behavior: </label><br>
+      <input type="radio" name="wormhole" id="Random"> Random <br><br>
+      <input type="radio" name="wormhole" id="Fixed"> Fixed <br><br>
+      
+      <label for=width>Fixed X-coordinate:  </label>
+      <input type="text" name="xcoor" id="xcoor" value=""><br><br>
+      <label for=height>Fixed Y-coordinate: </label>
+      <input type="text" name="ycoor" id="ycoor" value=""><br><br>   
+</div>
+
+<div id="Play Type" class="tabcontent">
+  <p>Please choose the play style you wish to use:</p>
+      <label for="play">Play behavior: </label><br>
+        <input type="radio" name="playtype" id="Regular"> Regular <br>
+        <input type="radio" name="playtype" id="Immortal"> Immortal <br></br>
+</div>
+
+
+<!-- This script will display each tab item created along with the content defined in the <div> blocks above -->
+<script>
+  function openTab(event, content) {
+    var i, tabcontent, tabItem;
+  
+    tabcontent = document.getElementsByClassName("tabcontent");
+  
+    for (i = 0; i < tabcontent.length; i++) 
+    {
+      tabcontent[i].style.display = "none";
+    }
+  
+    tabItem = document.getElementsByClassName("tabItem");
+  
+    for (i = 0; i < tabItem.length; i++) 
+    {
+      tabItem[i].className = tabItem[i].className.replace(" active", "");
+    }
+  
+    document.getElementById(content).style.display = "block";
+    event.currentTarget.className += " active";
+  }
+
+</script>
+   
+<form>
+      <br><br>
+      <input type="submit" value="Submit">
+</form>
+
+
+</body>
+</html> 
