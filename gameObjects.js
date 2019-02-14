@@ -12,12 +12,12 @@ var spaceship = {
   damaged : false,
   wormholeRandom : false,
   maxCoord : 127,
-		
+
   move : function() {	
 
     intDistance = parseInt(newTurn.distance.value);
 
-    switch (newTurn.direction.value)
+    switch (newTurn.direction.value) 
     {
     case "0":
     this.location[0] += intDistance;
@@ -61,17 +61,17 @@ var spaceship = {
     }
 
     setData();
-		
+
     return false;
   }
 
 }
 
 function setData() {
-  currentStatus.location.value = "(" + spaceship.location[0] + "," + spaceship.location[1] + ")";
-  currentStatus.energy.value = spaceship.energy;
-  currentStatus.supplies.value = spaceship.supplies + "%";
-  currentStatus.credits.value = spaceship.credits;
+  document.getElementById("location").innerHTML = "Current Location: (" + spaceship.location[0] + ", " + spaceship.location[1] + ")";
+  document.getElementById("energy").innerHTML = "Energy: " + spaceship.energy;
+  document.getElementById("supplies").innerHTML = "Supplies: " + spaceship.supplies + "%";
+  document.getElementById("credits").innerHTML = "Credits: " + spaceship.credits;
 }
 
 //Map could contain 128x128 celestialPoint() objects
