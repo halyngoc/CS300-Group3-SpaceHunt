@@ -62,9 +62,9 @@ body {font-family: Arial;}
 
 <!-- This will call the openTab function so it can display the tab names and the content within them as buttons -->
 <div class="tab">
-  <button class="tabItem" onclick="openTab(event, 'Game Size')">Game Size</button>
+  <button class="tabItem" onclick="openTab(event, 'GameSize')">Game Size</button>
   
-  <button class="tabItem" onclick="openTab(event, 'Current Location')">Current Location</button>
+  <button class="tabItem" onclick="openTab(event, 'CurrentLocation')">Current Location</button>
   
   <button class="tabItem" onclick="openTab(event, 'Energy')">Energy</button>
 
@@ -74,26 +74,22 @@ body {font-family: Arial;}
 
   <button class="tabItem" onclick="openTab(event, 'Wormholes')">Wormholes</button>
 
-  <button class="tabItem" onclick="openTab(event, 'Play Type')">Play Type</button>
+  <button class="tabItem" onclick="openTab(event, 'PlayStyle')">Play Style</button>
 
 </div>
 
 
 <!-- These are the contents of the tab blocks State Varibles-->
-<div id="Game Size" class="tabcontent">
-   <p>Please enter the width and height of the desired game board below:</p>
-        <label for=width>Width:  </label>
-        <input type="text" name="width" id="width" value=""><br><br>
-        <label for=height>Height: </label>
-        <input type="text" name="height" id="height" value=""><br><br>
+<div id="GameSize" class="tabcontent">
+   <p>Please enter the width and height of the desired game board as Width, Height:</p>
+        <label for=size>Game Board Dimensions:  </label>
+        <input type="text" name="Dim" id="Dimensions" value=""><br><br>
 </div>
 
-<div id="Current Location" class="tabcontent">
-  <p>Please enter the location you would like the ship to begin at: </p>
-      <label for=width>X-coordinate:  </label>
-      <input type="text" name="xcoor" id="xcoor" value=""><br><br>
-      <label for=height>Y-coordinate: </label>
-      <input type="text" name="ycoor" id="ycoor" value=""><br><br>   
+<div id="CurrentLocation" class="tabcontent">
+  <p>Please enter the location you would like the ship to begin at as Xcoor, Ycoor: </p>
+      <label for=loc>Starting Location:  </label>
+      <input type="text" name="loc" id="Location" value=""><br><br>  
 </div>
 
 <div id="Energy" class="tabcontent">
@@ -115,21 +111,19 @@ body {font-family: Arial;}
 </div>
 
 <div id="Wormholes" class="tabcontent">
-  <p>Please choose if you like the wormholes to relocate the ship to random location or a specified fixed location:</p>
+  <p>Please choose if you like the wormholes to relocate the ship to random location or a specified fixed location in the form Xcoor, Ycoor:</p>
       <label for="wormhole">Wormhole behavior: </label><br>
-      <input type="radio" name="wormhole" id="Random"> Random <br><br>
-      <input type="radio" name="wormhole" id="Fixed"> Fixed <br><br>
+      <input type="radio" name="worm" id="Random"> Random <br><br>
+      <input type="radio" name="worm" id="Fixed"> Fixed <br><br>
       
-      <label for=width>Fixed X-coordinate:  </label>
-      <input type="text" name="xcoor" id="xcoor" value=""><br><br>
-      <label for=height>Fixed Y-coordinate: </label>
-      <input type="text" name="ycoor" id="ycoor" value=""><br><br>   
+      <label for=fixedworm>Fixed Wormhole Location:  </label>
+      <input type="text" name="wormF" id="FixedWormhole" value=""><br><br>  
 </div>
 
-<div id="Play Type" class="tabcontent">
+<div id="PlayStyle" class="tabcontent">
   <p>Please choose the play style you wish to use:</p>
       <label for="play">Play behavior: </label><br>
-        <input type="radio" name="playtype" id="Regular"> Regular <br>
+        <input type="radio" name="playtype" id="Mortal"> Mortal <br>
         <input type="radio" name="playtype" id="Immortal"> Immortal <br></br>
 </div>
 
@@ -159,10 +153,42 @@ body {font-family: Arial;}
 
 </script>
    
+
+
+
 <form>
       <br><br>
-      <input type="submit" value="Submit">
+      <input type="button" value="Submit" onclick="setData();">
+      
+
+      <script type="text/javascript">
+        function setData()
+        {
+                var MapSize = document.getElementById("Dimensions").value;
+                var StartLocation = document.getElementById("Location").value;
+                var Eng = document.getElementById("energy").value;
+                var Supl = document.getElementById("supplies").value;
+                var Cred = document.getElementById("credits").value;
+                var RandWrm = document.getElementById("Random").value         
+                var FixWrm = document.getElementById("Fixed").value;
+                var FixWrmLocation = document.getElementById("FixedWormhole").value;                            
+                var PlayStyleMor = document.getElementById("Mortal").value;
+                var PlayStyleImor = document.getElementById("Immortal").value;
+                        
+                var StateConfig = [MapSize, StartLocation, Eng, Supl, Cred, RandWrm, FixWrm, FixWrmLocation, PlayStyleMor, PlayStyleImor];
+
+                //can implement a for loop to check each index and determine if all indexes are empty, alert the user they must input data, also can use that to determine which radio button is selected
+
+                //also include maybe a cancel button that would navigate back to the main page
+
+                alert(StateConfig.join("\n"));
+
+
+        }
+      </script>
 </form>
+
+
 
 
 </body>
