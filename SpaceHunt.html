@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>
+  SpaceHunt Dream Team 3
+  </title>
+</head>
+
+<body>
+  <h1>
+    <b>Galactic Schooner OldSpice Bridge Display</b>
+  </h1>
+
+  <center><form id="newTurn">
+    <label for="distance">Distance </label>
+    <input type="text" name="distance" id="distance" value="0"> <br> <br>
+
+    <label for="direction">Direction </label>
+    <select name="direction" id="direction"> <br>
+    <option> 0
+    <option> 90
+    <option> 180
+    <option> 270
+    </select><br><br>
+
+    <input type="button" onmousedown="spaceship.move()" id="proceed" value="Proceed"><br>
+  </form></center>
+
+  <hr>
+  <h1> 
+    <em>Current Status</em>
+  </h1>
+
+  <form id="currentStatus">
+    <p id="location">Current Location: (0, 0)</p>
+    
+    <p id="energy">Energy: 1000</p>	
+
+    <p id="supplies">Supplies: 100%</p>
+
+    <p id="credits">Credits: 1000</p>
+
+    <p id="All systems ready">Message: All systems ready</p>
+  </form>
+	
+  <script src="gameObjects.js"></script>
+</body>
+</html>
