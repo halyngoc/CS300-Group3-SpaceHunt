@@ -76,7 +76,7 @@ function setData() {
 
 //Map could contain 128x128 celestialPoint() objects
 var gameSpace = {
-  map : [spaceship.maxCoord + 1][spaceship.maxCoord + 1];
+  map : [spaceship.maxCoord + 1][spaceship.maxCoord + 1],
 }
 
 function celestialPoint() {
