@@ -95,7 +95,7 @@ function celestialPoint() {
 }
 
 //Listener for 'Proceed' button
-document.getElementById("proceed").onclick = () =>
+document.getElementById("proceed").onclick = function()
 {
   spaceship.move();
 }
