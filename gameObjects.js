@@ -20,7 +20,6 @@ var spaceship = {
     this.supplies -= 2;
     this.energy = this.energy - this.energyPerDistance * intDistance;
 
-    //Wormhole check
     wormholeCheck();
 
     setData();
@@ -71,7 +70,7 @@ function wormholeCheck() {
     {
       spaceship.location[0] = 75;
       spaceship.location[1] = 75;
-    }	
+    }
   }
 }
 
