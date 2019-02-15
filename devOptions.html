@@ -86,13 +86,13 @@ body {font-family: Arial;}
 
 <!-- These are the contents of the tab blocks State Varibles-->
 <div id="GameSize" class="tabcontent">
-   <p>Please enter the width and height of the desired game board as Width, Height:</p>
+   <p>Please enter the width and height of the desired game board as Width, Height, for example 15, 20</p>
         <label for=size>Game Board Dimensions:  </label>
         <input type="text" name="Dim" id="Dimensions" value=""><br><br>
 </div>
 
 <div id="CurrentLocation" class="tabcontent">
-  <p>Please enter the location you would like the ship to begin at as Xcoor, Ycoor: </p>
+  <p>Please enter the location you would like the ship to begin at as Xcoor, Ycoor, for example 20, 25 <br> However, keep in mind that this will be limited by the game size.</p>
       <label for=loc>Starting Location:  </label>
       <input type="text" name="loc" id="Location" value=""><br><br>  
 </div>
@@ -175,25 +175,51 @@ body {font-family: Arial;}
         {
                 var MapSize = document.getElementById("Dimensions").value;
                 var StartLocation = document.getElementById("Location").value;
+
+                MapSize = MapSize.split(',');
+                StartLocation = StartLocation.split(',');
+                //window.alert(MapSize.join("\n"));
+                //window.alert(StartLocation.join("\n"));
+
+
+                if(MapSize[0] < StartLocation[0] || MapSize[1] < StartLocation[1])
+                {
+                  window.alert("Please fix the Current Location values inputted so they are within the Game Size bounds you've set.")
+                  return;
+                }
+
                 var Eng = document.getElementById("energy").value;
                 var Supl = document.getElementById("supplies").value;
                 var Cred = document.getElementById("credits").value;
-                var RandWrm = document.getElementById("Random").value         
-                var FixWrm = document.getElementById("Fixed").value;
-                var FixWrmLocation = document.getElementById("FixedWormhole").value;                            
-                var PlayStyleMor = document.getElementById("Mortal").value;
-                var PlayStyleImor = document.getElementById("Immortal").value;
+                                
+                if(document.getElementById("Random").checked)
+                {
+                  var RandWrm = 1;
+                }
+                else if (document.getElementById("Fixed").checked) 
+                {
+                  var RandWrm =0;
+                  var FixWrmLocation = document.getElementById("FixedWormhole").value;
+                }
 
-                var parser = ","
-                var StateConfig = MapSize.concat(parser, StartLocation, parser, Eng, parser, Supl, parser, Cred, parser, RandWrm, parser, FixWrm, parser, FixWrmLocation, parser, PlayStyleMor, parser, PlayStyleMor);
+                if(document.getElementById("Mortal").checked)
+                {
+                  var PlayStyleMor = 1;
+                }
+                else if (document.getElementById("Immortal").checked) 
+                {
+                  var PlayStyleMor = 0;
+                }
+                
+
+                var parser = "#"
+                var StateConfig = MapSize[0].concat(parser, MapSize[1], parser, StartLocation[0], parser, StartLocation[1], parser, Eng, parser, Supl, parser, Cred, parser, RandWrm, parser, FixWrmLocation, parser, PlayStyleMor);
 
                 alert(StateConfig);
 
                 localStorage.clear();
                 localStorage.setItem('Config', StateConfig);
                 close();
-                
-                //store in session storage, have a check in js file, if empty load the original, otherwise load whats in session storage.
         }
 
         function close()
