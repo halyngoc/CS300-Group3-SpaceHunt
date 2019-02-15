@@ -60,6 +60,8 @@ body {font-family: Arial;}
   <b>State Varibles</b>
 </h3>
 
+
+
 <!-- This will call the openTab function so it can display the tab names and the content within them as buttons -->
 <div class="tab">
   <button class="tabItem" onclick="openTab(event, 'GameSize')">Game Size</button>
@@ -77,6 +79,9 @@ body {font-family: Arial;}
   <button class="tabItem" onclick="openTab(event, 'PlayStyle')">Play Style</button>
 
 </div>
+
+
+
 
 
 <!-- These are the contents of the tab blocks State Varibles-->
@@ -128,6 +133,10 @@ body {font-family: Arial;}
 </div>
 
 
+
+
+
+
 <!-- This script will display each tab item created along with the content defined in the <div> blocks above -->
 <script>
   function openTab(event, content) {
@@ -158,10 +167,10 @@ body {font-family: Arial;}
 
 <form>
       <br><br>
-      <input type="button" value="Submit" onclick="setData();">
+      <input type="button" name="SubmitData" value="Submit Data" onclick="setData();">
       
 
-      <script type="text/javascript">
+      <script  type="text/javascript">
         function setData()
         {
                 var MapSize = document.getElementById("Dimensions").value;
@@ -174,16 +183,23 @@ body {font-family: Arial;}
                 var FixWrmLocation = document.getElementById("FixedWormhole").value;                            
                 var PlayStyleMor = document.getElementById("Mortal").value;
                 var PlayStyleImor = document.getElementById("Immortal").value;
-                        
-                var StateConfig = [MapSize, StartLocation, Eng, Supl, Cred, RandWrm, FixWrm, FixWrmLocation, PlayStyleMor, PlayStyleImor];
 
-                //can implement a for loop to check each index and determine if all indexes are empty, alert the user they must input data, also can use that to determine which radio button is selected
+                var parser = ","
+                var StateConfig = MapSize.concat(parser, StartLocation, parser, Eng, parser, Supl, parser, Cred, parser, RandWrm, parser, FixWrm, parser, FixWrmLocation, parser, PlayStyleMor, parser, PlayStyleMor);
 
-                //also include maybe a cancel button that would navigate back to the main page
+                alert(StateConfig);
 
-                alert(StateConfig.join("\n"));
+                localStorage.clear();
+                localStorage.setItem('Config', StateConfig);
+                close();
+                
+                //store in session storage, have a check in js file, if empty load the original, otherwise load whats in session storage.
+        }
 
-
+        function close()
+        {
+            var devWindow = window.open("SpaceHunt.html", "_self");
+            devWindow.close();
         }
       </script>
 </form>

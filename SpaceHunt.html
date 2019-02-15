@@ -1,8 +1,8 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
   <title>
-  CS300 SpaceHunt Dream Team 3
+  SpaceHunt Dream Team 3
   </title>
 </head>
 
@@ -11,7 +11,7 @@
     <b>Galactic Schooner OldSpice Bridge Display</b>
   </h1>
 
-  <center><form name="newTurn">
+  <center><form id="newTurn">
     <label for="distance">Distance </label>
     <input type="text" name="distance" id="distance" value="0"> <br> <br>
 
@@ -23,39 +23,35 @@
     <option> 270
     </select><br><br>
 
-    <input name="proceed" type="button" onmousedown="spaceship.move()" id="proceed" value="Proceed"><br>
-  </form></center>	
+    <!-- This button calls spaceship.move() -->
+    <input type="button" id="proceed" value="Proceed"><br>
+  </form></center>
+
   <hr>
   <h1> 
     <em>Current Status</em>
   </h1>
 
-  <form name="currentStatus">
-    <label for="location">Current Location:  </label>
-    <input type="text" name="location" id="location" value="(0,0)"><br><br>
+  <form id="currentStatus">
+    <p id="location">Current Location: (0, 0)</p>
 
-    <label for="energy">Energy: </label>	
-    <input type="text" name="energy" id="energy" value="1000"><br><br>
+    <p id="energy">Energy: 1000</p>	
 
-    <label for="supplies">Supplies: </label>
-    <input type="text" name="supplies" id="supplies" value="100%"><br><br>
+    <p id="supplies">Supplies: 100%</p>
 
-    <label for="credits">Credits: </label>
-    <input type="text" name="credits" id="credits" value="1000"><br><br>
+    <p id="credits">Credits: 1000</p>
 
-    <label for="message">Message: </label>
-    <input type="text" name="message" id="message" value="All systems ready"><br><br>
+    <p id="All systems ready">Message: All systems ready</p>
   </form>
-
-  
+	
   <h2>
     <em>Developer Option</em>
   </h2>
     
-      <p>Are you a Developer?</p>
-      <a href="devOptions.html"><button>I'm a Dev</button></a>
-      
-	
+  <p>Are you a Developer?</p>
+  <a href="devOptions.html"><button>I'm a Dev</button></a>
+
+  
   <script src="gameObjects.js"></script>
 </body>
 </html>
