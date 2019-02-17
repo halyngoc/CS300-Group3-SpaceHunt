@@ -64,7 +64,7 @@ var spaceship = {
 
     return false;
   }
-}
+};
 
 function setData() {
   document.getElementById("location").innerHTML = "Current Location: (" + spaceship.location[0] + ", " + spaceship.location[1] + ")";
