@@ -145,4 +145,6 @@ document.getElementById("sensorsBtn").onclick = function() {
   }
 
   displayNearbyCPs(2);
+  spaceship.supplies -= 2;
+  setData();
 };
