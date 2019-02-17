@@ -86,7 +86,7 @@ window.onload = function() {
   for (var i = 0; i <= spaceship.maxCoord; i++) {
     var CPRow = [];
     for (var j = 0; j <= spaceship.maxCoord; j++) {
-      CPRow.push(new celestialPoint());
+      CPRow.push(new celestialPoint([i, j]));
     }
     gameSpace.push(CPRow);
   }
@@ -95,13 +95,23 @@ window.onload = function() {
   spaceship.displayCurrentCP();
 };
 
-function celestialPoint() {
 
-  this.planet = null;
-  this.asteroid = null;
+function celestialPoint(location) {
+  this.location = location,
+  this.celestialObjects = [];
 
   this.toHTML = function() {
-    return "<p>Empty space...</p>";
+    var html = "<h2>Location: (" + this.location[0] + ", " + this.location[1] + ")</h2>";
+
+    if (this.celestialObjects.length === 0) {
+      html += "<p>Empty space...</p>";
+    } else {
+      this.celestialObjects.forEach(function(co) {
+        html += "<p>" + co + "</p>"
+      });
+    }
+
+    return html;
   };
 	
 	//Incomplete object constructor for celestial points
@@ -139,8 +149,7 @@ document.getElementById("sensorsBtn").onclick = function() {
 
     // All nearby CPs
     getNearbyCPCoords(range).forEach(function(CPCoords) {
-      document.getElementById("nearbyCPs").innerHTML += "<h2>Location: (" + CPCoords[0]+ ", " + CPCoords[1] + ")</h2>" +
-        gameSpace[CPCoords[0]][CPCoords[1]].toHTML();
+      document.getElementById("nearbyCPs").innerHTML += gameSpace[CPCoords[0]][CPCoords[1]].toHTML();
     });
   }
 
