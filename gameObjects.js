@@ -144,7 +144,7 @@ function celestialPoint(location) {
       this.celestialObjects.forEach(function(co) {
         html += "<p>" + co + "</p>";
       });
-    };
+    }
 
     return html;
   };
