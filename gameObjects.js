@@ -40,11 +40,24 @@ var spaceship = {
     break;
     }
 		
-    Collisions(this.location[0], this.location[1], this.damaged);
+    var retCol = Collisions(this.location[0], this.location[1]);
     this.supplies -= 2;
     checkSupplies(this.supplies);
+    if(this.damaged === true){
+      alert("Your ship is damaged. Energy consumed at 5 times. Repair ASAP.");
+      this.energy = this.energy - this.energyPerDistance * intDistance * 5;
+    }
+    else{
     this.energy = this.energy - this.energyPerDistance * intDistance;
+    }
     checkEnergy(this.energy);
+    if(retCol === 1){
+      this.damaged = true;
+    }
+    if(retCol === 2){
+      this.energy = 1000;
+      this.supplies += 2;
+    }
 
     //Wormhole check
     if (this.location[0] < 0 || this.location[0] > this.maxCoord || this.location[1] < 0 || this.location[1] > this.maxCoord)

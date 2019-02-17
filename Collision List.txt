@@ -4,7 +4,7 @@
 3	meteor storm		78		26
 4	asteroid		28		94
 5	asteroid		48		97
-6	asteroid		92		94
+6	asteroid		2		94
 7	asteroid		59		10
 8	asteroid		68		9
 9	asteroid		15		12
@@ -12,7 +12,7 @@
 11	asteroid		2		11
 12	asteroid		8		44
 13	asteroid		77		1
-14	freighter		34		92
+14	freighter		24		39
 15	freighter		62		11
 16	freighter		33		2
 17	freighter		5		9
