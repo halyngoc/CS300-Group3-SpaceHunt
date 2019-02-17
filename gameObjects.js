@@ -188,7 +188,11 @@ document.getElementById("sensorsBtn").onclick = function() {
     });
   }
 
-  displayNearbyCPs(2);
+  // Range can be improved to 5, for now it's hardcoded to be 2
+  var range = 2;
+
+  var nearbyCPCoords = getNearbyCPCoords(range);
+  displayNearbyCPs(range);
 
   // Handle supplies lost
   spaceship.supplies -= 2;
