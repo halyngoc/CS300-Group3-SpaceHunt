@@ -97,7 +97,7 @@ window.onload = function() {
 
 
 function celestialPoint(location) {
-  this.location = location,
+  this.location = location;
   this.celestialObjects = [];
 
   this.toHTML = function() {
@@ -107,7 +107,7 @@ function celestialPoint(location) {
       html += "<p>Empty space...</p>";
     } else {
       this.celestialObjects.forEach(function(co) {
-        html += "<p>" + co + "</p>"
+        html += "<p>" + co + "</p>";
       });
     }
 
