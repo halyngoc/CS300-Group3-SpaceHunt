@@ -12,34 +12,11 @@ var spaceship = {
   damaged : false,
   wormholeRandom : false,
   maxCoord : 127,
-		
+
   move : function() {	
 
-    intDistance = parseInt(newTurn.distance.value);
+    directionCheck();
 
-    switch (newTurn.direction.value)
-    {
-    case "0":
-    this.location[0] += intDistance;
-    break;
-		
-    case "90":
-    this.location[1] += intDistance;
-    break;
-
-    case "180":
-    this.location[0] -= intDistance;
-    break;
-
-    case "270":
-    this.location[1] -= intDistance;
-    break;
-
-    default:
-    console.log("Invalid direction.");
-    break;
-    }
-		
     var retCol = Collisions(this.location[0], this.location[1]);
     this.supplies -= 2;
     checkSupplies(this.supplies);
@@ -59,41 +36,71 @@ var spaceship = {
       this.supplies += 2;
     }
 
-    //Wormhole check
-    if (this.location[0] < 0 || this.location[0] > this.maxCoord || this.location[1] < 0 || this.location[1] > this.maxCoord)
-    {
-      alert("You've entered a wormhole!");
-      //Random wormhole behavior is between 1 and 100
-      if (this.wormholeRandom) 
-      {
-        this.location[0] = Math.floor((Math.random() * 100) + 1);
-        this.location[1] = Math.floor((Math.random() * 100) + 1);
-      }
-      else
-      {
-        this.location[0] = 75;
-        this.location[1] = 75;
-      }	
-    }
+    wormholeCheck();
 
     setData();
-		
+
     return false;
   }
 
 }
 
+function directionCheck() {
+  intDistance = parseInt(document.getElementById("distance").value);
+
+  switch (document.getElementById("direction").value) 
+  {
+  case "0":
+  spaceship.location[0] += intDistance;
+  break;
+		
+  case "90":
+  spaceship.location[1] += intDistance;
+  break;
+
+  case "180":
+  spaceship.location[0] -= intDistance;
+  break;
+
+  case "270":
+  spaceship.location[1] -= intDistance;
+  break;
+
+  default:
+  console.log("Invalid direction.");
+  break;
+  }
+}
+
+function wormholeCheck() {
+  if (spaceship.location[0] < 0 || spaceship.location[0] > spaceship.maxCoord || spaceship.location[1] < 0 || spaceship.location[1] > spaceship.maxCoord)
+  {
+    alert("You've entered a wormhole!");
+    //Random wormhole behavior is between 1 and 100
+    if (this.wormholeRandom) 
+    {
+      spaceship.location[0] = Math.floor((Math.random() * 100) + 1);
+      spaceship.location[1] = Math.floor((Math.random() * 100) + 1);
+    }
+    else
+    {
+      spaceship.location[0] = 75;
+      spaceship.location[1] = 75;
+    }
+  }
+}
+
 function setData() {
-  currentStatus.location.value = "(" + spaceship.location[0] + "," + spaceship.location[1] + ")";
-  currentStatus.energy.value = spaceship.energy;
-  currentStatus.supplies.value = spaceship.supplies + "%";
-  currentStatus.credits.value = spaceship.credits;
+  document.getElementById("location").innerHTML = "Current Location: (" + spaceship.location[0] + ", " + spaceship.location[1] + ")";
+  document.getElementById("energy").innerHTML = "Energy: " + spaceship.energy;
+  document.getElementById("supplies").innerHTML = "Supplies: " + spaceship.supplies + "%";
+  document.getElementById("credits").innerHTML = "Credits: " + spaceship.credits;
 }
 
 //Map could contain 128x128 celestialPoint() objects
 var gameSpace = {
   map : [spaceship.maxCoord + 1][spaceship.maxCoord + 1]
-}
+};
 
 function celestialPoint() {
 
@@ -101,4 +108,10 @@ function celestialPoint() {
   this.asteroid = false;
 	
 	//Incomplete object constructor for celestial points
+}
+
+//Listener for 'Proceed' button
+document.getElementById("proceed").onclick = function()
+{
+  spaceship.move();
 }

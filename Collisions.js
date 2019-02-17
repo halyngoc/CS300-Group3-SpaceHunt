@@ -32,7 +32,7 @@ function Collisions(x, y) {
 
   // Freighter
   if((x == 24 && y == 39) || (x == 62 && y == 11) || (x == 33 && y == 2) || (x == 55 && y == 9)){
-    alert("Freighter found! Energy 100%! Supplies +2!\n");
+    alert("Freighter found! Energy 100%! Supplies +2%!\n");
     return 2;
   }  
 
