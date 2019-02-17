@@ -62,7 +62,13 @@ var spaceship = {
 
     setData();
 
+    this.displayCurrentCP();
+
     return false;
+  },
+
+  displayCurrentCP : function() {
+    document.getElementById("currentCPcontent").innerHTML = gameSpace[this.location[0]][this.location[1]].toString();
   }
 };
 
@@ -84,12 +90,19 @@ window.onload = function() {
     }
     gameSpace.push(CPRow);
   }
+
+  // Display starting CP
+  spaceship.displayCurrentCP();
 };
 
 function celestialPoint() {
 
   this.planet = null;
   this.asteroid = null;
+
+  this.toString = function() {
+    return "<p>Empty space...</p>";
+  };
 	
 	//Incomplete object constructor for celestial points
 }
