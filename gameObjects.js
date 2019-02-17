@@ -79,6 +79,28 @@ function setData() {
   document.getElementById("credits").innerHTML = "Credits: " + spaceship.credits;
 }
 
+var celestialMap = {
+  celestialPoints : [],
+
+  // Returns formatted HTML of CM
+  toHTML : function() {
+    var html = "";
+    this.celestialPoints.forEach(function(cp) {
+      html += cp.toHTML();
+    });
+    return html;
+  },
+
+  // Display on html page
+  display : function() {
+    document.getElementById("celestialMapContent").innerHTML = this.toHTML();
+  },
+
+  // Import/Export CM @TODO
+  loadFromString : function() {},
+  toString : function() {}
+};
+
 //Map could contain 128x128 celestialPoint() objects
 var gameSpace = [];
 window.onload = function() {
@@ -93,8 +115,21 @@ window.onload = function() {
 
   // Display starting CP
   spaceship.displayCurrentCP();
-};
 
+  // Set locations of the 3 planets
+  // For now the locations are hardcoded
+  gameSpace[2][0].celestialObjects.push("Planet Celeron");
+  gameSpace[5][1].celestialObjects.push("Planet Xeon");
+  gameSpace[6][5].celestialObjects.push("Planet Ryzen");
+
+  // Add the 3 planets to CM
+  celestialMap.celestialPoints.push(gameSpace[2][0]);
+  celestialMap.celestialPoints.push(gameSpace[5][1]);
+  celestialMap.celestialPoints.push(gameSpace[6][5]);
+
+  // Display starting CM with the 3 planets on it
+  celestialMap.display();
+};
 
 function celestialPoint(location) {
   this.location = location;
@@ -109,7 +144,7 @@ function celestialPoint(location) {
       this.celestialObjects.forEach(function(co) {
         html += "<p>" + co + "</p>";
       });
-    }
+    };
 
     return html;
   };
@@ -154,6 +189,11 @@ document.getElementById("sensorsBtn").onclick = function() {
   }
 
   displayNearbyCPs(2);
+
+  // Handle supplies lost
   spaceship.supplies -= 2;
   setData();
+
+  // Update CM @TODO Add newly found COs to CM
+  celestialMap.display();
 };
