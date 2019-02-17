@@ -127,6 +127,11 @@ window.onload = function() {
   celestialMap.celestialPoints.add(gameSpace[5][1]);
   celestialMap.celestialPoints.add(gameSpace[6][5]);
 
+  // For debugging purposses, here are some celestial objects
+  gameSpace[6][5].celestialObjects.push("asteroid");
+  gameSpace[0][1].celestialObjects.push("asteroid");
+  gameSpace[3][2].celestialObjects.push("asteroid");
+
   // Display starting CM with the 3 planets on it
   celestialMap.display();
 };
@@ -191,13 +196,18 @@ document.getElementById("sensorsBtn").onclick = function() {
   // Range can be improved to 5, for now it's hardcoded to be 2
   var range = 2;
 
-  var nearbyCPCoords = getNearbyCPCoords(range);
   displayNearbyCPs(range);
 
   // Handle supplies lost
   spaceship.supplies -= 2;
   setData();
 
-  // Update CM @TODO Add newly found COs to CM
+  // Update CM
+  getNearbyCPCoords(range).forEach(function(coords) {
+    var cp = gameSpace[coords[0]][coords[1]];
+    if (cp.celestialObjects.length !== 0) {
+      celestialMap.celestialPoints.add(cp);
+    }
+  });
   celestialMap.display();
 };
