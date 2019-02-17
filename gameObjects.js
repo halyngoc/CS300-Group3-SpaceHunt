@@ -64,7 +64,6 @@ var spaceship = {
 
     return false;
   }
-
 }
 
 function setData() {
