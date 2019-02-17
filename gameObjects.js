@@ -74,14 +74,22 @@ function setData() {
 }
 
 //Map could contain 128x128 celestialPoint() objects
-var gameSpace = {
-  map : [spaceship.maxCoord + 1][spaceship.maxCoord + 1],
-}
+var gameSpace = [];
+window.onload = function() {
+  // Initialize gameSpace
+  for (let i = 0; i <= spaceship.maxCoord; i++) {
+    var CPRow = [];
+    for (let i = 0; i <= spaceship.maxCoord; i++) {
+      CPRow.push(new celestialPoint());
+    }
+    gameSpace.push(CPRow);
+  }
+};
 
 function celestialPoint() {
 
-  this.planet = false;
-  this.asteroid = false;
+  this.planet = null;
+  this.asteroid = null;
 	
 	//Incomplete object constructor for celestial points
 }
