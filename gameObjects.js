@@ -80,7 +80,7 @@ function setData() {
 }
 
 var celestialMap = {
-  celestialPoints : [],
+  celestialPoints : new Set(),
 
   // Returns formatted HTML of CM
   toHTML : function() {
@@ -123,9 +123,9 @@ window.onload = function() {
   gameSpace[6][5].celestialObjects.push("Planet Ryzen");
 
   // Add the 3 planets to CM
-  celestialMap.celestialPoints.push(gameSpace[2][0]);
-  celestialMap.celestialPoints.push(gameSpace[5][1]);
-  celestialMap.celestialPoints.push(gameSpace[6][5]);
+  celestialMap.celestialPoints.add(gameSpace[2][0]);
+  celestialMap.celestialPoints.add(gameSpace[5][1]);
+  celestialMap.celestialPoints.add(gameSpace[6][5]);
 
   // Display starting CM with the 3 planets on it
   celestialMap.display();
