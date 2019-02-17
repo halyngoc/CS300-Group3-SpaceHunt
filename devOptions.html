@@ -191,12 +191,13 @@ body {font-family: Arial;}
                                 
                 if(document.getElementById("Random").checked){
                   var RandWrm = 1;
+                  var FixWrmLocation = [0, 0];
 
                 } else if (document.getElementById("Fixed").checked) {
                   var RandWrm =0;
                   var FixWrmLocation = document.getElementById("FixedWormhole").value;
                   FixWrmLocation = FixWrmLocation.split(',');
-
+                  
                   if(MapSize[0] < FixWrmLocation[0] || MapSize[1] < FixWrmLocation[1]){
                     window.alert("Please change the Fixed Wormhole location values inputted so they are within the Game Size bounds set.")
                     return;
@@ -211,11 +212,11 @@ body {font-family: Arial;}
                 }
                 
                 var parser = "#"
-                var StateConfig = MapSize[0].concat(parser, MapSize[1], parser, StartLocation[0], parser, StartLocation[1], parser, Eng, parser, Supl, parser, Cred, parser, RandWrm, parser, PlayStyleMor, parser, FixWrmLocation[0], parse, FixWrmLocation[1]);
-
+              
+                var StateConfig = MapSize[0].concat(parser, MapSize[1], parser, StartLocation[0], parser, StartLocation[1], parser, Eng, parser, Supl, parser, Cred, parser, RandWrm, parser, FixWrmLocation[0], parser, FixWrmLocation[1], parser, PlayStyleMor);
+                
                 //alert(StateConfig);
 
-                localStorage.clear();
                 localStorage.setItem('Config', StateConfig);
                 close();
         }

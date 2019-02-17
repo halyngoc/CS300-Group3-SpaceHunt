@@ -4,43 +4,43 @@
 if('Config' in localStorage)
 {
   var Config = localStorage.getItem('Config');
-
+  localStorage.removeItem('Config');
+  
   Config = Config.split('#');
+  var PlayStyle = Config[10];
+
+  localStorage.setItem('PlayType', PlayStyle);  //save play style choice for supply and energy checks
 
   for(var i = 0; i < Config.length; i++)
   {
     Config[i] = parseInt(Config[i], 10);
   }
-  window.alert(Config.join("\n"));
+  //window.alert(Config.join("\n"));
 
-  localStorage.clear();
+  if(Config[7] == 1) {
+    var Rand = true;
+  }else {
+    var Rand = false;
+  }
 
-  var Rand = Config[7].value == 1 ? true : false; //determine if wormhole is rand or fixed since it returns a 1 for random set
-  
   var devConfig = true;
-
 }
-                                //dont forget, to modify nickolais file for the mortal, immortal value so i'll need to local storage again
-
 
 //values wont update with dev config until at least one move have been made
 
 var spaceship = {
-
-//do parsing in here, add var for immortal, and modify nikolais file to check
-  
   //use the ternary operator for choosing values since if statements cant be used 
   
   location : [devConfig ? Config[2] : 0, devConfig ? Config[3] : 0],         //1 //will need to split the 2 values for location
-  energy : devConfig ? Config[4] : 1000,            //2
-  supplies : devConfig ? Config[5] : 100,           //3
-  credits : devConfig ? Config[6] : 1000,           //4
+  energy : devConfig ? Config[4] : 1000,        
+  supplies : devConfig ? Config[5] : 100,       
+  credits : devConfig ? Config[6] : 1000,       
   sensor : 0,
   energyPerDistance : 10,
   damaged : false,
-  wormholeRandom : devConfig ? Rand : false,   //if false puts you at 75 75 always
-  maxCoord : 127,           //map size ask simon if this means 127 x127
-  
+  wormholeRandom : devConfig ? Rand : true,   //if dev config has been made this can be set to T or F otherwise it will default to random behavoir 
+  maxCoordX : devConfig ? Config[0] : 127,           
+  maxCoordY : devConfig ? Config[1] : 127,
 
   move : function() {	
 
@@ -86,21 +86,19 @@ function directionCheck() {
 }
 
 function wormholeCheck() {
-  if (spaceship.location[0] < 0 || spaceship.location[0] > spaceship.maxCoord || spaceship.location[1] < 0 || spaceship.location[1] > spaceship.maxCoord)
+    
+  if (spaceship.location[0] < 0 || spaceship.location[0] > spaceship.maxCoordX || spaceship.location[1] < 0 || spaceship.location[1] > spaceship.maxCoordY)
   {
-    alert("You've entered a wormhole!");
-    //Random wormhole behavior is between 1 and 100
-    if (this.wormholeRandom) 
+    //Random wormhole behavior is between 1 and 127 (Map Size)
+    if (spaceship.wormholeRandom == true) 
     {       //random factor will need to be hanged by game size
-      spaceship.location[0] = Math.floor((Math.random() * devConfig ? Config[0] : 127) + 1);    //set to either the base set map size or the dev config map size
-      spaceship.location[1] = Math.floor((Math.random() * devConfig ? Config[1] : 127) + 1);
-
-      window.alert("Random wormhole is true")
+      spaceship.location[0] = Math.floor((Math.random() * spaceship.maxCoordX) + 1);    //set to either the base set map size or the dev config map size
+      spaceship.location[1] = Math.floor((Math.random() * spaceship.maxCoordY) + 1);
     }
     else
     {
-      spaceship.location[0] = Config[9];     //where the fixed worm hole dest is
-      spaceship.location[1] = Config[10];    //fixed set location x and y coor
+      spaceship.location[0] = Config[8];     //where the fixed worm hole dest is
+      spaceship.location[1] = Config[9];    //fixed set location x and y coor
     }
   }
 }
@@ -114,7 +112,8 @@ function setData() {
 
 //Map could contain 128x128 celestialPoint() objects unless there is a dev config set
 var gameSpace = {
-  map : [devConfig ? Config[0] : spaceship.maxCoord + 1][devConfig ? Config[1] : spaceship.maxCoord + 1]
+  
+  map : [spaceship.maxCoordX + 1][spaceship.maxCoordY+ 1]
 };
 
 function celestialPoint() {
