@@ -68,7 +68,7 @@ var spaceship = {
   },
 
   displayCurrentCP : function() {
-    document.getElementById("currentCPcontent").innerHTML = gameSpace[this.location[0]][this.location[1]].toString();
+    document.getElementById("currentCPcontent").innerHTML = gameSpace[this.location[0]][this.location[1]].toHTML();
   }
 };
 
@@ -100,7 +100,7 @@ function celestialPoint() {
   this.planet = null;
   this.asteroid = null;
 
-  this.toString = function() {
+  this.toHTML = function() {
     return "<p>Empty space...</p>";
   };
 	
@@ -140,7 +140,7 @@ document.getElementById("sensorsBtn").onclick = function() {
     // All nearby CPs
     getNearbyCPCoords(range).forEach(function(CPCoords) {
       document.getElementById("nearbyCPs").innerHTML += "<h2>Location: (" + CPCoords[0]+ ", " + CPCoords[1] + ")</h2>" +
-        "<p>" + gameSpace[CPCoords[0]][CPCoords[1]].toString() + "</p>";
+        gameSpace[CPCoords[0]][CPCoords[1]].toHTML();
     });
   }
 
