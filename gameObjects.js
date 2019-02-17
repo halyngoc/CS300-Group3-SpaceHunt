@@ -83,9 +83,9 @@ function setData() {
 var gameSpace = [];
 window.onload = function() {
   // Initialize gameSpace
-  for (let i = 0; i <= spaceship.maxCoord; i++) {
+  for (var i = 0; i <= spaceship.maxCoord; i++) {
     var CPRow = [];
-    for (let i = 0; i <= spaceship.maxCoord; i++) {
+    for (var j = 0; j <= spaceship.maxCoord; j++) {
       CPRow.push(new celestialPoint());
     }
     gameSpace.push(CPRow);
