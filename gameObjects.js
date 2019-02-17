@@ -106,3 +106,43 @@ function celestialPoint() {
 	
 	//Incomplete object constructor for celestial points
 }
+
+document.getElementById("sensorsBtn").onclick = function() {
+  function isInGameSpace(coords) {
+    var x = coords[0];
+    var y = coords[1];
+    return x >= 0 && x <= spaceship.maxCoord && y >= 0 && y <= spaceship.maxCoord;
+  }
+
+  function getNearbyCPCoords(range) {
+    var currentX = spaceship.location[0];
+    var currentY = spaceship.location[1];
+    var nearbyCPCoords = [];
+
+    // Could be more optimized but I don't really care for now
+    for (var i = - range; i <= range; i++) {
+      for (var j = - range; j <= range; j++) {
+        var coords = [currentX + i, currentY + j];
+
+        if (isInGameSpace(coords) && JSON.stringify(coords) != JSON.stringify([currentX, currentY])) {
+          nearbyCPCoords.push(coords);
+        }
+      }
+    }
+
+    return nearbyCPCoords;
+  }
+
+  function displayNearbyCPs(range) {
+    // Header
+    document.getElementById("nearbyCPs").innerHTML = "<h1><em>Nearby Celestial Points</em></h1>";
+
+    // All nearby CPs
+    getNearbyCPCoords(range).forEach(function(CPCoords) {
+      document.getElementById("nearbyCPs").innerHTML += "<h2>Location: (" + CPCoords[0]+ ", " + CPCoords[1] + ")</h2>" +
+        "<p>" + gameSpace[CPCoords[0]][CPCoords[1]].toString() + "</p>";
+    });
+  }
+
+  displayNearbyCPs(2);
+};
