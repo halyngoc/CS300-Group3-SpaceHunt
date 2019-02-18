@@ -1,15 +1,20 @@
-function checkEnergy(currentEnergy)
+function checkEnergyAndSupplies(currEnergy, currSupplies)
 {
-  if(currentEnergy <= 0)
+  if((currEnergy <= 0) && (currSupplies <= 0))
   {
-    if(!alert("You Ran out of Energy\n" + "GAME OVER")){window.location.reload();}
+    if(!alert("You ran out of Energy and Supplies\n" + "GAME OVER")){window.location.reload();}
+    return true;
   }
-}
-
-function checkSupplies(currentSupplies)
-{
-  if(currentSupplies <= 0)
+  else if(currEnergy <= 0)
   {
-    if(!alert("You Ran out of Supplies\n" + "GAME OVER")){window.location.reload();}
+    if(!alert("You ran out of Energy\n" + "GAME OVER")){window.location.reload();}
+    return true;
   }
+  else if(currSupplies <= 0)
+  {
+    if(!alert("You ran out of Supplies\n" + "GAME OVER")){window.location.reload();}
+    return true;
+  }
+  else
+    return false;
 }
