@@ -1,5 +1,4 @@
-//Example on how we could have shared definitions of our objects
-//This is obviously incomplete, but an idea that may help us get started
+
 
 var spaceship = {
 
@@ -61,7 +60,7 @@ function wormholeCheck() {
   {
     alert("You've entered a wormhole!");
     //Random wormhole behavior is between 1 and 100
-    if (this.wormholeRandom) 
+    if (spaceship.wormholeRandom) 
     {
       spaceship.location[0] = Math.floor((Math.random() * 100) + 1);
       spaceship.location[1] = Math.floor((Math.random() * 100) + 1);
