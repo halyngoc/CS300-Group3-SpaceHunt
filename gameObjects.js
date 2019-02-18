@@ -23,7 +23,6 @@ if('Config' in localStorage)
     var Rand = false;
   }
 
-  setData();
   var devConfig = true;
 }
 
@@ -43,6 +42,7 @@ var spaceship = {
   wormholeRandom : devConfig ? Rand : true,   //if dev config has been made this can be set to T or F otherwise it will default to random behavoir 
   maxCoordX : devConfig ? Config[0] : 127,           
   maxCoordY : devConfig ? Config[1] : 127,
+
 
   move : function() {	
 
@@ -67,19 +67,19 @@ var spaceship = {
     switch (document.getElementById("direction").value) 
     {
     case "0":
-    this.location[0] += intDistance;
+    spaceship.location[0] += intDistance;
     break;
     
     case "90":
-    this.location[1] += intDistance;
+    spaceship.location[1] += intDistance;
     break;
 
     case "180":
-    this.location[0] -= intDistance;
+    spaceship.location[0] -= intDistance;
     break;
 
     case "270":
-    this.location[1] -= intDistance;
+    spaceship.location[1] -= intDistance;
     break;
 
     default:
@@ -90,19 +90,19 @@ var spaceship = {
 
   function wormholeCheck() {
  //Wormhole check
-    if (this.location[0] < 0 || this.location[0] > this.maxCoordX || this.location[1] < 0 || this.location[1] > this.maxCoordY)
+    if (spaceship.location[0] < 0 || spaceship.location[0] > spaceship.maxCoordX || spaceship.location[1] < 0 || spaceship.location[1] > spaceship.maxCoordY)
     {
       alert("You've entered a wormhole!");
       //Random wormhole behavior is between 1 and 100, //set to either the base set map size or the dev config map size
-      if (this.wormholeRandom == true) 
+      if (spaceship.wormholeRandom == true) 
       {
-        this.location[0] = Math.floor((Math.random() * this.maxCoordX) + 1);
-        this.location[1] = Math.floor((Math.random() * this.maxCoordY) + 1);
+        spaceship.location[0] = Math.floor((Math.random() * spaceship.maxCoordX) + 1);
+        spaceship.location[1] = Math.floor((Math.random() * spaceship.maxCoordY) + 1);
       }
       else
       {
-        this.location[0] = Config[8];
-        this.location[1] = Config[9];
+        spaceship.location[0] = Config[8];
+        spaceship.location[1] = Config[9];
       } 
     }
   }

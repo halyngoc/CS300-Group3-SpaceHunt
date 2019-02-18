@@ -167,11 +167,11 @@ body {font-family: Arial;}
 
 <form>
       <br><br>
-      <input type="button" name="SubmitData" value="Submit Data" onclick="setData();">
+      <input type="button" name="SubmitData" value="Submit Data" onclick="setStateData();">
       
 
       <script  type="text/javascript">
-        function setData()
+        function setStateData()
         {
                 var MapSize = document.getElementById("Dimensions").value;
                 var StartLocation = document.getElementById("Location").value;
@@ -180,15 +180,16 @@ body {font-family: Arial;}
                 //window.alert(MapSize.join("\n"));
                 //window.alert(StartLocation.join("\n"));
 
-                if(MapSize[0] < StartLocation[0] || MapSize[1] < StartLocation[1]) {
+                /*if(MapSize[0] < StartLocation[0] || MapSize[1] < StartLocation[1]) {
                   window.alert("Please fix the Current Location values inputted so they are within the Game Size bounds set.")
                   return;
                 }
-
+                */
                 var Eng = document.getElementById("energy").value;
                 var Supl = document.getElementById("supplies").value;
                 var Cred = document.getElementById("credits").value;
                                 
+
                 if(document.getElementById("Random").checked){
                   var RandWrm = 1;
                   var FixWrmLocation = [0, 0];
@@ -198,10 +199,11 @@ body {font-family: Arial;}
                   var FixWrmLocation = document.getElementById("FixedWormhole").value;
                   FixWrmLocation = FixWrmLocation.split(',');
                   
-                  if(MapSize[0] < FixWrmLocation[0] || MapSize[1] < FixWrmLocation[1]){
+                  /*if(MapSize[0] < FixWrmLocation[0] || MapSize[1] < FixWrmLocation[1]){
                     window.alert("Please change the Fixed Wormhole location values inputted so they are within the Game Size bounds set.")
                     return;
                   }
+                  */
                 }
 
                 if(document.getElementById("Mortal").checked){
