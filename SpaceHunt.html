@@ -23,8 +23,7 @@
     <option> 270
     </select><br><br>
 
-    <!-- This button calls spaceship.move() -->
-    <input type="button" id="proceed" value="Proceed"><br>
+    <input type="button" onmousedown="spaceship.move()" id="proceed" value="Proceed"><br>
   </form></center>
 
   <hr>
@@ -33,13 +32,13 @@
   </h1>
 
   <form id="currentStatus">
-    <p id="Location">Current Location: (0, 0)</p>
+    <p id="location">Current Location: (0, 0)</p>
+    
+    <p id="energy">Energy: 1000</p>	
 
-    <p id="Energy">Energy: 1000</p>	
+    <p id="supplies">Supplies: 100%</p>
 
-    <p id="Supplies">Supplies: 100%</p>
-
-    <p id="Credits">Credits: 1000</p>
+    <p id="credits">Credits: 1000</p>
 
     <p id="All systems ready">Message: All systems ready</p>
   </form>
@@ -50,9 +49,9 @@
     
   <p>Are you a Developer?</p>
   <a href="devOptions.html"><button>I'm a Dev</button></a>
-
   
   <script src="gameObjects.js"></script>
   <script src="checkEnergyAndSupplies.js"></script>
+
 </body>
 </html>

@@ -29,6 +29,7 @@ if('Config' in localStorage)
 //values wont update with dev config until at least one move have been made
 
 var spaceship = {
+
   //use the ternary operator for choosing values since if statements cant be used 
   
   location : [devConfig ? Config[2] : 0, devConfig ? Config[3] : 0],         //1 //will need to split the 2 values for location
@@ -44,12 +45,50 @@ var spaceship = {
 
   move : function() {	
 
-    directionCheck();
+    intDistance = parseInt(newTurn.distance.value);
+
+    switch (newTurn.direction.value) 
+    {
+    case "0":
+    this.location[0] += intDistance;
+    break;
+		
+    case "90":
+    this.location[1] += intDistance;
+    break;
+
+    case "180":
+    this.location[0] -= intDistance;
+    break;
+
+    case "270":
+    this.location[1] -= intDistance;
+    break;
+
+    default:
+    console.log("Invalid direction.");
+    break;
+    }
 		
     this.supplies -= 2;
     this.energy = this.energy - this.energyPerDistance * intDistance;
 
-    wormholeCheck();
+    //Wormhole check
+    if (this.location[0] < 0 || this.location[0] > this.maxCoordX || this.location[1] < 0 || this.location[1] > this.maxCoordY)
+    {
+      alert("You've entered a wormhole!");
+      //Random wormhole behavior is between 1 and 100, //set to either the base set map size or the dev config map size
+      if (this.wormholeRandom == true) 
+      {
+        this.location[0] = Math.floor((Math.random() * this.maxCoordX) + 1);
+        this.location[1] = Math.floor((Math.random() * this.maxCoordY) + 1);
+      }
+      else
+      {
+        this.location[0] = Config[8];
+        this.location[1] = Config[9];
+      }	
+    }
 
     setData();
 
@@ -58,63 +97,17 @@ var spaceship = {
 
 }
 
-function directionCheck() {
-  intDistance = parseInt(document.getElementById("distance").value);
-
-  switch (document.getElementById("direction").value) 
-  {
-  case "0":
-  spaceship.location[0] += intDistance;
-  break;
-		
-  case "90":
-  spaceship.location[1] += intDistance;
-  break;
-
-  case "180":
-  spaceship.location[0] -= intDistance;
-  break;
-
-  case "270":
-  spaceship.location[1] -= intDistance;
-  break;
-
-  default:
-  console.log("Invalid direction.");
-  break;
-  }
-}
-
-function wormholeCheck() {
-    
-  if (spaceship.location[0] < 0 || spaceship.location[0] > spaceship.maxCoordX || spaceship.location[1] < 0 || spaceship.location[1] > spaceship.maxCoordY)
-  {
-    //Random wormhole behavior is between 1 and 127 (Map Size)
-    if (spaceship.wormholeRandom == true) 
-    {       //random factor will need to be hanged by game size
-      spaceship.location[0] = Math.floor((Math.random() * spaceship.maxCoordX) + 1);    //set to either the base set map size or the dev config map size
-      spaceship.location[1] = Math.floor((Math.random() * spaceship.maxCoordY) + 1);
-    }
-    else
-    {
-      spaceship.location[0] = Config[8];     //where the fixed worm hole dest is
-      spaceship.location[1] = Config[9];    //fixed set location x and y coor
-    }
-  }
-}
-
 function setData() {
-  document.getElementById("Location").innerHTML = "Current Location: (" + spaceship.location[0] + ", " + spaceship.location[1] + ")";
-  document.getElementById("Energy").innerHTML = "Energy: " + spaceship.energy;
-  document.getElementById("Supplies").innerHTML = "Supplies: " + spaceship.supplies + "%";
-  document.getElementById("Credits").innerHTML = "Credits: " + spaceship.credits;
+  document.getElementById("location").innerHTML = "Current Location: (" + spaceship.location[0] + ", " + spaceship.location[1] + ")";
+  document.getElementById("energy").innerHTML = "Energy: " + spaceship.energy;
+  document.getElementById("supplies").innerHTML = "Supplies: " + spaceship.supplies + "%";
+  document.getElementById("credits").innerHTML = "Credits: " + spaceship.credits;
 }
 
-//Map could contain 128x128 celestialPoint() objects unless there is a dev config set
+//Map could contain 128x128 celestialPoint() objects
 var gameSpace = {
-  
-  map : [spaceship.maxCoordX + 1][spaceship.maxCoordY+ 1]
-};
+  map : [spaceship.maxCoordX + 1][spaceship.maxCoordY + 1],
+}
 
 function celestialPoint() {
 
@@ -122,10 +115,4 @@ function celestialPoint() {
   this.asteroid = false;
 	
 	//Incomplete object constructor for celestial points
-}
-
-//Listener for 'Proceed' button
-document.getElementById("proceed").onclick = function()
-{
-  spaceship.move();
 }
