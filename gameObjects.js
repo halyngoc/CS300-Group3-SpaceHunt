@@ -23,6 +23,7 @@ if('Config' in localStorage)
     var Rand = false;
   }
 
+  setData();
   var devConfig = true;
 }
 
@@ -45,14 +46,30 @@ var spaceship = {
 
   move : function() {	
 
-    intDistance = parseInt(newTurn.distance.value);
+    directionCheck();
+		
+    this.supplies -= 2;
+    this.energy = this.energy - this.energyPerDistance * intDistance;
 
-    switch (newTurn.direction.value) 
+    wormholeCheck();
+
+    setData();
+
+    return false;
+  }
+
+}
+
+  function directionCheck() {
+
+    intDistance = parseInt(document.getElementById("distance").value);
+
+    switch (document.getElementById("direction").value) 
     {
     case "0":
     this.location[0] += intDistance;
     break;
-		
+    
     case "90":
     this.location[1] += intDistance;
     break;
@@ -69,11 +86,10 @@ var spaceship = {
     console.log("Invalid direction.");
     break;
     }
-		
-    this.supplies -= 2;
-    this.energy = this.energy - this.energyPerDistance * intDistance;
+  }
 
-    //Wormhole check
+  function wormholeCheck() {
+ //Wormhole check
     if (this.location[0] < 0 || this.location[0] > this.maxCoordX || this.location[1] < 0 || this.location[1] > this.maxCoordY)
     {
       alert("You've entered a wormhole!");
@@ -87,15 +103,9 @@ var spaceship = {
       {
         this.location[0] = Config[8];
         this.location[1] = Config[9];
-      }	
+      } 
     }
-
-    setData();
-
-    return false;
   }
-
-}
 
 function setData() {
   document.getElementById("location").innerHTML = "Current Location: (" + spaceship.location[0] + ", " + spaceship.location[1] + ")";
@@ -105,7 +115,6 @@ function setData() {
 }
 
 //Map could contain 128x128 celestialPoint() objects
-
 var gameSpace = { map : [spaceship.maxCoordX + 1][spaceship.maxCoordY + 1] };
 
 function celestialPoint() {
@@ -114,4 +123,10 @@ function celestialPoint() {
   this.asteroid = false;
 	
 	//Incomplete object constructor for celestial points
+}
+
+//Listener for 'Proceed' button
+document.getElementById("proceed").onclick = function()
+{
+  spaceship.move();
 }
