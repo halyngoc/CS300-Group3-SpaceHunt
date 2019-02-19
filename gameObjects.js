@@ -53,7 +53,6 @@ var spaceship = {
     if(checkEnergyAndSupplies(this.energy, this.supplies) == true)
       return;
 
-
     wormholeCheck();
 
     setData();
@@ -61,7 +60,7 @@ var spaceship = {
     return false;
   }
 
-}
+};
 
   function directionCheck() {
 
