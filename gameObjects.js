@@ -50,6 +50,8 @@ var spaceship = {
 		
     this.supplies -= 2;
     this.energy = this.energy - this.energyPerDistance * intDistance;
+    if(checkEnergyAndSupplies(this.energy, this.supplies) == true)
+      return;
 
     wormholeCheck();
 
@@ -58,7 +60,7 @@ var spaceship = {
     return false;
   }
 
-}
+};
 
   function directionCheck() {
 
