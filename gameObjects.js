@@ -51,7 +51,8 @@ var spaceship = {
 
 
     var retCol = Collisions(this.location[0], this.location[1]);
-    this.supplies -= 2;
+    supplyDecrease();
+    
     if(this.damaged === true){
       alert("Your ship is damaged. Energy consumed at 5 times. Repair ASAP.");
       this.energy = this.energy - this.energyPerDistance * intDistance * 5;
@@ -77,7 +78,6 @@ var spaceship = {
   }
 
 };
-
 
   function directionCheck() {
 
@@ -127,11 +127,15 @@ var spaceship = {
       } 
     }
   }
+  
+  function supplyDecrease() {
+    spaceship.supplies = Math.floor(spaceship.supplies * 0.98)
+  }
 
 function setData() {
   document.getElementById("location").innerHTML = "Current Location: (" + spaceship.location[0] + ", " + spaceship.location[1] + ")";
   document.getElementById("energy").innerHTML = "Energy: " + spaceship.energy;
-  document.getElementById("supplies").innerHTML = "Supplies: " + spaceship.supplies + "%";
+  document.getElementById("supplies").innerHTML = "Supplies: " + spaceship.supplies;
   document.getElementById("credits").innerHTML = "Credits: " + spaceship.credits;
 }
 
