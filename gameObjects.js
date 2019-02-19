@@ -129,7 +129,7 @@ var spaceship = {
   }
   
   function supplyDecrease() {
-    spaceship.supplies = Math.floor(spaceship.supplies * 0.98)
+    spaceship.supplies = Math.floor(spaceship.supplies * 0.98);
   }
 
 function setData() {
