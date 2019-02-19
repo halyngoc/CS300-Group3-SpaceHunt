@@ -46,12 +46,28 @@ var spaceship = {
 
   move : function() {	
 
+
     directionCheck();
-		
+
+
+    var retCol = Collisions(this.location[0], this.location[1]);
     this.supplies -= 2;
+    if(this.damaged === true){
+      alert("Your ship is damaged. Energy consumed at 5 times. Repair ASAP.");
+      this.energy = this.energy - this.energyPerDistance * intDistance * 5;
+    }
+    else{
     this.energy = this.energy - this.energyPerDistance * intDistance;
+    }
     if(checkEnergyAndSupplies(this.energy, this.supplies) == true)
       return;
+    if(retCol === 1){
+      this.damaged = true;
+    }
+    if(retCol === 2){
+      this.energy = 1000;
+      this.supplies += 2;
+    }
 
     wormholeCheck();
 
@@ -61,6 +77,7 @@ var spaceship = {
   }
 
 };
+
 
   function directionCheck() {
 
@@ -88,7 +105,9 @@ var spaceship = {
     console.log("Invalid direction.");
     break;
     }
+
   }
+
 
   function wormholeCheck() {
  //Wormhole check
@@ -119,6 +138,7 @@ function setData() {
 //Map could contain 128x128 celestialPoint() objects
 var gameSpace = { map : [spaceship.maxCoordX + 1][spaceship.maxCoordY + 1] };
 
+
 function celestialPoint() {
 
   this.planet = false;
@@ -127,8 +147,10 @@ function celestialPoint() {
 	//Incomplete object constructor for celestial points
 }
 
+
 //Listener for 'Proceed' button
 document.getElementById("proceed").onclick = function()
 {
   spaceship.move();
 }
+
