@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<body bgcolor="EOFF63"></body> <!--background color -->
+<head>
+
+<title>
+  Dev Config
+  </title>
+
+<style>
+body {font-family: Arial;}
+
+/* Style the tab */
+.tab {
+  overflow: hidden;
+  border: 1px solid #218311; 
+  background-color: #218311;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #31C718;
+}
+
+/* Create an active/current tabItem shade  */
+.tab button.active {
+  background-color: #31C718;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 3px solid #31C718;
+  border-top: none;
+}
+</style>
+</head>
+
+<!-- Titles -->
+<body>
+
+<h1>
+  <b>Developer Game Configuration Options</b>
+</h1>
+
+<h3>
+  <b>State Varibles</b>
+</h3>
+
+
+
+<!-- This will call the openTab function so it can display the tab names and the content within them as buttons -->
+<div class="tab">
+  <button class="tabItem" onclick="openTab(event, 'GameSize')">Game Size</button>
+  
+  <button class="tabItem" onclick="openTab(event, 'CurrentLocation')">Current Location</button>
+  
+  <button class="tabItem" onclick="openTab(event, 'Energy')">Energy</button>
+
+  <button class="tabItem" onclick="openTab(event, 'Supplies')">Supplies</button>
+
+  <button class="tabItem" onclick="openTab(event, 'Credits')">Credits</button>
+
+  <button class="tabItem" onclick="openTab(event, 'Wormholes')">Wormholes</button>
+
+  <button class="tabItem" onclick="openTab(event, 'PlayStyle')">Play Style</button>
+
+</div>
+
+
+
+
+
+<!-- These are the contents of the tab blocks State Varibles-->
+<div id="GameSize" class="tabcontent">
+   <p>Please enter the width and height of the desired game board as Width, Height, for example 15, 20</p>
+        <label for=size>Game Board Dimensions:  </label>
+        <input type="text" name="Dim" id="Dimensions" value=""><br><br>
+</div>
+
+<div id="CurrentLocation" class="tabcontent">
+  <p>Please enter the location you would like the ship to begin at as Xcoor, Ycoor, for example 20, 25 <br> However, keep in mind that this will be limited by the game size.</p>
+      <label for=loc>Starting Location:  </label>
+      <input type="text" name="loc" id="Location" value=""><br><br>  
+</div>
+
+<div id="Energy" class="tabcontent">
+  <p>Please enter the amount of energy you would like to begin with:</p>
+    <label for="energy">Energy: </label>    
+    <input type="text" name="energy" id="energy" value=""><br><br>
+</div>
+
+<div id="Supplies" class="tabcontent">
+  <p>Please enter the amount of supplies you would like to begin with:</p>
+    <label for="supplies">Supplies: </label>
+    <input type="text" name="supplies" id="supplies" value=""><br><br>
+</div>
+
+<div id="Credits" class="tabcontent">
+  <p>Please enter the amount of credits you would like to begin with:</p>
+      <label for="credits">Credits: </label>
+      <input type="text" name="credits" id="credits" value=""><br><br>
+</div>
+
+<div id="Wormholes" class="tabcontent">
+  <p>Please choose if you like the wormholes to relocate the ship to random location or a specified fixed location in the form Xcoor, Ycoor:</p>
+      <label for="wormhole">Wormhole behavior: </label><br>
+      <input type="radio" name="worm" id="Random"> Random <br><br>
+      <input type="radio" name="worm" id="Fixed"> Fixed <br><br>
+      
+      <label for=fixedworm>Fixed Wormhole Location:  </label>
+      <input type="text" name="wormF" id="FixedWormhole" value=""><br><br>  
+</div>
+
+<div id="PlayStyle" class="tabcontent">
+  <p>Please choose the play style you wish to use:</p>
+      <label for="play">Play behavior: </label><br>
+        <input type="radio" name="playtype" id="Mortal"> Mortal <br>
+        <input type="radio" name="playtype" id="Immortal"> Immortal <br></br>
+</div>
+
+
+
+
+
+
+<!-- This script will display each tab item created along with the content defined in the <div> blocks above -->
+<script>
+  function openTab(event, content) {
+    var i, tabcontent, tabItem;
+  
+    tabcontent = document.getElementsByClassName("tabcontent");
+  
+    for (i = 0; i < tabcontent.length; i++) 
+    {
+      tabcontent[i].style.display = "none";
+    }
+  
+    tabItem = document.getElementsByClassName("tabItem");
+  
+    for (i = 0; i < tabItem.length; i++) 
+    {
+      tabItem[i].className = tabItem[i].className.replace(" active", "");
+    }
+  
+    document.getElementById(content).style.display = "block";
+    event.currentTarget.className += " active";
+  }
+
+</script>
+   
+
+
+
+<form>
+      <br><br>
+      <input type="button" name="SubmitData" value="Submit Data" onclick="setStateData();">
+      
+
+      <script  type="text/javascript">
+        function setStateData()
+        {
+                var MapSize = document.getElementById("Dimensions").value;
+                var StartLocation = document.getElementById("Location").value;
+                MapSize = MapSize.split(',');
+                StartLocation = StartLocation.split(',');
+                //window.alert(MapSize.join("\n"));
+                //window.alert(StartLocation.join("\n"));
+
+                /*if(MapSize[0] < StartLocation[0] || MapSize[1] < StartLocation[1]) {
+                  window.alert("Please fix the Current Location values inputted so they are within the Game Size bounds set.")
+                  return;
+                }
+                */
+                var Eng = document.getElementById("energy").value;
+                var Supl = document.getElementById("supplies").value;
+                var Cred = document.getElementById("credits").value;
+                                
+
+                if(document.getElementById("Random").checked){
+                  var RandWrm = 1;
+                  var FixWrmLocation = [0, 0];
+
+                } else if (document.getElementById("Fixed").checked) {
+                  var RandWrm =0;
+                  var FixWrmLocation = document.getElementById("FixedWormhole").value;
+                  FixWrmLocation = FixWrmLocation.split(',');
+                  
+                  /*if(MapSize[0] < FixWrmLocation[0] || MapSize[1] < FixWrmLocation[1]){
+                    window.alert("Please change the Fixed Wormhole location values inputted so they are within the Game Size bounds set.")
+                    return;
+                  }
+                  */
+                }
+
+                if(document.getElementById("Mortal").checked){
+                  var PlayStyleMor = 1;
+
+                } else if (document.getElementById("Immortal").checked) {
+                  var PlayStyleMor = 0;
+                }
+                
+                var parser = "#"
+              
+                var StateConfig = MapSize[0].concat(parser, MapSize[1], parser, StartLocation[0], parser, StartLocation[1], parser, Eng, parser, Supl, parser, Cred, parser, RandWrm, parser, FixWrmLocation[0], parser, FixWrmLocation[1], parser, PlayStyleMor);
+                
+                //alert(StateConfig);
+
+                localStorage.setItem('Config', StateConfig);
+                close();
+        }
+
+        function close()
+        {
+            var devWindow = window.open("SpaceHunt.html", "_self");
+            devWindow.close();
+        }
+      </script>
+</form>
+
+
+
+
+</body>
+</html> 
