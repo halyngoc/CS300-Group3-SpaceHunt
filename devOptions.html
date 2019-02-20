@@ -2,62 +2,13 @@
 <html>
 
 <head>
-  <!-- <link rel="registerStyle" type="text/css" href="devformStyle.css"> -->
-<style type="text/css">
-
-  body {
-  font-family: Arial;
-  background-color: black;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-.menu {
-  padding: 16px;
-  background-color: #C0D860;
-}
-
-input[type=text] {
-  width: 100%;
-  padding: 15px;
-  margin: 5px 0 22px 0;
-  display: inline-block;
-  border: none;
-  background: #F0F0D8;
-}
-
-hr {
-  border: 3px solid black;
-  margin-bottom: 25px;
-}
-
-/* Set a style for the submit button */
-.SubmitData {
-  background-color: #36D23C;
-  color: black;
-  padding: 16px 100px;
-  margin: 8px 0;
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
-  width: 100%;
-  opacity: 1;
-}
-
-.SubmitData:hover {
-  opacity: 1;
-  background-color: #39FF41;
-}
-
-</style>
+ <link rel="stylesheet" href="devformStyle.css"> 
 </head>
 
 <body>
 
 <form>
-  <div class="menu">
+  <div id="menu">
     <h1>
       <b>Developer Game Configuration Options</b>
     </h1>
@@ -92,7 +43,7 @@ hr {
 
 
     <br><br>
-    <a type="submit" class="SubmitData" href="SpaceHunt.html" target="_self" onclick="setStateData();">Submit Data</a> 
+    <a type="submit" id="devSubmitBtn" href="SpaceHunt.html" target="_self" onclick="setStateData();">Submit Data</a> 
 
 </div>
 
