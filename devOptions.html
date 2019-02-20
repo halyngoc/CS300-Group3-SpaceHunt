@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html>
-<head>
 
-<style>
-body {
+<head>
+  <!-- <link rel="registerStyle" type="text/css" href="devformStyle.css"> -->
+<style type="text/css">
+
+  body {
   font-family: Arial;
   background-color: black;
 }
@@ -51,6 +53,7 @@ hr {
 
 </style>
 </head>
+
 <body>
 
 <form>
@@ -62,7 +65,7 @@ hr {
     <hr>
 
     <label for="size"><b>Game Board Dimensions: </b></label>
-    <input <input type="text" name="Dim" id="Dimensions" value="128,128">
+    <input type="text" name="Dim" id="Dimensions" value="128,128">
 
     <label for=loc><b>Starting Location: </b></label>
     <input type="text" name="loc" id="Location" value="100,100">
@@ -77,80 +80,75 @@ hr {
     <input type="text" name="credits" id="Credits" value="1000">
 
     <label for="wormhole"><b>Wormhole behavior: </b></label><br>
-      <input type="radio" name="worm" id="Random" checked="checked"> Random <br>
+      <input type="radio" name="worm" id="Random" checked> Random <br>
       <input type="radio" name="worm" id="Fixed"> Fixed <br><br>
 
     <label for=fixedworm><b>Fixed Wormhole Location: </b></label>
     <input type="text" name="wormF" id="FixedWormhole" value="20,20">
 
     <label for="play"><b>Play behavior: </b></label><br>
-        <input type="radio" name="playtype" id="Mortal" checked="checked"> Mortal <br>
+        <input type="radio" name="playtype" id="Mortal" checked> Mortal <br>
         <input type="radio" name="playtype" id="Immortal"> Immortal <br></br>
 
 
     <br><br>
     <a type="submit" class="SubmitData" href="SpaceHunt.html" target="_self" onclick="setStateData();">Submit Data</a> 
 
-
 </div>
-</form>  
 
-<form>
-<script  type="text/javascript">
+
+<script type="text/javascript">
         
-        function setStateData()
-        {
-                var MapSize = document.getElementById("Dimensions").value;
-                var StartLocation = document.getElementById("Location").value;
-                MapSize = MapSize.split(',');
-                StartLocation = StartLocation.split(',');
-                //window.alert(MapSize.join("\n"));
-                //window.alert(StartLocation.join("\n"));
+  function setStateData()
+  {
+    var MapSize = document.getElementById("Dimensions").value;
+    var StartLocation = document.getElementById("Location").value;
+    MapSize = MapSize.split(',');
+    StartLocation = StartLocation.split(',');
+    //window.alert(MapSize.join("\n"));
+    //window.alert(StartLocation.join("\n"));
 
-                /*if(MapSize[0] < StartLocation[0] || MapSize[1] < StartLocation[1]) {
-                  window.alert("Please fix the Current Location values inputted so they are within the Game Size bounds set.")
-                  return;
-                }
-                */
-                var Eng = document.getElementById("Energy").value;
-                var Supl = document.getElementById("Supplies").value;
-                var Cred = document.getElementById("Credits").value;
-                                
+    /*if(MapSize[0] < StartLocation[0] || MapSize[1] < StartLocation[1]) {
+      window.alert("Please fix the Current Location values inputted so they are within the Game Size bounds set.")
+      return;
+    }
+    */
+    var Eng = document.getElementById("Energy").value;
+    var Supl = document.getElementById("Supplies").value;
+    var Cred = document.getElementById("Credits").value;
+                    
 
-                if(document.getElementById("Random").checked){
-                  var RandWrm = 1;
-                  var FixWrmLocation = [0, 0];
+    if(document.getElementById("Random").checked){
+      var RandWrm = 1;
+      var FixWrmLocation = [0, 0];
 
-                } else if (document.getElementById("Fixed").checked) {
-                  var RandWrm =0;
-                  var FixWrmLocation = document.getElementById("FixedWormhole").value;
-                  FixWrmLocation = FixWrmLocation.split(',');
-                  
-                  /*if(MapSize[0] < FixWrmLocation[0] || MapSize[1] < FixWrmLocation[1]){
-                    window.alert("Please change the Fixed Wormhole location values inputted so they are within the Game Size bounds set.")
-                    return;
-                  }
-                  */
-                }
+    } else if (document.getElementById("Fixed").checked) {
+      var RandWrm =0;
+      var FixWrmLocation = document.getElementById("FixedWormhole").value;
+      FixWrmLocation = FixWrmLocation.split(',');
+      
+      /*if(MapSize[0] < FixWrmLocation[0] || MapSize[1] < FixWrmLocation[1]){
+        window.alert("Please change the Fixed Wormhole location values inputted so they are within the Game Size bounds set.")
+        return;
+      }
+      */
+    }
 
-                if(document.getElementById("Mortal").checked){
-                  var PlayStyleMor = 1;
+    if(document.getElementById("Mortal").checked){
+      var PlayStyleMor = 1;
 
-                } else if (document.getElementById("Immortal").checked) {
-                  var PlayStyleMor = 0;
-                }
-                
-                var parser = "#"
-              
-                var StateConfig = MapSize[0].concat(parser, MapSize[1], parser, StartLocation[0], parser, StartLocation[1], parser, Eng, parser, Supl, parser, Cred, parser, RandWrm, parser, FixWrmLocation[0], parser, FixWrmLocation[1], parser, PlayStyleMor);
-                
-                //alert(StateConfig);
+    } else if (document.getElementById("Immortal").checked) {
+      var PlayStyleMor = 0;
+    }
+    
+    var parser = "#"
+  
+    var StateConfig = MapSize[0].concat(parser, MapSize[1], parser, StartLocation[0], parser, StartLocation[1], parser, Eng, parser, Supl, parser, Cred, parser, RandWrm, parser, FixWrmLocation[0], parser, FixWrmLocation[1], parser, PlayStyleMor);
+    
+    //alert(StateConfig);
 
-                localStorage.setItem('Config', StateConfig);
-            }
+    localStorage.setItem('Config', StateConfig);
+  }
         
 </script>
-</form>
-
 </body>
-</html>
