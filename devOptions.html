@@ -1,176 +1,103 @@
 <!DOCTYPE html>
 <html>
-<body bgcolor="EOFF63"></body> <!--background color -->
 <head>
 
-<title>
-  Dev Config
-  </title>
-
 <style>
-body {font-family: Arial;}
-
-/* Style the tab */
-.tab {
-  overflow: hidden;
-  border: 1px solid #218311; 
-  background-color: #218311;
+body {
+  font-family: Arial;
+  background-color: black;
 }
 
-/* Style the buttons inside the tab */
-.tab button {
-  background-color: inherit;
-  float: left;
+* {
+  box-sizing: border-box;
+}
+
+.menu {
+  padding: 16px;
+  background-color: #C0D860;
+}
+
+input[type=text] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
   border: none;
-  outline: none;
+  background: #F0F0D8;
+}
+
+hr {
+  border: 3px solid black;
+  margin-bottom: 25px;
+}
+
+/* Set a style for the submit button */
+.SubmitData {
+  background-color: #36D23C;
+  color: black;
+  padding: 16px 100px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 12px;
   cursor: pointer;
-  padding: 14px 16px;
-  transition: 0.3s;
-  font-size: 17px;
+  width: 100%;
+  opacity: 1;
 }
 
-/* Change background color of buttons on hover */
-.tab button:hover {
-  background-color: #31C718;
+.SubmitData:hover {
+  opacity: 1;
+  background-color: #39FF41;
 }
 
-/* Create an active/current tabItem shade  */
-.tab button.active {
-  background-color: #31C718;
-}
-
-/* Style the tab content */
-.tabcontent {
-  display: none;
-  padding: 6px 12px;
-  border: 3px solid #31C718;
-  border-top: none;
-}
 </style>
 </head>
-
-<!-- Titles -->
 <body>
 
-<h1>
-  <b>Developer Game Configuration Options</b>
-</h1>
+<form>
+  <div class="menu">
+    <h1>
+      <b>Developer Game Configuration Options</b>
+    </h1>
+    <p>Please fill in all the fields for the state varibles, regular default values are intially set</p>
+    <hr>
 
-<h3>
-  <b>State Varibles</b>
-</h3>
+    <label for="size"><b>Game Board Dimensions: </b></label>
+    <input <input type="text" name="Dim" id="Dimensions" value="128,128">
 
+    <label for=loc><b>Starting Location: </b></label>
+    <input type="text" name="loc" id="Location" value="100,100">
 
+    <label for="energy"><b>Energy: </b></label>
+    <input type="text" name="energy" id="Energy" value="1000">
 
-<!-- This will call the openTab function so it can display the tab names and the content within them as buttons -->
-<div class="tab">
-  <button class="tabItem" onclick="openTab(event, 'GameSize')">Game Size</button>
-  
-  <button class="tabItem" onclick="openTab(event, 'CurrentLocation')">Current Location</button>
-  
-  <button class="tabItem" onclick="openTab(event, 'Energy')">Energy</button>
+    <label "supplies"><b>Supplies: </b></label>
+    <input type="text" name="supplies" id="Supplies" value="100">
 
-  <button class="tabItem" onclick="openTab(event, 'Supplies')">Supplies</button>
+    <label for="credits"><b>Credits: </b></label>
+    <input type="text" name="credits" id="Credits" value="1000">
 
-  <button class="tabItem" onclick="openTab(event, 'Credits')">Credits</button>
-
-  <button class="tabItem" onclick="openTab(event, 'Wormholes')">Wormholes</button>
-
-  <button class="tabItem" onclick="openTab(event, 'PlayStyle')">Play Style</button>
-
-</div>
-
-
-
-
-
-<!-- These are the contents of the tab blocks State Varibles-->
-<div id="GameSize" class="tabcontent">
-   <p>Please enter the width and height of the desired game board as Width, Height, for example 15, 20</p>
-        <label for=size>Game Board Dimensions:  </label>
-        <input type="text" name="Dim" id="Dimensions" value=""><br><br>
-</div>
-
-<div id="CurrentLocation" class="tabcontent">
-  <p>Please enter the location you would like the ship to begin at as Xcoor, Ycoor, for example 20, 25 <br> However, keep in mind that this will be limited by the game size.</p>
-      <label for=loc>Starting Location:  </label>
-      <input type="text" name="loc" id="Location" value=""><br><br>  
-</div>
-
-<div id="Energy" class="tabcontent">
-  <p>Please enter the amount of energy you would like to begin with:</p>
-    <label for="energy">Energy: </label>    
-    <input type="text" name="energy" id="energy" value=""><br><br>
-</div>
-
-<div id="Supplies" class="tabcontent">
-  <p>Please enter the amount of supplies you would like to begin with:</p>
-    <label for="supplies">Supplies: </label>
-    <input type="text" name="supplies" id="supplies" value=""><br><br>
-</div>
-
-<div id="Credits" class="tabcontent">
-  <p>Please enter the amount of credits you would like to begin with:</p>
-      <label for="credits">Credits: </label>
-      <input type="text" name="credits" id="credits" value=""><br><br>
-</div>
-
-<div id="Wormholes" class="tabcontent">
-  <p>Please choose if you like the wormholes to relocate the ship to random location or a specified fixed location in the form Xcoor, Ycoor:</p>
-      <label for="wormhole">Wormhole behavior: </label><br>
-      <input type="radio" name="worm" id="Random"> Random <br><br>
+    <label for="wormhole"><b>Wormhole behavior: </b></label><br>
+      <input type="radio" name="worm" id="Random" checked="checked"> Random <br>
       <input type="radio" name="worm" id="Fixed"> Fixed <br><br>
-      
-      <label for=fixedworm>Fixed Wormhole Location:  </label>
-      <input type="text" name="wormF" id="FixedWormhole" value=""><br><br>  
-</div>
 
-<div id="PlayStyle" class="tabcontent">
-  <p>Please choose the play style you wish to use:</p>
-      <label for="play">Play behavior: </label><br>
-        <input type="radio" name="playtype" id="Mortal"> Mortal <br>
+    <label for=fixedworm><b>Fixed Wormhole Location: </b></label>
+    <input type="text" name="wormF" id="FixedWormhole" value="20,20">
+
+    <label for="play"><b>Play behavior: </b></label><br>
+        <input type="radio" name="playtype" id="Mortal" checked="checked"> Mortal <br>
         <input type="radio" name="playtype" id="Immortal"> Immortal <br></br>
+
+
+    <br><br>
+    <a type="submit" class="SubmitData" href="SpaceHunt.html" target="_self" onclick="setStateData();">Submit Data</a> 
+
+
 </div>
-
-
-
-
-
-
-<!-- This script will display each tab item created along with the content defined in the <div> blocks above -->
-<script>
-  function openTab(event, content) {
-    var i, tabcontent, tabItem;
-  
-    tabcontent = document.getElementsByClassName("tabcontent");
-  
-    for (i = 0; i < tabcontent.length; i++) 
-    {
-      tabcontent[i].style.display = "none";
-    }
-  
-    tabItem = document.getElementsByClassName("tabItem");
-  
-    for (i = 0; i < tabItem.length; i++) 
-    {
-      tabItem[i].className = tabItem[i].className.replace(" active", "");
-    }
-  
-    document.getElementById(content).style.display = "block";
-    event.currentTarget.className += " active";
-  }
-
-</script>
-   
-
-
+</form>  
 
 <form>
-      <br><br>
-      <input type="button" name="SubmitData" value="Submit Data" onclick="setStateData();">
-      
-
-      <script  type="text/javascript">
+<script  type="text/javascript">
+        
         function setStateData()
         {
                 var MapSize = document.getElementById("Dimensions").value;
@@ -185,9 +112,9 @@ body {font-family: Arial;}
                   return;
                 }
                 */
-                var Eng = document.getElementById("energy").value;
-                var Supl = document.getElementById("supplies").value;
-                var Cred = document.getElementById("credits").value;
+                var Eng = document.getElementById("Energy").value;
+                var Supl = document.getElementById("Supplies").value;
+                var Cred = document.getElementById("Credits").value;
                                 
 
                 if(document.getElementById("Random").checked){
@@ -220,19 +147,10 @@ body {font-family: Arial;}
                 //alert(StateConfig);
 
                 localStorage.setItem('Config', StateConfig);
-                close();
-        }
-
-        function close()
-        {
-            var devWindow = window.open("SpaceHunt.html", "_self");
-            devWindow.close();
-        }
-      </script>
+            }
+        
+</script>
 </form>
 
-
-
-
 </body>
-</html> 
+</html>
