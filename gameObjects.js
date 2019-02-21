@@ -164,9 +164,9 @@ var celestialMap = {
 var gameSpace = [];
 window.onload = function() {
   // Initialize gameSpace
-  for (var i = 0; i <= spaceship.maxCoord; i++) {
+  for (var i = 0; i <= spaceship.maxCoordX; i++) {
     var CPRow = [];
-    for (var j = 0; j <= spaceship.maxCoord; j++) {
+    for (var j = 0; j <= spaceship.maxCoordY; j++) {
       CPRow.push(new celestialPoint([i, j]));
     }
     gameSpace.push(CPRow);
@@ -220,7 +220,7 @@ document.getElementById("sensorsBtn").onclick = function() {
   function isInGameSpace(coords) {
     var x = coords[0];
     var y = coords[1];
-    return x >= 0 && x <= spaceship.maxCoord && y >= 0 && y <= spaceship.maxCoord;
+    return x >= 0 && x <= spaceship.maxCoordX && y >= 0 && y <= spaceship.maxCoordY;
   }
 
   function getNearbyCPCoords(range) {
