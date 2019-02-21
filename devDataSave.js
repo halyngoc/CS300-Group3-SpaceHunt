@@ -1,5 +1,5 @@
 function setStateData()
-  {
+{
     var MapSize = document.getElementById("Dimensions").value;
     var StartLocation = document.getElementById("Location").value;
     MapSize = MapSize.split(',');
@@ -16,14 +16,15 @@ function setStateData()
     var Supl = document.getElementById("Supplies").value;
     var Cred = document.getElementById("Credits").value;
                     
-
+    var RandWrm;
+    var FixWrmLocation;
     if(document.getElementById("Random").checked){
-      var RandWrm = 1;
-      var FixWrmLocation = [0, 0];
+      RandWrm = 1;
+      FixWrmLocation = [0, 0];
 
     } else if (document.getElementById("Fixed").checked) {
-      var RandWrm =0;
-      var FixWrmLocation = document.getElementById("FixedWormhole").value;
+      RandWrm =0;
+      FixWrmLocation = document.getElementById("FixedWormhole").value;
       FixWrmLocation = FixWrmLocation.split(',');
       
       /*if(MapSize[0] < FixWrmLocation[0] || MapSize[1] < FixWrmLocation[1]){
@@ -33,18 +34,19 @@ function setStateData()
       */
     }
 
+    var PlayStyleMor;
     if(document.getElementById("Mortal").checked){
-      var PlayStyleMor = 1;
+      PlayStyleMor = 1;
 
     } else if (document.getElementById("Immortal").checked) {
-      var PlayStyleMor = 0;
+      PlayStyleMor = 0;
     }
     
-    var parser = "#"
+    var parser = "#";
   
     var StateConfig = MapSize[0].concat(parser, MapSize[1], parser, StartLocation[0], parser, StartLocation[1], parser, Eng, parser, Supl, parser, Cred, parser, RandWrm, parser, FixWrmLocation[0], parser, FixWrmLocation[1], parser, PlayStyleMor);
     
-    alert(StateConfig);
+    //alert(StateConfig);
 
     localStorage.setItem('Config', StateConfig);
-  }
+}
