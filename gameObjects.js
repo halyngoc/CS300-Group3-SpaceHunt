@@ -282,16 +282,16 @@ document.getElementById("sensorsBtn").onclick = function() {
 //Listeners for movement buttons
 document.getElementById("up").onclick = function() {
   spaceship.move("up");
-}
+};
 
 document.getElementById("left").onclick = function() {
   spaceship.move("left");
-}
+};
 
 document.getElementById("right").onclick = function() {
   spaceship.move("right");
-}
+};
 
 document.getElementById("down").onclick = function() {
   spaceship.move("down");
-}
+};
