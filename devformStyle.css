@@ -1,0 +1,45 @@
+body {
+  font-family: Arial;
+  background-color: black;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+#menu {
+  padding: 16px;
+  background-color: #C0D860;
+}
+
+input[type=text] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #F0F0D8;
+}
+
+hr {
+  border: 3px solid black;
+  margin-bottom: 25px;
+}
+
+/* Set a style for the submit button */
+#devSubmitBtn {
+  background-color: #36D23C;
+  color: black;
+  padding: 16px 100px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  width: 100%;
+  opacity: 1;
+}
+
+#devSubmitBtn:hover {
+  opacity: 1;
+  background-color: #39FF41;
+}

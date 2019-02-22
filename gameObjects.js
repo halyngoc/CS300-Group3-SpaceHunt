@@ -45,12 +45,10 @@ var spaceship = {
 
 
   move : function() {	
-
-
     directionCheck();
 
-
     var retCol = Collisions(this.location[0], this.location[1]);
+    
     supplyDecrease();
     
     if(this.damaged === true){
@@ -73,11 +71,17 @@ var spaceship = {
     wormholeCheck();
 
     setData();
+    
+    this.displayCurrentCP();
 
     return false;
+  },
+  
+  displayCurrentCP : function() {
+    document.getElementById("currentCPcontent").innerHTML = gameSpace[this.location[0]][this.location[1]].toHTML();
   }
-
 };
+
 
   function directionCheck() {
 
@@ -139,22 +143,141 @@ function setData() {
   document.getElementById("credits").innerHTML = "Credits: " + spaceship.credits;
 }
 
+var celestialMap = {
+  celestialPoints : new Set(),
+
+  // Returns formatted HTML of CM
+  toHTML : function() {
+    var html = "";
+    this.celestialPoints.forEach(function(cp) {
+      html += cp.toHTML();
+    });
+    return html;
+  },
+
+  // Display on html page
+  display : function() {
+    document.getElementById("celestialMapContent").innerHTML = this.toHTML();
+  },
+
+  // Import/Export CM @TODO
+  loadFromString : function() {},
+  toString : function() {}
+};
+
 //Map could contain 128x128 celestialPoint() objects
-var gameSpace = { map : [spaceship.maxCoordX + 1][spaceship.maxCoordY + 1] };
+var gameSpace = [];
+window.onload = function() {
+  // Initialize gameSpace
+  for (var i = 0; i <= spaceship.maxCoordX; i++) {
+    var CPRow = [];
+    for (var j = 0; j <= spaceship.maxCoordY; j++) {
+      CPRow.push(new celestialPoint([i, j]));
+    }
+    gameSpace.push(CPRow);
+  }
 
+  // Display starting CP
+  spaceship.displayCurrentCP();
 
-function celestialPoint() {
+  // Set locations of the 3 planets
+  // For now the locations are hardcoded
+  gameSpace[2][0].celestialObjects.push("Planet Celeron");
+  gameSpace[5][1].celestialObjects.push("Planet Xeon");
+  gameSpace[6][5].celestialObjects.push("Planet Ryzen");
 
-  this.planet = false;
-  this.asteroid = false;
+  // Add the 3 planets to CM
+  celestialMap.celestialPoints.add(gameSpace[2][0]);
+  celestialMap.celestialPoints.add(gameSpace[5][1]);
+  celestialMap.celestialPoints.add(gameSpace[6][5]);
+
+  // For debugging purposses, here are some celestial objects
+  gameSpace[6][5].celestialObjects.push("asteroid");
+  gameSpace[0][1].celestialObjects.push("asteroid");
+  gameSpace[3][2].celestialObjects.push("asteroid");
+
+  // Display starting CM with the 3 planets on it
+  celestialMap.display();
+};
+
+function celestialPoint(location) {
+  this.location = location;
+  this.celestialObjects = [];
+
+  this.toHTML = function() {
+    var html = "<h2>Location: (" + this.location[0] + ", " + this.location[1] + ")</h2>";
+
+    if (this.celestialObjects.length === 0) {
+      html += "<p>Empty space...</p>";
+    } else {
+      this.celestialObjects.forEach(function(co) {
+        html += "<p>" + co + "</p>";
+      });
+    }
+
+    return html;
+  };
 	
 	//Incomplete object constructor for celestial points
 }
 
+document.getElementById("sensorsBtn").onclick = function() {
+  function isInGameSpace(coords) {
+    var x = coords[0];
+    var y = coords[1];
+    return x >= 0 && x <= spaceship.maxCoordX && y >= 0 && y <= spaceship.maxCoordY;
+  }
+
+  function getNearbyCPCoords(range) {
+    var currentX = spaceship.location[0];
+    var currentY = spaceship.location[1];
+    var nearbyCPCoords = [];
+
+    // Could be more optimized but I don't really care for now
+    for (var i = - range; i <= range; i++) {
+      for (var j = - range; j <= range; j++) {
+        var coords = [currentX + i, currentY + j];
+
+        if (isInGameSpace(coords) && JSON.stringify(coords) != JSON.stringify([currentX, currentY])) {
+          nearbyCPCoords.push(coords);
+        }
+      }
+    }
+
+    return nearbyCPCoords;
+  }
+
+  function displayNearbyCPs(range) {
+    // Header
+    document.getElementById("nearbyCPs").innerHTML = "<h1><em>Nearby Celestial Points</em></h1>";
+
+    // All nearby CPs
+    getNearbyCPCoords(range).forEach(function(CPCoords) {
+      document.getElementById("nearbyCPs").innerHTML += gameSpace[CPCoords[0]][CPCoords[1]].toHTML();
+    });
+  }
+
+  // Range can be improved to 5, for now it's hardcoded to be 2
+  var range = 2;
+
+  displayNearbyCPs(range);
+
+  // Handle supplies lost
+  supplyDecrease();
+  setData();
+
+  // Update CM
+  getNearbyCPCoords(range).forEach(function(coords) {
+    var cp = gameSpace[coords[0]][coords[1]];
+    if (cp.celestialObjects.length !== 0) {
+      celestialMap.celestialPoints.add(cp);
+    }
+  });
+  celestialMap.display();
+};
 
 //Listener for 'Proceed' button
 document.getElementById("proceed").onclick = function()
 {
   spaceship.move();
 }
-
