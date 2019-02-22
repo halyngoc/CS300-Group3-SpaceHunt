@@ -311,7 +311,7 @@ var offline_data_manager = {
 	},
 	restore_data: function() {
 		if ('game_saved' in localStorage) {
-			var conf = confirm("Would you like to continue previous game?");
+			conf = confirm("Would you like to continue previous game?");
 		}
 		if (conf == true) {
 			console.log("** restoring data to previous state");
