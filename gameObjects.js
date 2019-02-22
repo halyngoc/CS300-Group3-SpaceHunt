@@ -44,12 +44,14 @@ var spaceship = {
   maxCoordY : devConfig ? Config[1] : 127,
 
 
-  move : function() {	
-    directionCheck();
+
+  move : function(direction) {	
+    directionCheck(direction);
 
     var retCol = Collisions(this.location[0], this.location[1]);
     
-    this.supplies -= 2;
+    supplyDecrease();
+    
     if(this.damaged === true){
       alert("Your ship is damaged. Energy consumed at 5 times. Repair ASAP.");
       this.energy = this.energy - this.energyPerDistance * intDistance * 5;
@@ -82,59 +84,61 @@ var spaceship = {
 };
 
 
-  function directionCheck() {
+function directionCheck(direction) {
 
-    intDistance = parseInt(document.getElementById("distance").value);
+  intDistance = parseInt(document.getElementById("distance").value);
 
-    switch (document.getElementById("direction").value) 
-    {
-    case "0":
+  switch (direction) 
+  {
+    case "right":
     spaceship.location[0] += intDistance;
     break;
     
-    case "90":
+    case "up":
     spaceship.location[1] += intDistance;
     break;
 
-    case "180":
+    case "left":
     spaceship.location[0] -= intDistance;
     break;
 
-    case "270":
+    case "down":
     spaceship.location[1] -= intDistance;
     break;
 
     default:
     console.log("Invalid direction.");
     break;
-    }
-
   }
+}
 
-
-  function wormholeCheck() {
- //Wormhole check
-    if (spaceship.location[0] < 0 || spaceship.location[0] > spaceship.maxCoordX || spaceship.location[1] < 0 || spaceship.location[1] > spaceship.maxCoordY)
+function wormholeCheck() {
+//Wormhole check
+  if (spaceship.location[0] < 0 || spaceship.location[0] > spaceship.maxCoordX || spaceship.location[1] < 0 || spaceship.location[1] > spaceship.maxCoordY)
+  {
+    alert("You've entered a wormhole!");
+    //Random wormhole behavior is between 1 and 100, //set to either the base set map size or the dev config map size
+    if (spaceship.wormholeRandom == true) 
     {
-      alert("You've entered a wormhole!");
-      //Random wormhole behavior is between 1 and 100, //set to either the base set map size or the dev config map size
-      if (spaceship.wormholeRandom == true) 
-      {
-        spaceship.location[0] = Math.floor((Math.random() * spaceship.maxCoordX) + 1);
-        spaceship.location[1] = Math.floor((Math.random() * spaceship.maxCoordY) + 1);
-      }
-      else
-      {
-        spaceship.location[0] = Config[8];
-        spaceship.location[1] = Config[9];
-      } 
+      spaceship.location[0] = Math.floor((Math.random() * spaceship.maxCoordX) + 1);
+      spaceship.location[1] = Math.floor((Math.random() * spaceship.maxCoordY) + 1);
     }
+    else
+    {
+      spaceship.location[0] = Config[8];
+      spaceship.location[1] = Config[9];
+    } 
   }
+}
+  
+function supplyDecrease() {
+  spaceship.supplies = Math.floor(spaceship.supplies * 0.98);
+}
 
 function setData() {
   document.getElementById("location").innerHTML = "Current Location: (" + spaceship.location[0] + ", " + spaceship.location[1] + ")";
   document.getElementById("energy").innerHTML = "Energy: " + spaceship.energy;
-  document.getElementById("supplies").innerHTML = "Supplies: " + spaceship.supplies + "%";
+  document.getElementById("supplies").innerHTML = "Supplies: " + spaceship.supplies;
   document.getElementById("credits").innerHTML = "Credits: " + spaceship.credits;
 }
 
@@ -193,6 +197,9 @@ window.onload = function() {
 
   // Display starting CM with the 3 planets on it
   celestialMap.display();
+  
+  //Correctly displays data on dev menu exit
+  setData();
 };
 
 function celestialPoint(location) {
@@ -258,7 +265,7 @@ document.getElementById("sensorsBtn").onclick = function() {
   displayNearbyCPs(range);
 
   // Handle supplies lost
-  spaceship.supplies -= 2;
+  supplyDecrease();
   setData();
 
   // Update CM
@@ -271,8 +278,21 @@ document.getElementById("sensorsBtn").onclick = function() {
   celestialMap.display();
 };
 
-//Listener for 'Proceed' button
-document.getElementById("proceed").onclick = function()
-{
-  spaceship.move();
-}
+
+
+//Listeners for movement buttons
+document.getElementById("up").onclick = function() {
+  spaceship.move("up");
+};
+
+document.getElementById("left").onclick = function() {
+  spaceship.move("left");
+};
+
+document.getElementById("right").onclick = function() {
+  spaceship.move("right");
+};
+
+document.getElementById("down").onclick = function() {
+  spaceship.move("down");
+};
