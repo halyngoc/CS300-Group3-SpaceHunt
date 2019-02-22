@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>
+  SpaceHunt Dream Team 3
+  </title>
+</head>
+
+<body>
+  <h1>
+    <b>Galactic Schooner OldSpice Bridge Display</b>
+  </h1>
+
+  <center><form id="newTurn">
+    <label for="distance">Distance </label>
+    <select name="distance" id="distance"><br>
+    <option> 0 <option> 1 <option> 2 <option> 3
+    <option> 4 <option> 5 <option> 6 <option> 7
+    <option> 8 <option> 9 <option> 10
+    </select> <br><br>
+
+    <input type="button" id="up" value="Up"><br>
+    <input type="button" id="left" value="Left">
+    <input type="button" id="right" value="Right"><br>
+    <input type="button" id="down" value="Down"><br><br>
+
+    <input type="button" id="sensorsBtn" value="Deploy sensors">
+  </form></center>
+
+  <hr>
+  
+  <div id="currentStatus">
+    <h1> 
+      <em>Current Status</em>
+    </h1>
+    <p id="location">Current Location: (0, 0)</p>
+    <p id="energy">Energy: 1000</p>	
+    <p id="supplies">Supplies: 100</p>
+    <p id="credits">Credits: 1000</p>
+    <p id="All systems ready">Message: All systems ready</p>
+  </div>
+
+  <div id="currentCP">
+    <h1><em>Current Celestial Point</em></h1>
+    <div id="currentCPcontent"></div>
+  </div>
+
+  <div id="nearbyCPs"></div>
+
+  <div id="celestialMap">
+    <h1><em>Celestial Map</em></h1>
+    <div id="celestialMapContent"></div>
+  </div>
+	
+  <h2>
+    <em>Developer Option</em>
+  </h2>
+    
+  <p>Are you a Developer?</p>
+  <a href="devOptions.html"><button>I'm a Dev</button></a>
+  
+  <script src="gameObjects.js"></script>
+  <script src="checkEnergyAndSupplies.js"></script>
+  <script src="Collisions.js"></script>
+
+</body>
+</html>
