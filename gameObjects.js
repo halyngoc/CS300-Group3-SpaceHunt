@@ -296,3 +296,29 @@ document.getElementById("right").onclick = function() {
 document.getElementById("down").onclick = function() {
   spaceship.move("down");
 };
+
+var offline_data_manager = {
+  store_data: function() { 
+    localStorage.setItem("game_saved", 0);
+    localStorage.setItem("spaceship_energy", spaceship.energy);
+    localStorage.setItem("location_x", spaceship.location[0]);
+    localStorage.setItem("location_y", spaceship.location[1]);
+    localStorage.setItem("supplies", spaceship.supplies);
+    localStorage.setItem("credits", spaceship.credits);
+    localStorage.setItem("energyPerDistance", spaceship.energyPerDistance);
+  },
+  restore_data: function() {
+    if ('game_saved' in localStorage) {
+      conf = confirm("Would you like to continue previous game?");
+    }
+    if (conf == true) {
+      console.log("** restoring data to previous state");
+      spaceship.energy = localStorage.getItem("spaceship_energy");
+      spaceship.location[0] = localStorage.getItem("location_x");
+      spaceship.location[1] = localStorage.getItem("location_y");
+      spaceship.supplies = localStorage.getItem("supplies");
+      spaceship.credits = localStorage.getItem("credits");
+      spaceship.energyPerDistance = localStorage.getItem("energyPerDistance");
+    }
+  }
+};
