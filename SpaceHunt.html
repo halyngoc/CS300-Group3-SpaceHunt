@@ -6,7 +6,7 @@
   </title>
 </head>
 
-<body>
+<body onunload="offline_data_manager.store_data()">
   <h1>
     <b>Galactic Schooner OldSpice Bridge Display</b>
   </h1>
@@ -62,6 +62,6 @@
   <script src="gameObjects.js"></script>
   <script src="checkEnergyAndSupplies.js"></script>
   <script src="Collisions.js"></script>
-
+  <script>offline_data_manager.restore_data()</script>
 </body>
 </html>
