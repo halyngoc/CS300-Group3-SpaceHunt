@@ -306,6 +306,12 @@ var offline_data_manager = {
     localStorage.setItem("supplies", spaceship.supplies);
     localStorage.setItem("credits", spaceship.credits);
     localStorage.setItem("energyPerDistance", spaceship.energyPerDistance);
+    if (spaceship.damaged == true) {
+      localStorage.setItem("damaged", 1);
+    }
+    else {
+      localStorage.setItem("damaged", 0)
+    }
   },
   restore_data: function() {
     if ('game_saved' in localStorage) {
@@ -319,6 +325,12 @@ var offline_data_manager = {
       spaceship.supplies = localStorage.getItem("supplies");
       spaceship.credits = localStorage.getItem("credits");
       spaceship.energyPerDistance = localStorage.getItem("energyPerDistance");
+      if (localStorage.getItem("damaged") == 1) {
+        spaceship.damaged = true
+      }
+      else {
+        spaceship.damaged = false
+      }
     }
   }
 };
