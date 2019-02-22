@@ -44,6 +44,7 @@ var spaceship = {
   maxCoordY : devConfig ? Config[1] : 127,
 
 
+
   move : function(direction) {	
     directionCheck(direction);
 
