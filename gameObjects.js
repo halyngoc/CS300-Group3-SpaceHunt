@@ -326,10 +326,10 @@ var offline_data_manager = {
       spaceship.credits = localStorage.getItem("credits");
       spaceship.energyPerDistance = localStorage.getItem("energyPerDistance");
       if (localStorage.getItem("damaged") == 1) {
-        spaceship.damaged = true
+        spaceship.damaged = true;
       }
       else {
-        spaceship.damaged = false
+        spaceship.damaged = false;
       }
     }
   }
