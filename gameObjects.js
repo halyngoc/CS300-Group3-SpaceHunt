@@ -310,7 +310,7 @@ var offline_data_manager = {
       localStorage.setItem("damaged", 1);
     }
     else {
-      localStorage.setItem("damaged", 0)
+      localStorage.setItem("damaged", 0);
     }
   },
   restore_data: function() {
