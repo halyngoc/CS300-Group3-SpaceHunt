@@ -304,13 +304,19 @@ var offline_data_manager = {
     localStorage.setItem("supplies", spaceship.supplies);
     localStorage.setItem("credits", spaceship.credits);
     localStorage.setItem("energyPerDistance", spaceship.energyPerDistance);
-    localStorage.SetItem("maxcoordy", spaceship.maxCoordY);
-    localStorage.SetItem("maxcoordx", spaceship.maxCoordX);
     if (spaceship.damaged == true) {
       localStorage.setItem("damaged", 1);
     }
     else {
       localStorage.setItem("damaged", 0);
+    }
+    if (devConfig == true) {
+    	localStorage.SetItem("maxcoordx", Config[0]);
+    	localStorage.SetItem("maxcoordy", Config[1]);
+    }
+    else {
+    	localStorage.SetItem("maxcoordy", spaceship.maxCoordY);
+    	localStorage.SetItem("maxcoordx", spaceship.maxCoordX);
     }
   },
 
