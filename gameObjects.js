@@ -294,7 +294,7 @@ document.getElementById("right").onclick = function() {
 document.getElementById("down").onclick = function() {
   spaceship.move("down");
 };
-/*
+
 var offline_data_manager = {
   store_data: function() { 
     localStorage.setItem("game_saved", 0);
@@ -304,6 +304,8 @@ var offline_data_manager = {
     localStorage.setItem("supplies", spaceship.supplies);
     localStorage.setItem("credits", spaceship.credits);
     localStorage.setItem("energyPerDistance", spaceship.energyPerDistance);
+    localStorage.SetItem("maxcoordy", spaceship.maxCoordY)
+    localStorage.SetItem("maxcoordx", spaceship.maxCoordX)
     if (spaceship.damaged == true) {
       localStorage.setItem("damaged", 1);
     }
@@ -324,6 +326,8 @@ var offline_data_manager = {
       spaceship.supplies = localStorage.getItem("supplies");
       spaceship.credits = localStorage.getItem("credits");
       spaceship.energyPerDistance = localStorage.getItem("energyPerDistance");
+      spaceship.maxCoordX = localStorage.getItem("maxcoordx")
+      spaceship.maxCoordY = localStorage.getItem("maxcoordy")
       if (localStorage.getItem("damaged") == 1) {
         spaceship.damaged = true;
       }
@@ -333,4 +337,3 @@ var offline_data_manager = {
     }
   }
 };
-*/
