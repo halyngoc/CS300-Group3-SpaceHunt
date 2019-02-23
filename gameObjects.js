@@ -278,8 +278,6 @@ document.getElementById("sensorsBtn").onclick = function() {
   celestialMap.display();
 };
 
-
-
 //Listeners for movement buttons
 document.getElementById("up").onclick = function() {
   spaceship.move("up");
@@ -296,7 +294,7 @@ document.getElementById("right").onclick = function() {
 document.getElementById("down").onclick = function() {
   spaceship.move("down");
 };
-
+/*
 var offline_data_manager = {
   store_data: function() { 
     localStorage.setItem("game_saved", 0);
@@ -313,6 +311,7 @@ var offline_data_manager = {
       localStorage.setItem("damaged", 0);
     }
   },
+
   restore_data: function() {
     if ('game_saved' in localStorage) {
       conf = confirm("Would you like to continue previous game?");
@@ -334,3 +333,4 @@ var offline_data_manager = {
     }
   }
 };
+*/
