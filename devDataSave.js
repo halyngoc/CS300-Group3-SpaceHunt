@@ -50,7 +50,7 @@ function setStateData()
     var parser = "#";
     var StateConfig = MapSize[0].concat(parser, MapSize[1], parser, StartLocation[0], parser, StartLocation[1], parser, Eng, parser, Supl, parser, Cred, parser, RandWrm, parser, FixWrmLocation[0], parser, FixWrmLocation[1], parser, PlayStyleMor);
     
-    window.alert(StateConfig);
+    //window.alert(StateConfig);
 
     localStorage.setItem('Config', StateConfig);
 }
