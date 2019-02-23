@@ -310,7 +310,7 @@ var offline_data_manager = {
     else {
       localStorage.setItem("damaged", 0);
     }
-    if (devConfig == true) {
+    if (devConfig in localStorage) {
     	localStorage.SetItem("maxcoordx", Config[0]);
     	localStorage.SetItem("maxcoordy", Config[1]);
     }
