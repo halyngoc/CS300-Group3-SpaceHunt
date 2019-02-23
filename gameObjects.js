@@ -310,6 +310,9 @@ var offline_data_manager = {
     else {
       localStorage.setItem("damaged", 0);
     }
+    localStorage.SetItem("maxcoordx", spaceship.maxCoordX)
+    /*
+    console.log(spaceship.maxCoordX)
     if (devConfig == true) { // alternate: if ("Config" in localStorage)
     	localStorage.SetItem("maxcoordx", Config[0]);
     	localStorage.SetItem("maxcoordy", Config[1]);
@@ -318,6 +321,7 @@ var offline_data_manager = {
     	localStorage.SetItem("maxcoordy", spaceship.maxCoordY);
     	localStorage.SetItem("maxcoordx", spaceship.maxCoordX);
     }
+    */
   },
 
   restore_data: function() {
@@ -332,8 +336,9 @@ var offline_data_manager = {
       spaceship.supplies = localStorage.getItem("supplies");
       spaceship.credits = localStorage.getItem("credits");
       spaceship.energyPerDistance = localStorage.getItem("energyPerDistance");
-      spaceship.maxCoordX = localStorage.getItem("maxcoordx");
-      spaceship.maxCoordY = localStorage.getItem("maxcoordy");
+      console.log("spaceship.maxCoordX stored as:")
+      console.log(spaceship.maxCoordX = localStorage.getItem("maxcoordx"));
+      //spaceship.maxCoordY = localStorage.getItem("maxcoordy");
       if (localStorage.getItem("damaged") == 1) {
         spaceship.damaged = true;
       }
