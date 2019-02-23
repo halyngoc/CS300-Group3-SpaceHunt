@@ -326,8 +326,8 @@ var offline_data_manager = {
       spaceship.supplies = localStorage.getItem("supplies");
       spaceship.credits = localStorage.getItem("credits");
       spaceship.energyPerDistance = localStorage.getItem("energyPerDistance");
-      spaceship.maxCoordX = localStorage.getItem("maxcoordx")
-      spaceship.maxCoordY = localStorage.getItem("maxcoordy")
+      spaceship.maxCoordX = localStorage.getItem("maxcoordx");
+      spaceship.maxCoordY = localStorage.getItem("maxcoordy");
       if (localStorage.getItem("damaged") == 1) {
         spaceship.damaged = true;
       }
