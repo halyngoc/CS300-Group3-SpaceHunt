@@ -5,7 +5,7 @@ if('Config' in localStorage)
 {
   var Config = localStorage.getItem('Config');
   localStorage.removeItem('Config');
-  
+
   Config = Config.split('#');
   var PlayStyle = Config[10];
 
@@ -30,54 +30,59 @@ if('Config' in localStorage)
 
 var spaceship = {
 
-  //use the ternary operator for choosing values since if statements cant be used 
-  
+  //use the ternary operator for choosing values since if statements cant be used
+
   location : [devConfig ? Config[2] : 0, devConfig ? Config[3] : 0],         //1 //will need to split the 2 values for location
-  energy : devConfig ? Config[4] : 1000,        
-  supplies : devConfig ? Config[5] : 100,       
-  credits : devConfig ? Config[6] : 1000,       
+  energy : devConfig ? Config[4] : 1000,
+  supplies : devConfig ? Config[5] : 100,
+  credits : devConfig ? Config[6] : 1000,
   sensor : 0,
   energyPerDistance : 10,
   damaged : false,
-  wormholeRandom : devConfig ? Rand : true,   //if dev config has been made this can be set to T or F otherwise it will default to random behavoir 
-  maxCoordX : devConfig ? Config[0] : 127,           
+  wormholeRandom : devConfig ? Rand : true,   //if dev config has been made this can be set to T or F otherwise it will default to random behavoir
+  maxCoordX : devConfig ? Config[0] : 127,
   maxCoordY : devConfig ? Config[1] : 127,
 
 
 
-  move : function(direction) {	
+  move : function(direction) {
     directionCheck(direction);
 
-    var retCol = Collisions(this.location[0], this.location[1]);
-    
+    //var retCol = Collisions(this.location[0], this.location[1]);
+
     supplyDecrease();
-    
-    if(this.damaged === true){
-      alert("Your ship is damaged. Energy consumed at 5 times. Repair ASAP.");
-      this.energy = this.energy - this.energyPerDistance * intDistance * 5;
-    }
-    else{
+
+    //if(this.damaged === true){
+      //alert("Your ship is damaged. Energy consumed at 5 times. Repair ASAP.");
+      //this.energy = this.energy - this.energyPerDistance * intDistance * 5;
+    //}
+    //else{
     this.energy = this.energy - this.energyPerDistance * intDistance;
-    }
+    //}
     if(checkEnergyAndSupplies(this.energy, this.supplies) == true)
       return;
-    if(retCol === 1){
-      this.damaged = true;
-    }
-    if(retCol === 2){
+    //if(retCol === 1){
+      //this.damaged = true;
+    //}
+    //if(retCol === 2){
+      //this.energy = 1000;
+      //this.supplies += 2;
+    //}
+
+    if(checkFreighter(this.location[0], this.location[1]) === true){
       this.energy = 1000;
-      this.supplies += 2;
+      this.supplies += this.supplies * 0.02;
     }
 
     wormholeCheck();
 
     setData();
-    
+
     this.displayCurrentCP();
 
     return false;
   },
-  
+
   displayCurrentCP : function() {
     document.getElementById("currentCPcontent").innerHTML = gameSpace[this.location[0]][this.location[1]].toHTML();
   }
@@ -88,12 +93,12 @@ function directionCheck(direction) {
 
   intDistance = parseInt(document.getElementById("distance").value);
 
-  switch (direction) 
+  switch (direction)
   {
     case "right":
     spaceship.location[0] += intDistance;
     break;
-    
+
     case "up":
     spaceship.location[1] += intDistance;
     break;
@@ -118,7 +123,7 @@ function wormholeCheck() {
   {
     alert("You've entered a wormhole!");
     //Random wormhole behavior is between 1 and 100, //set to either the base set map size or the dev config map size
-    if (spaceship.wormholeRandom == true) 
+    if (spaceship.wormholeRandom == true)
     {
       spaceship.location[0] = Math.floor((Math.random() * spaceship.maxCoordX) + 1);
       spaceship.location[1] = Math.floor((Math.random() * spaceship.maxCoordY) + 1);
@@ -127,10 +132,10 @@ function wormholeCheck() {
     {
       spaceship.location[0] = Config[8];
       spaceship.location[1] = Config[9];
-    } 
+    }
   }
 }
-  
+
 function supplyDecrease() {
   spaceship.supplies = Math.floor(spaceship.supplies * 0.98);
 }
@@ -190,6 +195,19 @@ window.onload = function() {
   celestialMap.celestialPoints.add(gameSpace[5][1]);
   celestialMap.celestialPoints.add(gameSpace[6][5]);
 
+  // Set locations of the 4 freighters
+  // For now the locations are hardcoded
+  gameSpace[24][39].celestialObjects.push("freighter");
+  gameSpace[62][11].celestialObjects.push("freighter");
+  gameSpace[33][2].celestialObjects.push("freighter");
+  gameSpace[5][9].celestialObjects.push("freighter");
+
+  // Add the 3 planets to CM
+  celestialMap.celestialPoints.add(gameSpace[24][39]);
+  celestialMap.celestialPoints.add(gameSpace[62][11]);
+  celestialMap.celestialPoints.add(gameSpace[33][2]);
+  celestialMap.celestialPoints.add(gameSpace[5][9]);
+
   // For debugging purposses, here are some celestial objects
   gameSpace[6][5].celestialObjects.push("asteroid");
   gameSpace[0][1].celestialObjects.push("asteroid");
@@ -197,7 +215,7 @@ window.onload = function() {
 
   // Display starting CM with the 3 planets on it
   celestialMap.display();
-  
+
   //Correctly displays data on dev menu exit
   setData();
 };
@@ -219,7 +237,7 @@ function celestialPoint(location) {
 
     return html;
   };
-	
+
 	//Incomplete object constructor for celestial points
 }
 
