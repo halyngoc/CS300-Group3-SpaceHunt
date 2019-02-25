@@ -60,16 +60,16 @@ function setMapData(StateConfig, MapSize, parser) {
     var Planets = [ PlanetCeleron[0], PlanetCeleron[1], PlanetXeon[0], PlanetXeon[1], PlanetRyzen[0], PlanetRyzen[1] ];
 
     var NumberofStations = document.getElementById("StationNum").value;
-    var SpaceStations = ['0', '0', '0', '0', '0', '0'];
+    var SpaceStations = ['-1', '-1', '-1', '-1', '-1', '-1'];
 
     var NumberofFreighters = document.getElementById("FreighterNum").value;
-    var AbandonedFreighter = ['0', '0', '0', '0', '0', '0'];
+    var AbandonedFreighter = ['-1', '-1', '-1', '-1', '-1', '-1'];
 
     var NumberofMeteors = document.getElementById("MeteorNum").value;
-    var MeteorStorms = ['0', '0', '0', '0', '0', '0'];
+    var MeteorStorms = ['-1', '-1', '-1', '-1', '-1', '-1'];
 
     var NumberofAsteroids = document.getElementById("AsteroidsNum").value;
-    var Asteroids = ['0', '0', '0', '0', '0', '0'];
+    var Asteroids = ['-1', '-1', '-1', '-1', '-1', '-1'];
 
 
     if(document.getElementById("RandomPlanet").checked){
@@ -102,8 +102,8 @@ function setMapData(StateConfig, MapSize, parser) {
         SpaceStations = SpaceStations.replace(/ /g, "");
         SpaceStations = SpaceStations.replace(/#/g, ",");
         SpaceStations = SpaceStations.split(',');
-        if(NumberofStations == 1) { SpaceStations[2] = '0'; SpaceStations[3] = '0'; SpaceStations[4] = '0'; SpaceStations[5] = '0';}
-        else if(NumberofStations == 2) { SpaceStations[4] = '0'; SpaceStations[5] = '0'; }
+        if(NumberofStations == 1) { SpaceStations[2] = '-1'; SpaceStations[3] = '-1'; SpaceStations[4] = '-1'; SpaceStations[5] = '-1';}
+        else if(NumberofStations == 2) { SpaceStations[4] = '-1'; SpaceStations[5] = '-1'; }
 
       }      
     }
@@ -123,8 +123,8 @@ function setMapData(StateConfig, MapSize, parser) {
         AbandonedFreighter = AbandonedFreighter.replace(/ /g, "");
         AbandonedFreighter = AbandonedFreighter.replace(/#/g, ",");
         AbandonedFreighter = AbandonedFreighter.split(',');
-        if(NumberofFreighters == 1) { AbandonedFreighter[2] = '0'; AbandonedFreighter[3] = '0'; AbandonedFreighter[4] = '0'; AbandonedFreighter[5] = '0';}
-        else if(NumberofFreighters == 2) { AbandonedFreighter[4] = '0'; AbandonedFreighter[5] = '0'; }
+        if(NumberofFreighters == 1) { AbandonedFreighter[2] = '-1'; AbandonedFreighter[3] = '-1'; AbandonedFreighter[4] = '-1'; AbandonedFreighter[5] = '-1';}
+        else if(NumberofFreighters == 2) { AbandonedFreighter[4] = '-1'; AbandonedFreighter[5] = '-1'; }
 
       }      
     }
@@ -144,8 +144,8 @@ function setMapData(StateConfig, MapSize, parser) {
         MeteorStorms = MeteorStorms.replace(/ /g, "");
         MeteorStorms = MeteorStorms.replace(/#/g, ",");
         MeteorStorms = MeteorStorms.split(',');
-        if(NumberofMeteors == 1) { MeteorStorms[2] = '0'; MeteorStorms[3] = '0'; MeteorStorms[4] = '0'; MeteorStorms[5] = '0';}
-        else if(NumberofMeteors == 2) { MeteorStorms[4] = '0'; MeteorStorms[5] = '0'; }
+        if(NumberofMeteors == 1) { MeteorStorms[2] = '-1'; MeteorStorms[3] = '-1'; MeteorStorms[4] = '-1'; MeteorStorms[5] = '-1';}
+        else if(NumberofMeteors == 2) { MeteorStorms[4] = '-1'; MeteorStorms[5] = '-1'; }
 
       }      
     }
@@ -165,8 +165,8 @@ function setMapData(StateConfig, MapSize, parser) {
         Asteroids = Asteroids.replace(/ /g, "");
         Asteroids = Asteroids.replace(/#/g, ",");
         Asteroids = Asteroids.split(',');
-        if(NumberofAsteroids == 1) { Asteroids[2] = '0'; Asteroids[3] = '0'; Asteroids[4] = '0'; Asteroids[5] = '0';}
-        else if(NumberofAsteroids == 2) { Asteroids[4] = '0'; Asteroids[5] = '0'; }
+        if(NumberofAsteroids == 1) { Asteroids[2] = '-1'; Asteroids[3] = '-1'; Asteroids[4] = '-1'; Asteroids[5] = '-1';}
+        else if(NumberofAsteroids == 2) { Asteroids[4] = '-1'; Asteroids[5] = '-1'; }
 
       }      
     }
