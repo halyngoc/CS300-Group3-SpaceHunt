@@ -69,13 +69,13 @@ var spaceship = {
       //this.supplies += 2;
     //}
 
+    wormholeCheck();
+    
     if(checkFreighter(this.location[0], this.location[1]) === true){
       this.energy = 1000;
       this.supplies += this.supplies * 0.02;
     }
-
-    wormholeCheck();
-
+    
     setData();
 
     this.displayCurrentCP();
