@@ -168,7 +168,7 @@ var Save_Game_Module = {
     localStorage.setItem("energyPerDistance"+username, spaceship.energyPerDistance);
     localStorage.setItem("maxcoordx"+username, spaceship.maxCoordX);
     localStorage.setItem("maxcoordy"+username, spaceship.maxCoordY);
-    localStorage.setItem("sensor"+username, spaceship.sensor)
+    localStorage.setItem("sensor"+username, spaceship.sensor);
 
     // store damaged variable as 1 or 0 since everything is saved as strings
     if (spaceship.damaged == true) {
@@ -202,7 +202,7 @@ var Save_Game_Module = {
       spaceship.energyPerDistance = parseInt(localStorage.getItem("energyPerDistance"+username));
       spaceship.maxCoordX = parseInt(localStorage.getItem("maxcoordx"+username));
       spaceship.maxCoordY = parseInt(localStorage.getItem("maxcoordy"+username));
-      spaceship.sensor = parseInt(localStorage.getItem("sensor"+username, spaceship.sensor))
+      spaceship.sensor = parseInt(localStorage.getItem("sensor"+username, spaceship.sensor));
       if (localStorage.getItem("damaged"+username) == 1) {
         spaceship.damaged = true;
       }
