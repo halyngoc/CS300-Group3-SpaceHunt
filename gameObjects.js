@@ -147,16 +147,18 @@ var celestialMap = {
 
   // Returns formatted HTML of CM
   toHTML : function() {
-    var html = "";
+    var html = "<tr><th>Celestial object</th><th>Location</th></tr>";
     this.celestialPoints.forEach(function(cp) {
-      html += cp.toHTML();
+      cp.celestialObjects.forEach(function(co) {
+        html += "<tr><td>" + co + "</td><td>" + cp.location[0] + ", " + cp.location[1] + "</td></tr>";
+      });
     });
     return html;
   },
 
   // Display on html page
   display : function() {
-    document.getElementById("celestialMapContent").innerHTML = this.toHTML();
+    document.getElementById("gazetteer").innerHTML = this.toHTML();
   },
 
   // Import/Export CM @TODO
@@ -219,8 +221,6 @@ function celestialPoint(location) {
 
     return html;
   };
-	
-	//Incomplete object constructor for celestial points
 }
 
 document.getElementById("sensorsBtn").onclick = function() {
