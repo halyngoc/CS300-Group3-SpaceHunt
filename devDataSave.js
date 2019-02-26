@@ -197,7 +197,7 @@ function BoundsChecking(StateConfig, MapItems, MapSize, parser) {
   }
 
   if(ErrorFound == true) {
-    window.alert("An out of bounds error was found in your specified Map items (Planets, Space Stations, Abandoned Freighter, Meteor Storms, or Asteroids). The values have been corrected to be wintin the bounds of the Map.")
+    window.alert("An out of bounds error was found in your specified Map items (Planets, Space Stations, Abandoned Freighter, Meteor Storms, or Asteroids). The values have been corrected to be wintin the bounds of the Map.");
   }
   
 
@@ -216,7 +216,7 @@ function BoundsChecking(StateConfig, MapItems, MapSize, parser) {
   //Asteroids added
   StateConfig = StateConfig.concat(parser, MapItems[24], parser, MapItems[25], parser, MapItems[26], parser, MapItems[27], parser, MapItems[28], parser, MapItems[29]);
   
-  
+
   //window.alert(StateConfig);
   localStorage.setItem('Config', StateConfig);
 }
