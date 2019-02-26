@@ -1,0 +1,67 @@
+#profile_menu {
+  background-color: #556163;
+  border: none;
+  font-family: arial;
+  display:inline;
+  height: 20px;
+}
+
+#user_select {
+	background-color: white;
+	height: 24px;
+}
+
+#user_select:hover {
+	background-color: #B2F9FD;
+}
+
+#save_game {
+  background-color: white;
+  height: 24px;
+}
+
+#save_game:hover {
+  background-color: #B2F9FD;
+}
+
+#load_game {
+	background-color: white;
+	height: 24px;
+}
+
+#load_game:hover {
+	background-color: #B2F9FD;
+	height: 24px;
+}
+
+#add_profile {
+	background-color: white;
+	height: 24px;
+}
+
+#add_profile:hover {
+	background-color: #B2F9FD;
+	height: 24px;
+}
+
+#new_user {
+	height: 18px;
+}
+
+#new_user:hover {
+	background-color: #B2F9FD;
+}
+
+#clear_profiles {
+	background-color: white;
+	height: 24px;
+}
+
+#clear_profiles:hover {
+	background-color: #B2F9FD;
+	height: 24px;
+}
+
+#new_username_text {
+	color: white;
+}
