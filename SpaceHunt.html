@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <link rel="stylesheet" href="user_profile_menu_style.css" type="text/css">
   <title>
   SpaceHunt Dream Team 3
   </title>
@@ -28,7 +29,27 @@
   </form></center>
 
   <hr>
-  
+
+
+  <!-- US_2.5_Nameable Persistent State -->
+  <script src="Save_Game_Module.js"></script>
+    <form>
+      <fieldset id="profile_menu">
+        <select id="user_select">
+          <option> Select Profile </option>
+        </select>
+        <button type="button" id="save_game" onclick="Save_Game_Module.store_user_data()"> Save Game </button>
+        <button type="button" id="load_game" onclick="Save_Game_Module.load_user_data()"> Load Game </button>
+        <span id="new_username_text"> &nbsp &nbsp &nbsp New Username: </span> <input type="text" id="new_user">
+        <button type="button" id="add_profile" onclick="Save_Game_Module.add_user()"> Add Profile </button>
+        <button type="button" id="clear_profiles" onclick="Save_Game_Module.clear_users()"> Clear Profiles </button>
+      </fieldset>
+    </form>
+  <script> Save_Game_Module.load_users(); </script>
+
+
+
+
   <div id="currentStatus">
     <h1> 
       <em>Current Status</em>
