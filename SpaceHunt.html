@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="stylesheet" href="user_profile_menu_style.css" type="text/css">
+  <link rel="stylesheet" href="Save menu/user_profile_menu_style.css" type="text/css">
   <title>
   SpaceHunt Dream Team 3
   </title>
@@ -31,7 +31,7 @@
   <hr>
 
   <!-- US_2.5_Nameable Persistent State -->
-  <script src="Save_Game_Module.js"></script>
+  <script src="Save menu/Save_Game_Module.js"></script>
     <form>
       <fieldset id="profile_menu">
         <select id="user_select">
@@ -76,9 +76,12 @@
   <p>Are you a Developer?</p>
   <a href="devOptions.html"><button>I'm a Dev</button></a>
 
-  <script src="gameObjects.js"></script>
-  <script src="checkEnergyAndSupplies.js"></script>
-  <script src="checkFreighter.js"></script>
+  <script src="Objects/spaceship.js"></script>
+  <script src="Objects/sensor.js"></script>
+  <script src="Objects/map.js"></script>
+  <script src="Events/checkEnergyAndSupplies.js"></script>
+  <script src="Events/checkFreighter.js"></script>
+  <script src="Events/Collisions.js"></script>
 
 </body>
 </html>
