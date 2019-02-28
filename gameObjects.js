@@ -3,30 +3,29 @@
 
 if('Config' in localStorage)
 {
+  var devConfig = true;
+  var Rand;
+
   var Config = localStorage.getItem('Config');
   localStorage.removeItem('Config');
-
   Config = Config.split('#');
-  var PlayStyle = Config[10];
 
+  var PlayStyle = Config[10];
   localStorage.setItem('PlayType', PlayStyle);  //save play style choice for supply and energy checks
+
+  var devMapItems = Config.slice(11, 41);		//pull off and save the MapItem value indexes
+  localStorage.setItem('devMapItems', devMapItems);
+
+  Config.splice(11, 30);		//remove excess MapItem values from the Config array
 
   for(var i = 0; i < Config.length; i++)
   {
-    Config[i] = parseInt(Config[i], 10);
-  }
-  //window.alert(Config.join("\n"));
-
-  if(Config[7] == 1) {
-    var Rand = true;
-  }else {
-    var Rand = false;
+  	Config[i] = parseInt(Config[i], 10);
   }
 
-  var devConfig = true;
-}
+  Rand = (Config[7] == 1) ? true : false;	//determine if wormhole is set to random or fixed
+ }
 
-//values wont update with dev config until at least one move have been made
 
 var spaceship = {
 
@@ -92,23 +91,28 @@ var spaceship = {
 function directionCheck(direction) {
 
   intDistance = parseInt(document.getElementById("distance").value);
+  var collision;
 
   switch (direction)
   {
     case "right":
-    spaceship.location[0] += intDistance;
+    collision = checkCollison(intDistance, direction);
+    collision ? AsteroidCollison() : spaceship.location[0] += intDistance;
     break;
 
     case "up":
-    spaceship.location[1] += intDistance;
+    collision = checkCollison(intDistance, direction);
+    collision ? AsteroidCollison() : spaceship.location[1] += intDistance;
     break;
 
     case "left":
-    spaceship.location[0] -= intDistance;
+    collision = checkCollison(intDistance, direction);
+    collision ? AsteroidCollison() : spaceship.location[0] -= intDistance;
     break;
 
     case "down":
-    spaceship.location[1] -= intDistance;
+    collision = checkCollison(intDistance, direction);
+    collision ? AsteroidCollison() : spaceship.location[1] -= intDistance;
     break;
 
     default:
@@ -116,6 +120,36 @@ function directionCheck(direction) {
     break;
   }
 }
+
+function checkCollison(intDistance, direction) {
+
+	var xCoor = spaceship.location[0]; yCoor = spaceship.location[1];
+
+	for(var i = 0; i < intDistance; i++) {
+		if(direction == "right") {
+			xCoor += 1;
+		} else if (direction == "up") {
+			yCoor += 1;
+		} else if (direction == "left") {
+			xCoor -= 1;
+		} else if (direction == "down") {
+			yCoor -= 1;
+		}
+
+		if(xCoor == 6 && yCoor == 5 || xCoor == 0 && yCoor == 1 || xCoor == 3 && yCoor == 2) {
+			return true;
+		}
+	}
+
+	return false;
+}
+
+
+function AsteroidCollison() {
+	window.alert("You collided with a ASTEROID!!! The ship has exploded and your crew have all perished!");
+	window.location.reload();
+}
+
 
 function wormholeCheck() {
 //Wormhole check
