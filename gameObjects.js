@@ -97,22 +97,23 @@ function directionCheck(direction) {
   {
     case "right":
     collision = checkCollison(intDistance, direction);
-    collision ? AsteroidCollison() : spaceship.location[0] += intDistance;
+    //the tenerary is its own stand alone expression and cannot stand alone. 
+    if(collision) { AsteroidCollison(); } else { spaceship.location[0] += intDistance; }
     break;
 
     case "up":
     collision = checkCollison(intDistance, direction);
-    collision ? AsteroidCollison() : spaceship.location[1] += intDistance;
+    if(collision) { AsteroidCollison(); } else { spaceship.location[1] += intDistance; }
     break;
 
     case "left":
     collision = checkCollison(intDistance, direction);
-    collision ? AsteroidCollison() : spaceship.location[0] -= intDistance;
+    if(collision) { AsteroidCollison(); } else { spaceship.location[0] -= intDistance; }
     break;
 
     case "down":
     collision = checkCollison(intDistance, direction);
-    collision ? AsteroidCollison() : spaceship.location[1] -= intDistance;
+    if(collision) { AsteroidCollison(); } else { spaceship.location[1] -= intDistance; }
     break;
 
     default:
