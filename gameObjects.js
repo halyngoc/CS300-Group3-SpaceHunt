@@ -78,6 +78,8 @@ var spaceship = {
     
     setData();
 
+    handleMoveEvent(this.location[0], this.location[1]);
+
     this.displayCurrentCP();
 
     return false;
