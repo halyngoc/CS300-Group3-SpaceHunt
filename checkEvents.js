@@ -10,7 +10,7 @@ function checkEvents(x, y){
 
   if(gameSpace[x][y].celestialObjects.includes("Meteor Storm")){
     alert("Meteor Storm. Ship damaged!");
-    this.damaged = true;
+    spaceship.damaged = true;
     return 2;
   }
 
