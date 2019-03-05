@@ -1,3 +1,6 @@
+// Check all checkEvents
+// return 1 for freighters, 2 for Meteor Storms, 3 for planets
+
 function checkEvents(x, y){
 
   if(gameSpace[x][y].celestialObjects == "freighter"){
