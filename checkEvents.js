@@ -8,61 +8,61 @@ function checkEvents(x, y){
     return 1;
   }
 
-  else if(gameSpace[x][y].celestialObjects.includes("Meteor Storm")){
+  if(gameSpace[x][y].celestialObjects.includes("Meteor Storm")){
     alert("Meteor Storm. Ship damaged!");
-    damage = "true";
+    this.damage = "true";
     return 2;
   }
 
-  else if(gameSpace[x][y].celestialObjects.includes("Venus")){
+  if(gameSpace[x][y].celestialObjects.includes("Venus")){
     alert("Venus! Celestial body Collision! Your ship is damaged and the crew dies. Game Over!\n");
     window.location.reload();
     return 3;
   }
 
-  else if(gameSpace[x][y].celestialObjects.includes("Mars")){
+  if(gameSpace[x][y].celestialObjects.includes("Mars")){
     alert("Mars! Celestial body Collision! Your ship is damaged and the crew dies. Game Over!\n");
     window.location.reload();
     return 3;
   }
 
-  else if(gameSpace[x][y].celestialObjects.includes("Jupiter")){
+  if(gameSpace[x][y].celestialObjects.includes("Jupiter")){
     alert("Jupiter! Celestial body Collision! Your ship is damaged and the crew dies. Game Over!\n");
     window.location.reload();
     return 3;
   }
 
-  else if(gameSpace[x][y].celestialObjects.includes("Mercury")){
+  if(gameSpace[x][y].celestialObjects.includes("Mercury")){
     alert("Mercury! Celestial body Collision! Your ship is damaged and the crew dies. Game Over!\n");
     window.location.reload();
     return 3;
   }
 
-  else if(gameSpace[x][y].celestialObjects.includes("Sun")){
+  if(gameSpace[x][y].celestialObjects.includes("Sun")){
     alert("Sun! Celestial body Collision! Your ship is damaged and the crew dies. Game Over!\n");
     window.location.reload();
     return 3;
   }
 
-  else if(gameSpace[x][y].celestialObjects.includes("Saturn")){
+  if(gameSpace[x][y].celestialObjects.includes("Saturn")){
     alert("Saturn! Celestial body Collision! Your ship is damaged and the crew dies. Game Over!\n");
     window.location.reload();
     return 3;
   }
 
-  else if(gameSpace[x][y].celestialObjects.includes("Uranus")){
+  if(gameSpace[x][y].celestialObjects.includes("Uranus")){
     alert("Uranus! Celestial body Collision! Your ship is damaged and the crew dies. Game Over!\n");
     window.location.reload();
     return 3;
   }
 
-  else if(gameSpace[x][y].celestialObjects.includes("Neptune")){
+  if(gameSpace[x][y].celestialObjects.includes("Neptune")){
     alert("Neptune! Celestial body Collision! Your ship is damaged and the crew dies. Game Over!\n");
     window.location.reload();
     return 3;
   }
 
-  else if(gameSpace[x][y].celestialObjects.includes("Moon")){
+  if(gameSpace[x][y].celestialObjects.includes("Moon")){
     alert("Moon! Celestial body Collision! Your ship is damaged and the crew dies. Game Over!\n");
     window.location.reload();
     return 3;
