@@ -13,8 +13,15 @@ function handleSpaceStationEvent() {
     // Display the gamble button
     document.getElementById("gambleBtn").classList.remove("hidden");
   } else {
-    // TODO: Charge a docking fee
+    console.log("Docking fee: 10 credits")
+    if (spaceship.credits < 10) {
+      spaceship.credits = 0;
+    } else {
+      spaceship.credits -= 10;
+    }
   }
+
+  setData();
 }
 
 document.getElementById("gambleBtn").onclick = function() {
