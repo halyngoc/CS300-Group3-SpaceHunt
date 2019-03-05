@@ -8,12 +8,12 @@ function handleMoveEvent(x, y) {
 function handleSpaceStationEvent() {
   // There's a random chance that a Casinian is here
   if (Math.random() <= 0.5) {
-    console.log("Casinian is here");
+    window.alert("Casinian is here");
 
     // Display the gamble button
     document.getElementById("gambleBtn").classList.remove("hidden");
   } else {
-    console.log("Docking fee: 10 credits")
+    window.alert("Docking fee: 10 credits");
     if (spaceship.credits < 10) {
       spaceship.credits = 0;
     } else {
