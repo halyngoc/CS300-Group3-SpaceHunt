@@ -45,7 +45,6 @@ var spaceship = {
     directionCheck(direction);
     WinningRecipeCheck();
     supplyDecrease();
-
     wormholeCheck();
 
     var retCheck = checkEvents(this.location[0], this.location[1]);
@@ -289,6 +288,7 @@ window.onload = function() {
 	celestialMap.celestialPoints.add(gameSpace[devConfig ? Config[15] : 5][devConfig ? Config[16] : 1]);
 	celestialMap.celestialPoints.add(gameSpace[devConfig ? Config[17] : 6][devConfig ? Config[18] : 5]);
   
+
 
   // Display starting CM with the 3 planets on it
   celestialMap.display();
