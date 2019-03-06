@@ -69,7 +69,7 @@ var spaceship = {
     }
     if(retCheck === 1){
       this.energy = 1000;
-      this.supplies += this.supplies * 0.02;
+      this.supplies += Math.floor(this.supplies * 0.02);
     }
 
     setData();
