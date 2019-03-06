@@ -1,29 +1,27 @@
 //Example on how we could have shared definitions of our objects
 //This is obviously incomplete, but an idea that may help us get started
+var devConfig = false;
+var Rand;
 
 if('Config' in localStorage)
 {
-  var devConfig = true;
-  var Rand;
+  devConfig = true;
 
   var Config = localStorage.getItem('Config');
-  localStorage.removeItem('Config');
+  //localStorage.removeItem('Config');
   Config = Config.split('#');
 
   var PlayStyle = Config[10];
   localStorage.setItem('PlayType', PlayStyle);  //save play style choice for supply and energy checks
 
-  var devMapItems = Config.slice(11, 41);		//pull off and save the MapItem value indexes
-  localStorage.setItem('devMapItems', devMapItems);
-
-  Config.splice(11, 30);		//remove excess MapItem values from the Config array
-
-  for(var i = 0; i < Config.length; i++)
-  {
-  	Config[i] = parseInt(Config[i], 10);
+  for(var i = 0; i < Config.length; i++) {
+    Config[i] = parseInt(Config[i], 10);
   }
 
-  Rand = (Config[7] == 1) ? true : false;	//determine if wormhole is set to random or fixed
+  //wormhole behavoir
+  Rand = (Config[7] == 1) ? true : false; //determine if wormhole is set to random or fixed
+ } else {
+ 	devConfig = false;
  }
 
 
@@ -43,38 +41,33 @@ var spaceship = {
   maxCoordY : devConfig ? Config[1] : 127,
 
 
-
   move : function(direction) {
     directionCheck(direction);
-
-    //var retCol = Collisions(this.location[0], this.location[1]);
-
+    WinningRecipeCheck();
     supplyDecrease();
 
-    //if(this.damaged === true){
+    wormholeCheck();
+
+    var retCheck = checkEvents(this.location[0], this.location[1]);
+
+    if(this.damaged === true && retCheck !== 3){
       //alert("Your ship is damaged. Energy consumed at 5 times. Repair ASAP.");
-      //this.energy = this.energy - this.energyPerDistance * intDistance * 5;
-    //}
-    //else{
-    this.energy = this.energy - this.energyPerDistance * intDistance;
-    //}
+      this.energy = this.energy - this.energyPerDistance * intDistance * 5;
+    }
+    else{
+      this.energy = this.energy - this.energyPerDistance * intDistance;
+    }
     if(checkEnergyAndSupplies(this.energy, this.supplies) == true)
       return;
-    //if(retCol === 1){
-      //this.damaged = true;
-    //}
-    //if(retCol === 2){
-      //this.energy = 1000;
-      //this.supplies += 2;
-    //}
 
-    wormholeCheck();
-    
-    if(checkFreighter(this.location[0], this.location[1]) === true){
-      this.energy = 1000;
-      this.supplies += this.supplies * 0.02;
+    if(retCheck === 2){
+      this.damaged = true;
     }
-    
+    if(retCheck === 1){
+      this.energy = 1000;
+      this.supplies += Math.floor(this.supplies * 0.02);
+    }
+
     setData();
 
     this.displayCurrentCP();
@@ -87,7 +80,6 @@ var spaceship = {
   }
 };
 
-
 function directionCheck(direction) {
 
   intDistance = parseInt(document.getElementById("distance").value);
@@ -96,24 +88,31 @@ function directionCheck(direction) {
   switch (direction)
   {
     case "right":
-    collision = checkCollison(intDistance, direction);
-    //the tenerary is its own stand alone expression and cannot stand alone. 
-    if(collision) { AsteroidCollison(); } else { spaceship.location[0] += intDistance; }
+    collision = checkCollison(intDistance, direction); 
+    if(collision) { 
+    	AsteroidCollison();
+    	spaceship.location[0] += intDistance; }
     break;
 
     case "up":
     collision = checkCollison(intDistance, direction);
-    if(collision) { AsteroidCollison(); } else { spaceship.location[1] += intDistance; }
+    if(collision) { 
+    	AsteroidCollison();
+    	spaceship.location[1] += intDistance; }
     break;
 
     case "left":
     collision = checkCollison(intDistance, direction);
-    if(collision) { AsteroidCollison(); } else { spaceship.location[0] -= intDistance; }
+    if(collision) { 
+    	AsteroidCollison(); 
+    	spaceship.location[0] -= intDistance; }
     break;
 
     case "down":
     collision = checkCollison(intDistance, direction);
-    if(collision) { AsteroidCollison(); } else { spaceship.location[1] -= intDistance; }
+    if(collision) { 
+    	AsteroidCollison();
+    	spaceship.location[1] -= intDistance; }
     break;
 
     default:
@@ -122,33 +121,60 @@ function directionCheck(direction) {
   }
 }
 
-function checkCollison(intDistance, direction) {
-
-	var xCoor = spaceship.location[0]; yCoor = spaceship.location[1];
-
-	for(var i = 0; i < intDistance; i++) {
-		if(direction == "right") {
-			xCoor += 1;
-		} else if (direction == "up") {
-			yCoor += 1;
-		} else if (direction == "left") {
-			xCoor -= 1;
-		} else if (direction == "down") {
-			yCoor -= 1;
-		}
-
-		if(xCoor == 6 && yCoor == 5 || xCoor == 0 && yCoor == 1 || xCoor == 3 && yCoor == 2) {
-			return true;
+//simple win function 
+function WinningRecipeCheck() {
+	
+	if(Config != null) {
+		if(spaceship.location[0] == Config[11] && spaceship.location[1] == Config[12]) {
+			window.alert("YOU FOUND THE SECRET KOCA-KOLA RECIPE!!! YOU WIN!!!");
+			window.location.reload();
 		}
 	}
+	if(Config == null && spaceship.location[0] == 25 && spaceship.location[1] == 25) {
+		window.alert("YOU FOUND THE SECRET KOCA-KOLA RECIPE!!! YOU WIN!!!");
+		window.location.reload();
+	}
+}
 
-	return false;
+function checkCollison(intDistance, direction) {
+
+  var xCoor = spaceship.location[0]; yCoor = spaceship.location[1];
+
+  for(var i = 0; i < intDistance; i++) {
+    if(direction == "right") {
+      xCoor += 1;
+    } else if (direction == "up") {
+      yCoor += 1;
+    } else if (direction == "left") {
+      xCoor -= 1;
+    } else if (direction == "down") {
+      yCoor -= 1;
+    }
+
+    if(Config != null) {
+    	if(xCoor == Config[37] && yCoor == Config[38] || xCoor == Config[39] && yCoor == Config[40] || xCoor == Config[41] && yCoor == Config[42]) {
+    		return true;
+    	}
+    }
+    if(Config == null && (xCoor == 6 && yCoor == 5 || xCoor == 0 && yCoor == 1 || xCoor == 3 && yCoor == 2) ) {
+      return true;
+    }
+  }
+
+  return false;
 }
 
 
 function AsteroidCollison() {
-	window.alert("You collided with a ASTEROID!!! The ship has exploded and your crew have all perished!");
-	window.location.reload();
+	var chance = Math.random() * 100;
+	
+	if (chance < 90) { // 0-90% chance to be damaged and not die
+    	window.alert("You collided with a ASTEROID!!! Luckily you survied with just some damages to your ship, tread carfully from here on! Due to the damage the ship now consumes energy at 5 times the usual rate.");
+    	spaceship.damaged = true;
+    } else {
+  		window.alert("You collided with a ASTEROID!!! The ship has exploded and your crew have all perished!");
+  		window.location.reload();
+  	}
 }
 
 
@@ -204,13 +230,20 @@ var celestialMap = {
   toString : function() {}
 };
 
+
 //Map could contain 128x128 celestialPoint() objects
 var gameSpace = [];
 window.onload = function() {
+	var i = 0, j = 0;
+	var devConfig;
+	
+	if('Config' in localStorage) { devConfig = true; } else { devConfig = false;}
+	localStorage.removeItem('Config');
+
   // Initialize gameSpace
-  for (var i = 0; i <= spaceship.maxCoordX; i++) {
+  for (i = 0; i <= spaceship.maxCoordX; i++) {
     var CPRow = [];
-    for (var j = 0; j <= spaceship.maxCoordY; j++) {
+    for (j = 0; j <= spaceship.maxCoordY; j++) {
       CPRow.push(new celestialPoint([i, j]));
     }
     gameSpace.push(CPRow);
@@ -219,34 +252,43 @@ window.onload = function() {
   // Display starting CP
   spaceship.displayCurrentCP();
 
-  // Set locations of the 3 planets
-  // For now the locations are hardcoded
-  gameSpace[2][0].celestialObjects.push("Planet Celeron");
-  gameSpace[5][1].celestialObjects.push("Planet Xeon");
-  gameSpace[6][5].celestialObjects.push("Planet Ryzen");
+  //Default Map items
+  Default = [25, 25, 2, 0, 5, 1, 6, 5, 30, 48, 83, 14, 19, 65, 24, 39, 62, 11, 33, 2, 6, 12, 24, 35, 78, 26, 90, 5, 0, 1, 3, 2, 5, 20, 14, 8, 32, 0, 2, 25, 0, 30 ,71, 25, 55, 76, 102, 82, 1, 1];
+  MapItemNames = ["Winning Recipe", "Planet Celeron", "Planet Xeon", "Planet Ryzen", "Space Station", "Space Station", "Space Station", "Freighter", "Freighter", "Freighter", "Meteor Storm", "Meteor Storm","Meteor Storm", "Asteroid", "Asteroid", "Asteroid", "Venus", "Mars", "Jupiter", "Mercury", "Sun", "Saturn", "Uranus", "Neptune", "Moon"];
+  
+  //Map population
+  j = 0;
+  if(devConfig) {	//dev Config items
 
-  // Add the 3 planets to CM
-  celestialMap.celestialPoints.add(gameSpace[2][0]);
-  celestialMap.celestialPoints.add(gameSpace[5][1]);
-  celestialMap.celestialPoints.add(gameSpace[6][5]);
+  	for(i = 11; i < Config.length; i += 2) {
+  		if(Config[i] != 0.5 && Config[i+1] != 0.5) {
+  			gameSpace[Config[i]][Config[i+1]].celestialObjects.push(MapItemNames[j]);	
+  		} 
+  		//console.log("ConfigX: ", Config[i], " ConfigY: ", Config[i+1], "Name: ", MapItemNames[j] );
+  		j += 1;	
+  	}
+  	
+  	j = 16;
+  	for(i = 32; i < Default.length; i += 2) {
+  		gameSpace[Default[i]][Default[i+1]].celestialObjects.push(MapItemNames[j]);	
+  		//console.log("DefaultX: ", Default[i], " DefaultY: ", Default[i+1], "Name: ", MapItemNames[j] );
+  		j += 1;	
+  	}
+  } else {		//default Config items
 
-  // Set locations of the 4 freighters
-  // For now the locations are hardcoded
-  gameSpace[24][39].celestialObjects.push("freighter");
-  gameSpace[62][11].celestialObjects.push("freighter");
-  gameSpace[33][2].celestialObjects.push("freighter");
-  gameSpace[5][9].celestialObjects.push("freighter");
-
-  // Add the 3 planets to CM
-  celestialMap.celestialPoints.add(gameSpace[24][39]);
-  celestialMap.celestialPoints.add(gameSpace[62][11]);
-  celestialMap.celestialPoints.add(gameSpace[33][2]);
-  celestialMap.celestialPoints.add(gameSpace[5][9]);
-
-  // For debugging purposses, here are some celestial objects
-  gameSpace[6][5].celestialObjects.push("asteroid");
-  gameSpace[0][1].celestialObjects.push("asteroid");
-  gameSpace[3][2].celestialObjects.push("asteroid");
+  	for(i = 0; i < Default.length; i += 2) {
+  		gameSpace[Default[i]][Default[i+1]].celestialObjects.push(MapItemNames[j]);	
+  		//console.log("DefaultX: ", Default[i], " DefaultY: ", Default[i+1], "Name: ", MapItemNames[j] );
+  		j += 1;
+  	}
+  }
+  
+  	
+	// Add the 3 planets to CM
+	celestialMap.celestialPoints.add(gameSpace[devConfig ? Config[13] : 2][devConfig ? Config[14] : 0]);
+	celestialMap.celestialPoints.add(gameSpace[devConfig ? Config[15] : 5][devConfig ? Config[16] : 1]);
+	celestialMap.celestialPoints.add(gameSpace[devConfig ? Config[17] : 6][devConfig ? Config[18] : 5]);
+  
 
   // Display starting CM with the 3 planets on it
   celestialMap.display();
