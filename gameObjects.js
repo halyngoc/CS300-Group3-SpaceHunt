@@ -9,6 +9,7 @@ if('Config' in localStorage)
 
   var Config = localStorage.getItem('Config');
   //localStorage.removeItem('Config');
+
   Config = Config.split('#');
 
   var PlayStyle = Config[10];
@@ -42,6 +43,7 @@ var spaceship = {
   move : function(direction) {
     directionCheck(direction);
     WinningRecipeCheck();
+
     supplyDecrease();
 
     wormholeCheck();
@@ -260,7 +262,6 @@ window.onload = function() {
 	celestialMap.celestialPoints.add(gameSpace[devConfig ? Config[15] : 5][devConfig ? Config[16] : 1]);
 	celestialMap.celestialPoints.add(gameSpace[devConfig ? Config[17] : 6][devConfig ? Config[18] : 5]);
   
-
   // Display starting CM with the 3 planets on it
   celestialMap.display();
 
