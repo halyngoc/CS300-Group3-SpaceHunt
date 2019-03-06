@@ -220,6 +220,9 @@ window.onload = function() {
   gameSpace[6][5].celestialObjects.push("asteroid");
   gameSpace[0][1].celestialObjects.push("asteroid");
   gameSpace[3][2].celestialObjects.push("asteroid");
+  
+  //Bad Max hard coded temporarily
+  gameSpace[7][7].celestialObjects.push("Bad Max");
 
   // Display starting CM with the 3 planets on it
   celestialMap.display();
