@@ -198,15 +198,15 @@ var celestialMap = {
 //Map could contain 128x128 celestialPoint() objects
 var gameSpace = [];
 window.onload = function() {
-
+	var i = 0, j = 0;
 	var devConfig;
-	if('Config' in localStorage) { devConfig = true; } else { devConfig = false}
+	if('Config' in localStorage) { devConfig = true; } else { devConfig = false;}
 	localStorage.removeItem('Config');
 
   // Initialize gameSpace
-  for (var i = 0; i <= spaceship.maxCoordX; i++) {
+  for (i = 0; i <= spaceship.maxCoordX; i++) {
     var CPRow = [];
-    for (var j = 0; j <= spaceship.maxCoordY; j++) {
+    for (j = 0; j <= spaceship.maxCoordY; j++) {
       CPRow.push(new celestialPoint([i, j]));
     }
     gameSpace.push(CPRow);
@@ -217,27 +217,32 @@ window.onload = function() {
 
   Default = [25, 25, 2, 0, 5, 1, 6, 5, 30, 48, 83, 14, 19, 65, 24, 39, 62, 11, 33, 2, 6, 12, 24, 35, 78, 26, 90, 5, 0, 1, 3, 2, 5, 20, 14, 8, 32, 0, 2, 25, 0, 30 ,71, 25, 55, 76, 102, 82, 1, 1];
   MapItemNames = ["Winning Recipe", "Planet Celeron", "Planet Xeon", "Planet Ryzen", "Space Station", "Space Station", "Space Station", "Freighter", "Freighter", "Freighter", "Meteor Storm", "Meteor Storm","Meteor Storm", "Asteroid", "Asteroid", "Asteroid", "Venus", "Mars", "Jupiter", "Mercury", "Sun", "Saturn", "Uranus", "Neptune", "Moon"];
-  var j = 0;
-/*
+  
+  j = 0;
   if(devConfig) {
-
-  	for(var i = 11; i < Config.length; i += 2) {
-  		
+  	
+  	for(i = 11; i < Config.length; i += 2) {
   		if(Config[i] != 0.5 && Config[i+1] != 0.5) {
   			gameSpace[Config[i]][Config[i+1]].celestialObjects.push(MapItemNames[j]);	
-  		}
-  		
-  		console.log("ConfigX: ", Config[i], " ConfigY: ", Config[i+1], "Name: ", MapItemNames[j] );
-  		j += 1;
+  		} 
+  		//console.log("ConfigX: ", Config[i], " ConfigY: ", Config[i+1], "Name: ", MapItemNames[j] );
+  		j += 1;	
+  	}
+  	
+  	j = 16;
+  	for(i = 32; i < Default.length; i += 2) {
+  		gameSpace[Default[i]][Default[i+1]].celestialObjects.push(MapItemNames[j]);	
+  		//console.log("DefaultX: ", Default[i], " DefaultY: ", Default[i+1], "Name: ", MapItemNames[j] );
+  		j += 1;	
   	}
   } else {
- */
-  	for(var i = 0; i < Default.length; i += 2) {
+
+  	for(i = 0; i < Default.length; i += 2) {
   		gameSpace[Default[i]][Default[i+1]].celestialObjects.push(MapItemNames[j]);	
-  		console.log("DefaultX: ", Default[i], " DefaultY: ", Default[i+1], "Name: ", MapItemNames[j] );
+  		//console.log("DefaultX: ", Default[i], " DefaultY: ", Default[i+1], "Name: ", MapItemNames[j] );
   		j += 1;
   	}
-  //}
+  }
   
   	
 	// Add the 3 planets to CM
