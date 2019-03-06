@@ -9,7 +9,6 @@ if('Config' in localStorage)
 
   var Config = localStorage.getItem('Config');
   //localStorage.removeItem('Config');
-
   Config = Config.split('#');
 
   var PlayStyle = Config[10];
@@ -21,6 +20,8 @@ if('Config' in localStorage)
 
   //wormhole behavoir
   Rand = (Config[7] == 1) ? true : false; //determine if wormhole is set to random or fixed
+ } else {
+ 	devConfig = false;
  }
 
 
@@ -43,7 +44,6 @@ var spaceship = {
   move : function(direction) {
     directionCheck(direction);
     WinningRecipeCheck();
-
     supplyDecrease();
 
     wormholeCheck();
@@ -113,9 +113,17 @@ function directionCheck(direction) {
   }
 }
 
-//simple win function
+//simple win function 
 function WinningRecipeCheck() {
-	if(spaceship.location[0] == 25 && spaceship.location[1] == 25 || spaceship.location[0] == Config[11] && spaceship.location[1] == Config[12]) {
+	
+	if(Config != null) {
+		if(spaceship.location[0] == Config[11] && spaceship.location[1] == Config[12]) {
+			window.alert("YOU FOUND THE SECRET KOCA-KOLA RECIPE!!! YOU WIN!!!");
+			window.location.reload();
+		}
+	}
+
+	if(Config == null && spaceship.location[0] == 25 && spaceship.location[1] == 25) {
 		window.alert("YOU FOUND THE SECRET KOCA-KOLA RECIPE!!! YOU WIN!!!");
 		window.location.reload();
 	}
@@ -262,6 +270,7 @@ window.onload = function() {
 	celestialMap.celestialPoints.add(gameSpace[devConfig ? Config[15] : 5][devConfig ? Config[16] : 1]);
 	celestialMap.celestialPoints.add(gameSpace[devConfig ? Config[17] : 6][devConfig ? Config[18] : 5]);
   
+
   // Display starting CM with the 3 planets on it
   celestialMap.display();
 
