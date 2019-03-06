@@ -14,8 +14,7 @@ if('Config' in localStorage)
   var PlayStyle = Config[10];
   localStorage.setItem('PlayType', PlayStyle);  //save play style choice for supply and energy checks
 
-  for(var i = 0; i < Config.length; i++)
-  {
+  for(var i = 0; i < Config.length; i++) {
     Config[i] = parseInt(Config[i], 10);
   }
 
@@ -42,7 +41,7 @@ var spaceship = {
 
   move : function(direction) {
     directionCheck(direction);
-
+    WinningRecipeCheck();
     supplyDecrease();
 
     wormholeCheck();
@@ -110,6 +109,14 @@ function directionCheck(direction) {
     console.log("Invalid direction.");
     break;
   }
+}
+
+//simple win function
+function WinningRecipeCheck() {
+	if(spaceship.location[0] == 25 && spaceship.location[1] == 25 || spaceship.location[0] == Config[11] && spaceship.location[1] == Config[12]) {
+		window.alert("YOU FOUND THE SECRET KOCA-KOLA RECIPE!!! YOU WIN!!!");
+		window.location.reload();
+	}
 }
 
 function checkCollison(intDistance, direction) {
@@ -200,6 +207,7 @@ var gameSpace = [];
 window.onload = function() {
 	var i = 0, j = 0;
 	var devConfig;
+	
 	if('Config' in localStorage) { devConfig = true; } else { devConfig = false;}
 	localStorage.removeItem('Config');
 
@@ -215,12 +223,14 @@ window.onload = function() {
   // Display starting CP
   spaceship.displayCurrentCP();
 
+  //Default Map items
   Default = [25, 25, 2, 0, 5, 1, 6, 5, 30, 48, 83, 14, 19, 65, 24, 39, 62, 11, 33, 2, 6, 12, 24, 35, 78, 26, 90, 5, 0, 1, 3, 2, 5, 20, 14, 8, 32, 0, 2, 25, 0, 30 ,71, 25, 55, 76, 102, 82, 1, 1];
   MapItemNames = ["Winning Recipe", "Planet Celeron", "Planet Xeon", "Planet Ryzen", "Space Station", "Space Station", "Space Station", "Freighter", "Freighter", "Freighter", "Meteor Storm", "Meteor Storm","Meteor Storm", "Asteroid", "Asteroid", "Asteroid", "Venus", "Mars", "Jupiter", "Mercury", "Sun", "Saturn", "Uranus", "Neptune", "Moon"];
   
+  //Map population
   j = 0;
-  if(devConfig) {
-  	
+  if(devConfig) {	//dev Config items
+
   	for(i = 11; i < Config.length; i += 2) {
   		if(Config[i] != 0.5 && Config[i+1] != 0.5) {
   			gameSpace[Config[i]][Config[i+1]].celestialObjects.push(MapItemNames[j]);	
@@ -235,7 +245,7 @@ window.onload = function() {
   		//console.log("DefaultX: ", Default[i], " DefaultY: ", Default[i+1], "Name: ", MapItemNames[j] );
   		j += 1;	
   	}
-  } else {
+  } else {		//default Config items
 
   	for(i = 0; i < Default.length; i += 2) {
   		gameSpace[Default[i]][Default[i+1]].celestialObjects.push(MapItemNames[j]);	
