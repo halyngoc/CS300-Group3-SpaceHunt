@@ -3,6 +3,7 @@ function setStateData()
     var RandWrm;
     var FixWrmLocation = ['0.5', '0.5'];
     var PlayStyleMor;
+    var RecipeLoc = ['0.5', '0.5'];
 
     //textbox value pulls
     var MapSize = document.getElementById("Dimensions").value;
@@ -28,6 +29,15 @@ function setStateData()
     } else if (document.getElementById("Immortal").checked) {
       PlayStyleMor = '0';
     }
+
+    if(document.getElementById("RandomRecipe").checked){
+      RecipeLoc[0] = Math.floor((Math.random() * MapSize[0] + 1));
+      RecipeLoc[1] = Math.floor((Math.random() * MapSize[1] + 1));
+
+    } else if (document.getElementById("FixedRecipe").checked) {
+      RecipeLoc = document.getElementById("recipeLoc").value;
+      RecipeLoc = FixRecipeLoc.split(',');
+    }
     
     //bounds checking
     if(Number(MapSize[0]) < 9 || Number(MapSize[0]) > 255 || Number(MapSize[1]) < 9 || Number(MapSize[1]) > 255){
@@ -45,10 +55,15 @@ function setStateData()
       FixWrmLocation[0] = StartLocation[0]; 
       FixWrmLocation[1] = StartLocation[1];
     }
+    if(Number(MapSize[0]) < Number(RecipeLoc[0]) || Number(MapSize[1]) < Number(RecipeLoc[1]) || Number(RecipeLoc[0]) < 0 || Number(RecipeLoc[1]) < 0) {
+      window.alert("Fixed recipe location must be within the range of the map. Setting Fixed recipe location to a point within range");
+      RecipeLoc[0] = Math.floor((Math.random() * MapSize[0] + 1)); 
+      RecipeLoc[1] = Math.floor((Math.random() * MapSize[1] + 1));
+    }
 
     //localStorage string set up
     var parser = "#";
-    var StateConfig = MapSize[0].concat(parser, MapSize[1], parser, StartLocation[0], parser, StartLocation[1], parser, Eng, parser, Supl, parser, Cred, parser, RandWrm, parser, FixWrmLocation[0], parser, FixWrmLocation[1], parser, PlayStyleMor);
+    var StateConfig = MapSize[0].concat(parser, MapSize[1], parser, StartLocation[0], parser, StartLocation[1], parser, Eng, parser, Supl, parser, Cred, parser, RandWrm, parser, FixWrmLocation[0], parser, FixWrmLocation[1], parser, PlayStyleMor, parser, RecipeLoc[0], parser, RecipeLoc[1]);
     
     setMapData(StateConfig, MapSize, parser);
 }
@@ -217,6 +232,6 @@ function BoundsChecking(StateConfig, MapItems, MapSize, parser) {
   StateConfig = StateConfig.concat(parser, MapItems[24], parser, MapItems[25], parser, MapItems[26], parser, MapItems[27], parser, MapItems[28], parser, MapItems[29]);
   
 
-  //window.alert(StateConfig);
+  window.alert(StateConfig);
   localStorage.setItem('Config', StateConfig);
 }
