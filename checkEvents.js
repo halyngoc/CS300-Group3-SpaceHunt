@@ -15,48 +15,48 @@ function checkEvents(x, y){
   }
 
   if(gameSpace[x][y].celestialObjects.includes("Venus")){
-    death("VENUS");
-    return 3;
+    if(death("VENUS") == true)
+      return 3;
   }
 
   if(gameSpace[x][y].celestialObjects.includes("Mars")){
-    death("MARS");
-    return 3;
+    if(death("MARS") == true)
+      return 3;
   }
 
   if(gameSpace[x][y].celestialObjects.includes("Jupiter")){
-    death("JUPITER");
-    return 3;
+    if(death("JUPITER") == true)
+      return 3;
   }
 
   if(gameSpace[x][y].celestialObjects.includes("Mercury")){
-    death("MERCURY");
-    return 3;
+    if(death("MERCURY") == true)
+      return 3;
   }
 
   if(gameSpace[x][y].celestialObjects.includes("Sun")){
-    death("SUN");
-    return 3;
+    if(death("SUN") == true)
+      return 3;
   }
 
   if(gameSpace[x][y].celestialObjects.includes("Saturn")){
-    death("SATURN");
-    return 3;
+    if(death("SATURN") == true)
+      return 3;
   }
 
   if(gameSpace[x][y].celestialObjects.includes("Uranus")){
-    death("URANUS");
-    return 3;
+    if(death("URANUS") == true)
+      return 3;
   }
 
   if(gameSpace[x][y].celestialObjects.includes("Neptune")){
-    death("NEPTUNE");
-    return 3;
+    if(death("NEPTUNE") == true)
+      return 3;
   }
 
   if(gameSpace[x][y].celestialObjects.includes("Moon")){
-    death("MOON");
-    return 3;
+    if(death("MOON") == true)
+      return 3;
   }
 
   else {
