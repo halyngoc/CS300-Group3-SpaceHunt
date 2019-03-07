@@ -36,7 +36,7 @@ function death(causeOfDeath)
     }
     else if(causeOfDeath == "BADMAX")
     {
-      if(!alert("BADMAX KILLED YOUR ENTIRE CREW!\n" + "GAME OVER")){window.location.reload();}
+      if(!alert("BAD MAX HAS ATTACKED AND DESTROYED YOUR SHIP!\n" + "EVERYONE HAS DIED.\n" + "GAME OVER")){window.location.reload();}
     }
     else
     {
