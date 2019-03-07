@@ -45,6 +45,7 @@ var spaceship = {
     directionCheck(direction);
     WinningRecipeCheck();
     supplyDecrease();
+
     wormholeCheck();
 
     var retCheck = checkEvents(this.location[0], this.location[1]);
@@ -87,31 +88,27 @@ function directionCheck(direction) {
   switch (direction)
   {
     case "right":
-    collision = checkCollison(intDistance, direction); 
-    if(collision) { 
-    	AsteroidCollison();
-    	spaceship.location[0] += intDistance; }
+    collision = checkCollision(intDistance, direction);
+    spaceship.location[0] += intDistance;
+    if(collision) { AsteroidCollision(); }
     break;
 
     case "up":
-    collision = checkCollison(intDistance, direction);
-    if(collision) { 
-    	AsteroidCollison();
-    	spaceship.location[1] += intDistance; }
+    collision = checkCollision(intDistance, direction);
+    spaceship.location[1] += intDistance;
+    if(collision) { AsteroidCollision(); }
     break;
 
     case "left":
-    collision = checkCollison(intDistance, direction);
-    if(collision) { 
-    	AsteroidCollison(); 
-    	spaceship.location[0] -= intDistance; }
+    collision = checkCollision(intDistance, direction);
+    spaceship.location[0] -= intDistance;
+    if(collision) { AsteroidCollision(); }
     break;
 
     case "down":
-    collision = checkCollison(intDistance, direction);
-    if(collision) { 
-    	AsteroidCollison();
-    	spaceship.location[1] -= intDistance; }
+    collision = checkCollision(intDistance, direction);
+    spaceship.location[1] -= intDistance; 
+    if(collision) { AsteroidCollision(); }
     break;
 
     default:
@@ -129,16 +126,16 @@ function WinningRecipeCheck() {
 			window.location.reload();
 		}
 	}
-
 	if(Config == null && spaceship.location[0] == 25 && spaceship.location[1] == 25) {
 		window.alert("YOU FOUND THE SECRET KOCA-KOLA RECIPE!!! YOU WIN!!!");
 		window.location.reload();
 	}
 }
 
-function checkCollison(intDistance, direction) {
+function checkCollision(intDistance, direction) {
 
-  var xCoor = spaceship.location[0]; yCoor = spaceship.location[1];
+  var xCoor = spaceship.location[0]; 
+  var yCoor = spaceship.location[1];
 
   for(var i = 0; i < intDistance; i++) {
     if(direction == "right") {
@@ -165,7 +162,7 @@ function checkCollison(intDistance, direction) {
 }
 
 
-function AsteroidCollison() {
+function AsteroidCollision() {
 	var chance = Math.random() * 100;
 	
 	if (chance < 90) { // 0-90% chance to be damaged and not die
