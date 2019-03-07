@@ -12,136 +12,36 @@
     <h1>
       <b>Developer Game Configuration Options</b>
     </h1>
-    <p>Please fill in all the fields default values are intially set</p><br><br>
-    
-    <!-- State Varibles -->
-    <label><b>State Varibles: </b></label><br>
-    <hr>    <!-- border line splitter -->
+    <p>Please fill in all the fields for the state varibles, regular default values are intially set</p>
+    <hr>
 
+    <label for="size"><b>Game Board Dimensions: </b></label>
+    <input type="text" name="Dim" id="Dimensions" value="128,128">
 
-    <!-- Map size -->
-    <label for="size"><b>Game Board Dimensions: </b></label><br>
-    <input type="text" name="Dim" id="Dimensions" style="width: 75%;" value="128,128"><br>
+    <label for=loc><b>Starting Location: </b></label>
+    <input type="text" name="loc" id="Location" value="100,100">
 
-    <!-- Current location -->
-    <label for=loc><b>Starting Location: </b></label><br>
-    <input type="text" name="loc" id="Location" style="width: 75%;" value="100,100"><br>
+    <label for="energy"><b>Energy: </b></label>
+    <input type="text" name="energy" id="Energy" value="1000">
 
-    <!-- Energy -->
-    <label for="energy"><b>Energy: </b></label><br>
-    <input type="text" name="energy" id="Energy" style="width: 75%;" value="1000"><br>
+    <label "supplies"><b>Supplies: </b></label>
+    <input type="text" name="supplies" id="Supplies" value="100">
 
-    <!-- Supplies -->
-    <label "supplies"><b>Supplies: </b></label><br>
-    <input type="text" name="supplies" id="Supplies" style="width: 75%;" value="100"><br>
+    <label for="credits"><b>Credits: </b></label>
+    <input type="text" name="credits" id="Credits" value="1000">
 
-    <!-- Credits -->
-    <label for="credits"><b>Credits: </b></label><br>
-    <input type="text" name="credits" id="Credits" style="width: 75%;" value="1000"><br>
-
-    <!-- Wormholes -->
     <label for="wormhole"><b>Wormhole behavior: </b></label><br>
       <input type="radio" name="worm" id="Random" checked> Random <br>
       <input type="radio" name="worm" id="Fixed"> Fixed <br><br>
 
-    &nbsp;&nbsp;&nbsp;&nbsp;
-    <label for=fixedworm><b>Fixed Wormhole Location: </b></label><br>
-    <input type="text" name="wormF" id="FixedWormhole" style="margin-left: 1.5%; width: 35%;" value="50,50"><br>
+    <label for=fixedworm><b>Fixed Wormhole Location: </b></label>
+    <input type="text" name="wormF" id="FixedWormhole" value="20,20">
 
-    <label for="play"><b>Play Behavior: </b></label><br>
+    <label for="play"><b>Play behavior: </b></label><br>
         <input type="radio" name="playtype" id="Mortal" checked> Mortal <br>
-        <input type="radio" name="playtype" id="Immortal"> Immortal <br></br><br>
-
-    <!-- Winning Recipe Location -->
-    <label for=recipe><b>Winning Recipe Location: </b></label><br>
-    <input type="radio" name="recipe" id="RandomRecipe" checked> Random <br>
-    <input type="radio" name="recipe" id="FixedRecipe"> Fixed <br><br>
-
-    &nbsp;&nbsp;&nbsp;&nbsp;
-    <label for=recipe><b>Winning Recipe Fixed Location: </b></label><br>
-    <input type="text" name="recipe" id="RecipeLocation" style="margin-left: 1.5%; width: 35%;" value="25,25"><br>
-
-    <!-- Map Items -->
-    <label><b>Map Items: </b></label><br>
-    <hr>
-
-    <!-- PLANETS -->
-    <label for="planets"><b>Planet Locations: </b></label><br>
-        <input type="radio" name="planetType" id="RandomPlanet" checked> Random <br>
-        <input type="radio" name="planetType" id="FixedPlanet"> Fixed <br></br>
-    
-    &nbsp;&nbsp;&nbsp;&nbsp;
-    <label for=fixplanet><b>Planet Celeron Location: </b></label><br>
-    <input type="text" name="planetCeleron" id="planetCeleron" style="margin-left: 1.5%; width: 35%;" value="2,0"><br>
-    &nbsp;&nbsp;&nbsp;&nbsp;
-    <label for=fixplanet><b>Planet Xeon Location: </b></label><br>
-    <input type="text" name="planetXeon" id="planetXeon" style="margin-left: 1.5%; width: 35%;" value="5,1"><br>
-    &nbsp;&nbsp;&nbsp;&nbsp;
-    <label for=fixplanet><b>Planet Ryzen Location: </b></label><br>
-    <input type="text" name="planetRyzen" id="planetRyzen" style="margin-left: 1.5%; width: 35%;" value="6,5"><br><br>
+        <input type="radio" name="playtype" id="Immortal"> Immortal <br></br>
 
 
-     <!-- SPACE STATIONS -->
-    <label for=station><b>How many Space Stations would you like: </b></label><br>
-    <select name="station" id="StationNum"><br> <option> 0 <option> 1 <option> 2 <option> 3 </select><br><br>
-   
-    <label for="planets"><b>Space Station Locations: </b></label><br>
-        <input type="radio" name="StationType" id="RandomStation" checked> Random <br>
-        <input type="radio" name="StationType" id="FixedStation"> Fixed <br><br>
-
-    &nbsp;&nbsp;&nbsp;&nbsp;
-    <label for=fixstation><b>Space Stations Locations: </b></label><br>
-    <p style="margin-left: 1.5%;"> Parse each individual station with a ( # ) and the coordinates with a ( , ) as shown.</p>
-    
-    <input type="text" name="SpaceStationLocations" id="SpaceStationLocations" style="margin-left: 1.5%; width: 35%;" value="5,4 # 15,10 # 20,6"><br><br>
-
-
-    <!-- Freighters -->
-    <label for=Freighters><b>How many Abandoned Freighters would you like: </b></label><br>
-    <select name="Freighters" id="FreighterNum"><br> <option> 0 <option> 1 <option> 2 <option> 3 </select><br><br>
-
-    <label for="Freighters"><b>Abandoned Freighters Locations: </b></label><br>
-        <input type="radio" name="FreighterType" id="RandomFreighter" checked> Random <br>
-        <input type="radio" name="FreighterType" id="FixedFreighter"> Fixed <br><br>
-
-    &nbsp;&nbsp;&nbsp;&nbsp;
-    <label for=fixFreighter><b>Abandoned Freighters Locations: </b></label><br>
-    <p style="margin-left: 1.5%;"> Parse each individual with a ( # ) and the coordinates with a ( , ) as shown.</p>
-    
-    <input type="text" name="FreighterLocations" id="FreighterLocations" style="margin-left: 1.5%; width: 35%;" value="8,2 # 11,12 # 18,3"><br><br>
-
-
-    <!-- Meteor Storms -->
-    <label for=MeteorStorms><b>How many Meteor Storms would you like: </b></label><br>
-    <select name="MeteorStorms" id="MeteorNum"><br> <option> 0 <option> 1 <option> 2 <option> 3 </select><br><br>
-    
-    <label for="MeteorStorms"><b>Meteor Storms Locations: </b></label><br>
-        <input type="radio" name="MeteorType" id="RandomMeteor" checked> Random <br>
-        <input type="radio" name="MeteorType" id="FixedMeteor"> Fixed <br><br>
-
-    &nbsp;&nbsp;&nbsp;&nbsp;
-    <label for=fixMeteor><b>Meteor Storms Locations: </b></label><br>
-    <p style="margin-left: 1.5%;"> Parse each individual with a ( # ) and the coordinates with a ( , ) as shown.</p>
-    
-    <input type="text" name="MeteorLocations" id="MeteorLocations" style="margin-left: 1.5%; width: 35%;" value="3,6 # 14,11 # 16,7"><br><br>
-
-
-    <!-- Asteroids -->
-    <label for=Asteroids><b>How many Asteroids would you like: </b></label><br>
-    <select name="Asteroids" id="AsteroidsNum"><br> <option> 0 <option> 1 <option> 2 <option> 3 </select><br><br>
-    
-    <label for="Asteroids"><b>Asteroids Locations: </b></label><br>
-        <input type="radio" name="AsteroidsType" id="RandomAsteroids" checked> Random <br>
-        <input type="radio" name="AsteroidsType" id="FixedAsteroids"> Fixed <br><br>
-
-    &nbsp;&nbsp;&nbsp;&nbsp;
-    <label for=fixAsteroids><b>Asteroids Locations: </b></label><br>
-    <p style="margin-left: 1.5%;"> Parse each individual with a ( # ) and the coordinates with a ( , ) as shown.</p>
-    
-    <input type="text" name="AsteroidsLocations" id="AsteroidsLocations" style="margin-left: 1.5%; width: 35%;" value="9,8 # 19,13 # 14,8"><br>
-
-
-    <!-- SUBMIT BUTTON -->
     <br><br>
     <a type="submit" id="devSubmitBtn" href="SpaceHunt.html" target="_self" onclick="setStateData();">Submit Data</a> 
 
