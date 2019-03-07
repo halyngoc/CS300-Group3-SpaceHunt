@@ -90,25 +90,32 @@ function directionCheck(direction) {
     case "right":
     collision = checkCollision(intDistance, direction);
     spaceship.location[0] += intDistance;
-    if(collision) { AsteroidCollision(); }
+    if(collision) { 
+    	AsteroidCollision(); }
     break;
 
     case "up":
     collision = checkCollision(intDistance, direction);
     spaceship.location[1] += intDistance;
-    if(collision) { AsteroidCollision(); }
+    if(collision) { 
+    	AsteroidCollision();
+    }
     break;
 
     case "left":
     collision = checkCollision(intDistance, direction);
     spaceship.location[0] -= intDistance;
-    if(collision) { AsteroidCollision(); }
+    if(collision) { 
+    	AsteroidCollision(); 
+    }
     break;
 
     case "down":
     collision = checkCollision(intDistance, direction);
     spaceship.location[1] -= intDistance; 
-    if(collision) { AsteroidCollision(); }
+    if(collision) { 
+    	AsteroidCollision();
+    }
     break;
 
     default:
