@@ -129,6 +129,7 @@ function WinningRecipeCheck() {
 			window.location.reload();
 		}
 	}
+
 	if(Config == null && spaceship.location[0] == 25 && spaceship.location[1] == 25) {
 		window.alert("YOU FOUND THE SECRET KOCA-KOLA RECIPE!!! YOU WIN!!!");
 		window.location.reload();
@@ -288,7 +289,6 @@ window.onload = function() {
 	celestialMap.celestialPoints.add(gameSpace[devConfig ? Config[15] : 5][devConfig ? Config[16] : 1]);
 	celestialMap.celestialPoints.add(gameSpace[devConfig ? Config[17] : 6][devConfig ? Config[18] : 5]);
   
-
 
   // Display starting CM with the 3 planets on it
   celestialMap.display();
