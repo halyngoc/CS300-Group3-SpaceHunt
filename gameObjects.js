@@ -46,6 +46,10 @@ var spaceship = {
 
 
   move : function(direction) {
+    // Hide gamble button, necessary here because otherwise the button would only gets hidden when clicked
+    // This needs to happen before checkEvents()
+    document.getElementById("gambleBtn").classList.add("hidden");
+
     directionCheck(direction);
 
     supplyDecrease();
@@ -73,10 +77,6 @@ var spaceship = {
     }
 
     setData();
-
-    handleMoveEvent(this.location[0], this.location[1]);
-    
-    document.getElementById("gambleBtn").classList.add("hidden"); // Hide gamble button
 
     this.displayCurrentCP();
 
