@@ -1,10 +1,3 @@
-function handleMoveEvent(x, y) {
-  document.getElementById("gambleBtn").classList.add("hidden");
-  if (gameSpace[x][y].celestialObjects.includes("space station")) {
-    handleSpaceStationEvent();
-  }
-}
-
 function handleSpaceStationEvent() {
   // There's a random chance that a Casinian is here
   if (Math.random() <= 0.5) {

@@ -75,6 +75,8 @@ var spaceship = {
     setData();
 
     handleMoveEvent(this.location[0], this.location[1]);
+    
+    document.getElementById("gambleBtn").classList.add("hidden"); // Hide gamble button
 
     this.displayCurrentCP();
 
