@@ -48,34 +48,30 @@ var spaceship = {
   move : function(direction) {
     directionCheck(direction);
 
-    //var retCol = Collisions(this.location[0], this.location[1]);
-
     supplyDecrease();
 
-    //if(this.damaged === true){
-      //alert("Your ship is damaged. Energy consumed at 5 times. Repair ASAP.");
-      //this.energy = this.energy - this.energyPerDistance * intDistance * 5;
-    //}
-    //else{
-    this.energy = this.energy - this.energyPerDistance * intDistance;
-    //}
+    wormholeCheck();
+
+    var retCheck = checkEvents(this.location[0], this.location[1]);
+
+    if(this.damaged === true && retCheck !== 3){
+      alert("Your ship is damaged. Energy consumed at 5 times. Repair ASAP.");
+      this.energy = this.energy - this.energyPerDistance * intDistance * 5;
+    }
+    else{
+      this.energy = this.energy - this.energyPerDistance * intDistance;
+    }
     if(checkEnergyAndSupplies(this.energy, this.supplies) == true)
       return;
-    //if(retCol === 1){
-      //this.damaged = true;
-    //}
-    //if(retCol === 2){
-      //this.energy = 1000;
-      //this.supplies += 2;
-    //}
 
-    wormholeCheck();
-    
-    if(checkFreighter(this.location[0], this.location[1]) === true){
-      this.energy = 1000;
-      this.supplies += this.supplies * 0.02;
+    if(retCheck === 2){
+      this.damaged = true;
     }
-    
+    if(retCheck === 1){
+      this.energy = 1000;
+      this.supplies += Math.floor(this.supplies * 0.02);
+    }
+
     setData();
 
     handleMoveEvent(this.location[0], this.location[1]);
@@ -204,11 +200,23 @@ window.onload = function() {
   gameSpace[33][2].celestialObjects.push("freighter");
   gameSpace[5][9].celestialObjects.push("freighter");
 
-  // Add the 3 planets to CM
-  celestialMap.celestialPoints.add(gameSpace[24][39]);
-  celestialMap.celestialPoints.add(gameSpace[62][11]);
-  celestialMap.celestialPoints.add(gameSpace[33][2]);
-  celestialMap.celestialPoints.add(gameSpace[5][9]);
+  // Set locations of the 3 Meteor Storms
+  // For now the locations are hardcoded
+  gameSpace[6][12].celestialObjects.push("Meteor Storm");
+  gameSpace[24][35].celestialObjects.push("Meteor Storm");
+  gameSpace[78][26].celestialObjects.push("Meteor Storm");
+
+  // Set locations of planets
+  // For now the locations are hardcoded
+  gameSpace[5][20].celestialObjects.push("Venus");
+  gameSpace[14][8].celestialObjects.push("Mars");
+  gameSpace[32][0].celestialObjects.push("Jupiter");
+  gameSpace[2][25].celestialObjects.push("Mercury");
+  gameSpace[0][30].celestialObjects.push("Sun");
+  gameSpace[71][25].celestialObjects.push("Saturn");
+  gameSpace[55][76].celestialObjects.push("Uranus");
+  gameSpace[102][82].celestialObjects.push("Neptune");
+  gameSpace[1][1].celestialObjects.push("Moon");
 
   // For debugging purposses, here are some celestial objects
   gameSpace[6][5].celestialObjects.push("asteroid");
