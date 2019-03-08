@@ -42,7 +42,8 @@ var spaceship = {
 
 
   move : function(direction) {
-    directionCheck(direction);
+
+    var collision = directionCheck(direction);
     WinningRecipeCheck();
     supplyDecrease();
 
@@ -68,6 +69,10 @@ var spaceship = {
       this.supplies += Math.floor(this.supplies * 0.02);
     }
 
+    if(collision) {
+      AsteroidCollision();
+    }
+
     setData();
 
     this.displayCurrentCP();
@@ -90,38 +95,29 @@ function directionCheck(direction) {
     case "right":
     collision = checkCollision(intDistance, direction);
     spaceship.location[0] += intDistance;
-    if(collision) { 
-    	AsteroidCollision(); }
     break;
 
     case "up":
     collision = checkCollision(intDistance, direction);
     spaceship.location[1] += intDistance;
-    if(collision) { 
-    	AsteroidCollision();
-    }
     break;
 
     case "left":
     collision = checkCollision(intDistance, direction);
     spaceship.location[0] -= intDistance;
-    if(collision) { 
-    	AsteroidCollision(); 
-    }
     break;
 
     case "down":
     collision = checkCollision(intDistance, direction);
     spaceship.location[1] -= intDistance; 
-    if(collision) { 
-    	AsteroidCollision();
-    }
     break;
 
     default:
     console.log("Invalid direction.");
     break;
   }
+
+  return collision;
 }
 
 //simple win function 
@@ -174,11 +170,11 @@ function AsteroidCollision() {
 	
 	if (chance < 90) { // 0-90% chance to be damaged and not die
     	window.alert("You collided with a ASTEROID!!! Luckily you survied with just some damages to your ship, tread carfully from here on! Due to the damage the ship now consumes energy at 5 times the usual rate.");
-    	spaceship.damaged = true;
-    } else {
+      spaceship.damaged = true;
+  } else {
   		window.alert("You collided with a ASTEROID!!! The ship has exploded and your crew have all perished!");
   		window.location.reload();
-  	}
+	}
 }
 
 
