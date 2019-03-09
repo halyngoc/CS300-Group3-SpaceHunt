@@ -1,21 +1,24 @@
 //Example on how we could have shared definitions of our objects
 //This is obviously incomplete, but an idea that may help us get started
-var devConfig = false;
-var Rand;
 
 if('Config' in localStorage)
 {
-  devConfig = true;
-
   var Config = localStorage.getItem('Config');
-  //localStorage.removeItem('Config');
-  Config = Config.split('#');
+  localStorage.removeItem('Config');
 
+  Config = Config.split('#');
   var PlayStyle = Config[10];
+
   localStorage.setItem('PlayType', PlayStyle);  //save play style choice for supply and energy checks
 
   for(var i = 0; i < Config.length; i++) {
     Config[i] = parseFloat(Config[i]);
+  //window.alert(Config.join("\n"));
+
+  if(Config[7] == 1) {
+    var Rand = true;
+  }else {
+    var Rand = false;
   }
 
   //wormhole behavoir
@@ -26,6 +29,7 @@ if('Config' in localStorage)
  	devConfig = false;
  }
 
+//values wont update with dev config until at least one move have been made
 
 var spaceship = {
 
@@ -50,6 +54,7 @@ var spaceship = {
     
     directionCheck(direction, intDistance);
     WinningRecipeCheck();
+
     supplyDecrease();
 
     wormholeCheck();
@@ -188,7 +193,6 @@ function AsteroidCollision() {
 	}
 }
 
-
 function wormholeCheck() {
 //Wormhole check
   if (spaceship.location[0] < 0 || spaceship.location[0] > spaceship.maxCoordX || spaceship.location[1] < 0 || spaceship.location[1] > spaceship.maxCoordY)
@@ -241,20 +245,13 @@ var celestialMap = {
   toString : function() {}
 };
 
-
 //Map could contain 128x128 celestialPoint() objects
 var gameSpace = [];
 window.onload = function() {
-	var i = 0, j = 0;
-	var devConfig;
-	
-	if('Config' in localStorage) { devConfig = true; } else { devConfig = false;}
-	localStorage.removeItem('Config');
-
   // Initialize gameSpace
-  for (i = 0; i <= spaceship.maxCoordX; i++) {
+  for (var i = 0; i <= spaceship.maxCoordX; i++) {
     var CPRow = [];
-    for (j = 0; j <= spaceship.maxCoordY; j++) {
+    for (var j = 0; j <= spaceship.maxCoordY; j++) {
       CPRow.push(new celestialPoint([i, j]));
     }
     gameSpace.push(CPRow);
@@ -294,12 +291,10 @@ window.onload = function() {
   	}
   }
   
-  	
 	// Add the 3 planets to CM
 	celestialMap.celestialPoints.add(gameSpace[devConfig ? Config[13] : 2][devConfig ? Config[14] : 0]);
 	celestialMap.celestialPoints.add(gameSpace[devConfig ? Config[15] : 5][devConfig ? Config[16] : 1]);
 	celestialMap.celestialPoints.add(gameSpace[devConfig ? Config[17] : 6][devConfig ? Config[18] : 5]);
-  
 
   // Display starting CM with the 3 planets on it
   celestialMap.display();
