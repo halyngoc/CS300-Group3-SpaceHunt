@@ -3,7 +3,7 @@
 
 function checkEvents(x, y){
 
-  if(gameSpace[x][y].celestialObjects.includes("freighter")){
+  if(gameSpace[x][y].celestialObjects.includes("Freighter")){
     alert("Freighter found! Energy 1000 & Supplies increased by 2%");
     return 1;
   }
