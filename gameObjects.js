@@ -113,7 +113,7 @@ function directionCheck(direction, intDistance) {
 
 function energyDecrease(retCheck, collision, intDistance) {
 
-  if(collision === 0) {   //ship has not collided with anything
+  if(collision === 0 || spaceship.damaged === true) {   //ship has not collided with anything
     
     if(spaceship.damaged === true && retCheck !== 3){
       spaceship.energy = spaceship.energy - spaceship.energyPerDistance * intDistance * 5;
@@ -121,7 +121,6 @@ function energyDecrease(retCheck, collision, intDistance) {
     else{
       spaceship.energy = spaceship.energy - spaceship.energyPerDistance * intDistance;
     }
-
   }
   else {  //ship has collided with something
     var damagedDistance = intDistance - collision; //cp's to deplete a damaged ship energy, collision is the marker of the asteroid so that will be the undamage value
