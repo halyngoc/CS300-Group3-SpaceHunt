@@ -21,8 +21,7 @@ if('Config' in localStorage)
   //wormhole behavoir
   Rand = (Config[7] == 1) ? true : false; //determine if wormhole is set to random or fixed
 
- } 
- else {
+ } else {
  	devConfig = false;
  }
 
@@ -45,7 +44,10 @@ var spaceship = {
 
   move : function(direction) {
 
-    var collision = directionCheck(direction);
+    intDistance = parseInt(document.getElementById("distance").value);
+    var collision = checkCollision(intDistance, direction);
+    
+    directionCheck(direction, intDistance);
     WinningRecipeCheck();
     supplyDecrease();
 
@@ -53,13 +55,8 @@ var spaceship = {
 
     var retCheck = checkEvents(this.location[0], this.location[1]);
 
-    if(this.damaged === true && retCheck !== 3){
-      //alert("Your ship is damaged. Energy consumed at 5 times. Repair ASAP.");
-      this.energy = this.energy - this.energyPerDistance * intDistance * 5;
-    }
-    else{
-      this.energy = this.energy - this.energyPerDistance * intDistance;
-    }
+    energyDecrease(retCheck, collision, intDistance);
+    
     if(checkEnergyAndSupplies(this.energy, this.supplies) == true)
       return;
 
@@ -87,30 +84,23 @@ var spaceship = {
   }
 };
 
-function directionCheck(direction) {
-
-  intDistance = parseInt(document.getElementById("distance").value);
-  var collision;
+function directionCheck(direction, intDistance) {
 
   switch (direction)
   {
     case "right":
-    collision = checkCollision(intDistance, direction);
     spaceship.location[0] += intDistance;
     break;
 
     case "up":
-    collision = checkCollision(intDistance, direction);
     spaceship.location[1] += intDistance;
     break;
 
     case "left":
-    collision = checkCollision(intDistance, direction);
     spaceship.location[0] -= intDistance;
     break;
 
     case "down":
-    collision = checkCollision(intDistance, direction);
     spaceship.location[1] -= intDistance; 
     break;
 
@@ -118,10 +108,28 @@ function directionCheck(direction) {
     console.log("Invalid direction.");
     break;
   }
-
-  return collision;
 }
 
+function energyDecrease(retCheck, collision, intDistance) {
+
+  if(collision === 0 || spaceship.damaged === true) {   //ship has not collided with anything
+    
+    if(spaceship.damaged === true && retCheck !== 3){
+      spaceship.energy = spaceship.energy - spaceship.energyPerDistance * intDistance * 5;
+    
+    } else {
+      spaceship.energy = spaceship.energy - spaceship.energyPerDistance * intDistance;
+    }
+  
+  } else {  //ship has collided with something
+    var damagedDistance = intDistance - collision; //cp's to deplete a damaged ship energy, collision is the marker of the asteroid so that will be the undamage value
+    
+    //undamaged
+    spaceship.energy = spaceship.energy - spaceship.energyPerDistance * collision; //collision is the amount of cp's where the ship is undamaged    
+    //damaged
+    spaceship.energy = spaceship.energy - spaceship.energyPerDistance * damagedDistance * 5;
+  }
+}
 //simple win function 
 function WinningRecipeCheck() {
 	
@@ -131,6 +139,7 @@ function WinningRecipeCheck() {
 			window.location.reload();
 		}
 	}
+
 	if(Config == null && spaceship.location[0] == 25 && spaceship.location[1] == 25) {
 		window.alert("YOU FOUND THE SECRET KOCA-KOLA RECIPE!!! YOU WIN!!!");
 		window.location.reload();
@@ -155,15 +164,15 @@ function checkCollision(intDistance, direction) {
 
     if(Config != null) {
     	if(xCoor == Config[37] && yCoor == Config[38] || xCoor == Config[39] && yCoor == Config[40] || xCoor == Config[41] && yCoor == Config[42]) {
-    		return true;
+        return i+1;
     	}
     }
     if(Config == null && (xCoor == 6 && yCoor == 5 || xCoor == 0 && yCoor == 1 || xCoor == 3 && yCoor == 2) ) {
-      return true;
+      return i+1;
     }
   }
 
-  return false;
+  return 0;
 }
 
 
@@ -190,8 +199,8 @@ function wormholeCheck() {
     {
       spaceship.location[0] = Math.floor((Math.random() * spaceship.maxCoordX) + 1);
       spaceship.location[1] = Math.floor((Math.random() * spaceship.maxCoordY) + 1);
-    }
-    else
+    
+    } else
     {
       spaceship.location[0] = Config[8];
       spaceship.location[1] = Config[9];
@@ -259,9 +268,9 @@ window.onload = function() {
   MapItemNames = ["Winning Recipe", "Planet Celeron", "Planet Xeon", "Planet Ryzen", "Space Station", "Space Station", "Space Station", "Freighter", "Freighter", "Freighter", "Meteor Storm", "Meteor Storm","Meteor Storm", "Asteroid", "Asteroid", "Asteroid", "Venus", "Mars", "Jupiter", "Mercury", "Sun", "Saturn", "Uranus", "Neptune", "Moon"];
 
   //Map population
-  j = 0;
-  if(devConfig) {	//dev Config items
 
+  if(devConfig) {	//dev Config items
+    j = 0;
   	for(i = 11; i < Config.length; i += 2) {     
       if(Config[i] != 0.5 && Config[i+1] != 0.5) {
         gameSpace[Config[i]][Config[i+1]].celestialObjects.push(MapItemNames[j]);	
@@ -276,8 +285,9 @@ window.onload = function() {
   		//console.log("DefaultX: ", Default[i], " DefaultY: ", Default[i+1], "Name: ", MapItemNames[j] );
   		j += 1;	
   	}
+  
   } else {		//default Config items
-
+    j = 0;
   	for(i = 0; i < Default.length; i += 2) {
   		gameSpace[Default[i]][Default[i+1]].celestialObjects.push(MapItemNames[j]);	
   		//console.log("DefaultX: ", Default[i], " DefaultY: ", Default[i+1], "Name: ", MapItemNames[j] );
