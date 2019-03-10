@@ -18,15 +18,15 @@ function handleSpaceStationEvent() {
 }
 
 document.getElementById("gambleBtn").onclick = function() {
-  var amountTakenByUser = parseInt(window.prompt("There are 300 credits in front of you. You are free to take as much as you like, but so is the Casinian. If you take more credits than the Casinian, he will get angry and steal double the amount you've taken. Else, you keep what you've taken. How much will you take?", 0));
+  var amountTakenByUser = parseInt(window.prompt("There are 300 credits in front of you. You are free to take as much as you like, but so is the Casinian. If you take more credits than the Casinian, he will get angry and steal double the amount you tired to take, half from the pile half from you. Else, you keep what you've taken. How much will you take?", 0));
   var amountTakenByCasinian = Math.ceil(Math.random() * 300); // Get a random number between 1 and 300
 
   if (amountTakenByCasinian < amountTakenByUser) {
-    window.alert("The Casinian only took " + amountTakenByCasinian + " credit(s). He is very angry. You lost " + (2*amountTakenByUser) + " credit(s).");
+    window.alert("The Casinian only took " + amountTakenByCasinian + " credit(s). He is very angry. You lost the chance to take " + amountTakenByUser + " credit(s).");
     if (spaceship.credits < amountTakenByUser) {
       spaceship.credits = 0;
     } else {
-      spaceship.credits -= (amountTakenByUser * 2);
+      spaceship.credits -= amountTakenByUser;
     }
   } else if (amountTakenByUser == 0 || isNaN(amountTakenByUser)) {
     window.alert("You refused to take anything and leave.");
