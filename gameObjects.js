@@ -55,6 +55,7 @@ var spaceship = {
     
     directionCheck(direction, intDistance);
     WinningRecipeCheck();
+
     supplyDecrease();
 
     wormholeCheck();
@@ -189,8 +190,7 @@ function AsteroidCollision() {
     	window.alert("You collided with a ASTEROID!!! Luckily you survied with just some damages to your ship, tread carfully from here on! Due to the damage the ship now consumes energy at 5 times the usual rate.");
       spaceship.damaged = true;
   } else {
-  		window.alert("You collided with a ASTEROID!!! The ship has exploded and your crew have all perished!");
-  		window.location.reload();
+  		death("ASTEROID");
 	}
 }
 
