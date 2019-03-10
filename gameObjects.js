@@ -48,9 +48,8 @@ var spaceship = {
     // This needs to happen before checkEvents()
     document.getElementById("gambleBtn").classList.add("hidden");
 
-    directionCheck(direction);
-
     intDistance = parseInt(document.getElementById("distance").value);
+    
     var collision = checkCollision(intDistance, direction);
     
     directionCheck(direction, intDistance);
