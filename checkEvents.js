@@ -84,7 +84,7 @@ function checkEvents(x, y){
     return 0;
   }
 
-  if (gameSpace[x][y].celestialObjects.includes("space station")) {
+  if (gameSpace[x][y].celestialObjects.includes("Space Station")) {
     handleSpaceStationEvent();
   }
 
