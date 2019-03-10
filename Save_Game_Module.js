@@ -301,6 +301,7 @@ var Save_Game_Module = {
       gameSpace[x_coord][y_coord].celestialObjects.push(item_loaded);
     }
   setData();
+  spaceship.displayCurrentCP();
   }
 };
 
