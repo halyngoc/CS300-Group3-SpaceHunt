@@ -1,7 +1,7 @@
 function handleSpaceStationEvent() {
   // There's a random chance that a Casinian is here
   if (Math.random() <= 0.5) {
-    window.alert("Casinian is here");
+    window.alert("Casinian is here and wanting to gamble with you, press the Gamble button below to test your luck.");
 
     // Display the gamble button
     document.getElementById("gambleBtn").classList.remove("hidden");
@@ -22,11 +22,11 @@ document.getElementById("gambleBtn").onclick = function() {
   var amountTakenByCasinian = Math.ceil(Math.random() * 300); // Get a random number between 1 and 300
 
   if (amountTakenByCasinian < amountTakenByUser) {
-    window.alert("The Casinian only took " + amountTakenByCasinian + " credit(s). He is very angry. You lost " + amountTakenByUser + " credit(s).");
+    window.alert("The Casinian only took " + amountTakenByCasinian + " credit(s). He is very angry. You lost " + (2*amountTakenByUser) + " credit(s).");
     if (spaceship.credits < amountTakenByUser) {
       spaceship.credits = 0;
     } else {
-      spaceship.credits -= amountTakenByUser;
+      spaceship.credits -= (amountTakenByUser * 2);
     }
   } else if (amountTakenByUser == 0 || isNaN(amountTakenByUser)) {
     window.alert("You refused to take anything and leave.");
