@@ -287,6 +287,7 @@ window.onload = function() {
   	}
   
   } else {		//default Config items
+
     j = 0;
   	for(i = 0; i < Default.length; i += 2) {
   		gameSpace[Default[i]][Default[i+1]].celestialObjects.push(MapItemNames[j]);	
