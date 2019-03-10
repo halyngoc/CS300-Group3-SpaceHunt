@@ -3,13 +3,13 @@
 
 function checkEvents(x, y){
 
-  if(gameSpace[x][y].celestialObjects.includes("freighter")){
+  if(gameSpace[x][y].celestialObjects.includes("Freighter")){
     alert("Freighter found! Energy 1000 & Supplies increased by 2%");
     return 1;
   }
 
   if(gameSpace[x][y].celestialObjects.includes("Meteor Storm")){
-    alert("Meteor Storm. Ship damaged!");
+    alert("Meteor Storm. Ship damaged! Energy will now deplete at 5 time the usual.");
     spaceship.damaged = true;
     return 2;
   }
