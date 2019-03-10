@@ -44,7 +44,12 @@ var spaceship = {
 
   move : function(direction) {
 
+    // Hide gamble button, necessary here because otherwise the button would only gets hidden when clicked
+    // This needs to happen before checkEvents()
+    document.getElementById("gambleBtn").classList.add("hidden");
+
     intDistance = parseInt(document.getElementById("distance").value);
+    
     var collision = checkCollision(intDistance, direction);
     
     directionCheck(direction, intDistance);
@@ -262,7 +267,6 @@ window.onload = function() {
 
   // Display starting CP
   spaceship.displayCurrentCP();
-
   
   //Default Map items
   Default = [25, 25, 2, 0, 5, 1, 6, 5, 30, 48, 83, 14, 19, 65, 24, 39, 62, 11, 33, 2, 6, 12, 24, 35, 78, 26, 90, 5, 0, 1, 3, 2, 5, 20, 14, 8, 32, 0, 2, 25, 0, 30 ,71, 25, 55, 76, 102, 82, 1, 1, 7, 7];
@@ -303,7 +307,6 @@ window.onload = function() {
 	celestialMap.celestialPoints.add(gameSpace[devConfig ? Config[15] : 5][devConfig ? Config[16] : 1]);
 	celestialMap.celestialPoints.add(gameSpace[devConfig ? Config[17] : 6][devConfig ? Config[18] : 5]);
   
-
   // Display starting CM with the 3 planets on it
   celestialMap.display();
 
