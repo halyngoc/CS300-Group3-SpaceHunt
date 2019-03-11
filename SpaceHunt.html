@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="stylesheet" href="user_profile_menu_style.css" type="text/css">
   <link rel="stylesheet" href="./main.css">
   <title>
   SpaceHunt Dream Team 3
@@ -23,11 +22,11 @@
           <select id="user_select">
             <option> Select Profile </option>
           </select>
-          <button type="button" id="save_game" onclick="Save_Game_Module.store_user_data()"> Save Game </button>
-          <button type="button" id="load_game" onclick="Save_Game_Module.load_user_data()"> Load Game </button>
+          <button class="button" type="button" id="save_game" onclick="Save_Game_Module.store_user_data()"> Save Game </button>
+          <button class="button" type="button" id="load_game" onclick="Save_Game_Module.load_user_data()"> Load Game </button>
           <span id="new_username_text"> &nbsp &nbsp &nbsp New Username: </span> <input type="text" id="new_user">
-          <button type="button" id="add_profile" onclick="Save_Game_Module.add_user()"> Add Profile </button>
-          <button type="button" id="clear_profiles" onclick="Save_Game_Module.clear_users()"> Clear Profiles </button>
+          <button class="button" type="button" id="add_profile" onclick="Save_Game_Module.add_user()"> Add Profile </button>
+          <button class="button" type="button" id="clear_profiles" onclick="Save_Game_Module.clear_users()"> Clear Profiles </button>
         </fieldset>
       </form>
     <script> Save_Game_Module.load_users(); </script>
@@ -49,13 +48,13 @@
         <option> 8 <option> 9 <option> 10
         </select> <br><br>
     
-        <input type="button" id="up" value="Up"><br>
-        <input type="button" id="left" value="Left">
-        <input type="button" id="right" value="Right"><br>
-        <input type="button" id="down" value="Down"><br><br>
+        <input class="button" type="button" id="up" value="Up"><br>
+        <input class="button" type="button" id="left" value="Left">
+        <input class="button" type="button" id="right" value="Right"><br>
+        <input class="button" type="button" id="down" value="Down"><br><br>
     
-    	<input type="button" class="hidden" id="gambleBtn" value="Gamble!">
-        <input type="button" id="sensorsBtn" value="Deploy sensors">
+    	<input class="button hidden" type="button" id="gambleBtn" value="Gamble!">
+        <input class="button" type="button" id="sensorsBtn" value="Deploy sensors">
       </form></center>
     
       <hr>
@@ -85,7 +84,7 @@
        <em>Developer Option</em>
      </h2>
     <p>Are you a Developer?</p>
-    <a href="devOptions.html"><button>I'm a Dev</button></a>
+    <a href="devOptions.html"><button class="button">I'm a Dev</button></a>
   </footer>
 
   <script src="gameObjects.js"></script>
@@ -93,7 +92,7 @@
   <script src="gamble.js"></script>
   <script src="checkEvents.js"></script>
   <script src="death.js"></script>
-
+  <script src="buttonAnimation.js"></script>
 
 </body>
 </html>

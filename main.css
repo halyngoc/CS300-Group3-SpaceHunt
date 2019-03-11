@@ -1,6 +1,10 @@
 :root {
     --primary-color: black;
     --secondary-color: white;
+
+body, select, .button {
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-weight: normal;
 }
 
 body {
