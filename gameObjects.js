@@ -81,12 +81,19 @@ var spaceship = {
     setData();
 
     this.displayCurrentCP();
+    
 
     return false;
   },
 
   displayCurrentCP : function() {
     document.getElementById("currentCPcontent").innerHTML = gameSpace[this.location[0]][this.location[1]].toHTML();
+    
+    if (gameSpace[this.location[0]][this.location[1]].celestialObjects.length !== 0) {
+      celestialMap.celestialPoints.add(gameSpace[this.location[0]][this.location[1]]);
+    }
+      
+    celestialMap.display();
   }
 };
 
@@ -229,16 +236,18 @@ var celestialMap = {
 
   // Returns formatted HTML of CM
   toHTML : function() {
-    var html = "";
+    var html = "<tr><th>Celestial object</th><th>Location</th></tr>";
     this.celestialPoints.forEach(function(cp) {
-      html += cp.toHTML();
+      cp.celestialObjects.forEach(function(co) {
+        html += "<tr><td>" + co + "</td><td>" + cp.location[0] + ", " + cp.location[1] + "</td></tr>";
+      });
     });
     return html;
   },
 
   // Display on html page
   display : function() {
-    document.getElementById("celestialMapContent").innerHTML = this.toHTML();
+    document.getElementById("gazetteer").innerHTML = this.toHTML();
   },
 
   // Import/Export CM @TODO
@@ -269,7 +278,7 @@ window.onload = function() {
   spaceship.displayCurrentCP();
   
   //Default Map items
-  Default = [25, 25, 2, 0, 5, 1, 6, 5, 30, 48, 83, 14, 19, 65, 24, 39, 62, 11, 33, 2, 6, 12, 24, 35, 78, 26, 90, 5, 0, 1, 3, 2, 5, 20, 14, 8, 32, 0, 2, 25, 0, 30 ,71, 25, 55, 76, 102, 82, 1, 1, 7, 7];
+  Default = [25, 25, 2, 0, 5, 1, 6, 5, 30, 48, 83, 14, 19, 65, 24, 39, 62, 11, 33, 2, 6, 12, 24, 35, 78, 26, 90, 5, 0, 1, 3, 2, 5, 20, 14, 8, 32, 0, 2, 25, 0, 30 ,71, 25, 55, 76, 102, 82, 20, 37, 7, 7];
   MapItemNames = ["Winning Recipe", "Planet Celeron", "Planet Xeon", "Planet Ryzen", "Space Station", "Space Station", "Space Station", "Freighter", "Freighter", "Freighter", "Meteor Storm", "Meteor Storm","Meteor Storm", "Asteroid", "Asteroid", "Asteroid", "Venus", "Mars", "Jupiter", "Mercury", "Sun", "Saturn", "Uranus", "Neptune", "Moon", "Bad Max"];
 
   //Map population
@@ -331,8 +340,6 @@ function celestialPoint(location) {
 
     return html;
   };
-
-	//Incomplete object constructor for celestial points
 }
 
 document.getElementById("sensorsBtn").onclick = function() {
