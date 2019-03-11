@@ -35,3 +35,7 @@ td {
     height: 30em;
     overflow-y: scroll;
 }
+
+.hidden {
+    display: none;
+}
