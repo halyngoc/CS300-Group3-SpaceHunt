@@ -267,6 +267,7 @@ var Save_Game_Module = {
 
     // clear outdated gameSpace grid
     gameSpace = [];
+    celestialMap.celestialPoints.clear();
 
     // fill gameSpace grid with appropriate number of celestialPoints
     for (var i = 0; i <= x_dimension; ++i) {
@@ -296,12 +297,15 @@ var Save_Game_Module = {
       var array_index = parseInt(index_string_split[2]);
       var item_loaded = localStorage.getItem(String(x_coord) + "," + String(y_coord) + "," + String(array_index) + "," + user);
       console.log("Item loaded for location ["+x_coord+"]["+y_coord+"] : " + item_loaded);
-
+      if (item_loaded === "Planet Ryzen" || item_loaded === "Planet Celeron" || item_loaded === "Planet Xeon") {
+        celestialMap.celestialPoints.add(gameSpace[x_coord][y_coord]);
+      }
       // add string corresponding to celestial object to celestialObject array
       gameSpace[x_coord][y_coord].celestialObjects.push(item_loaded);
     }
   setData();
   spaceship.displayCurrentCP();
+  celestialMap.display();
   }
 };
 
