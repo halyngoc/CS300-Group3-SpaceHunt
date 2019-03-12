@@ -171,10 +171,10 @@ var Save_Game_Module = {
     localStorage.setItem("maxcoordy"+username, spaceship.maxCoordY);
     localStorage.setItem("sensor"+username, spaceship.sensor);
     if (Mortal == false) {
-      localStorage.setItem("Mortal"+username, "false")
+      localStorage.setItem("Mortal"+username, "false");
     }
     else {
-      localStorage.setItem("Mortal"+username, "true")
+      localStorage.setItem("Mortal"+username, "true");
     }
 
     // store damaged variable as 1 or 0 since everything is saved as strings
