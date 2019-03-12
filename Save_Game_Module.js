@@ -186,6 +186,10 @@ var Save_Game_Module = {
 
   // load_user_data restores game state for the profile selected
   load_user_data: function() {
+    celestialMap.celestialPoints.clear();
+    loadPlanets(devConfig);
+    celestialMap.display();
+
     var username = document.getElementById("user_select").value;
     if (username == 'Select Profile') {
       return;
