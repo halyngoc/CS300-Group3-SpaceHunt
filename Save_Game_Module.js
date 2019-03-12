@@ -110,6 +110,7 @@ var Save_Game_Module = {
     localStorage.removeItem("maxcoordy"+user);
     localStorage.removeItem("damaged"+user);
     localStorage.removeItem("sensor"+user);
+    localStorage.removeItem("Mortal"+user);
     console.log("cleared user data for: " + user);
 
     // call secondary function to clear map memory associated with this user
@@ -169,6 +170,12 @@ var Save_Game_Module = {
     localStorage.setItem("maxcoordx"+username, spaceship.maxCoordX);
     localStorage.setItem("maxcoordy"+username, spaceship.maxCoordY);
     localStorage.setItem("sensor"+username, spaceship.sensor);
+    if (Mortal == false) {
+      localStorage.setItem("Mortal"+username, "false")
+    }
+    else {
+      localStorage.setItem("Mortal"+username, "true")
+    }
 
     // store damaged variable as 1 or 0 since everything is saved as strings
     if (spaceship.damaged == true) {
@@ -203,6 +210,13 @@ var Save_Game_Module = {
       spaceship.maxCoordX = parseInt(localStorage.getItem("maxcoordx"+username));
       spaceship.maxCoordY = parseInt(localStorage.getItem("maxcoordy"+username));
       spaceship.sensor = parseInt(localStorage.getItem("sensor"+username, spaceship.sensor));
+      if (localStorage.getItem("Mortal"+username) == "false") {
+        Mortal = false
+      }
+      else {
+        Mortal = true
+      }
+
       if (localStorage.getItem("damaged"+username) == 1) {
         spaceship.damaged = true;
       }
