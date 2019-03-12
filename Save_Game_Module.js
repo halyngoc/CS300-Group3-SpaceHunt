@@ -211,10 +211,10 @@ var Save_Game_Module = {
       spaceship.maxCoordY = parseInt(localStorage.getItem("maxcoordy"+username));
       spaceship.sensor = parseInt(localStorage.getItem("sensor"+username, spaceship.sensor));
       if (localStorage.getItem("Mortal"+username) == "false") {
-        Mortal = false
+        Mortal = false;
       }
       else {
-        Mortal = true
+        Mortal = true;
       }
 
       if (localStorage.getItem("damaged"+username) == 1) {
