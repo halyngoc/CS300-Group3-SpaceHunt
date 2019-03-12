@@ -312,9 +312,7 @@ window.onload = function() {
   
   	
 	// Add the 3 planets to CM
-	celestialMap.celestialPoints.add(gameSpace[devConfig ? Config[13] : 2][devConfig ? Config[14] : 0]);
-	celestialMap.celestialPoints.add(gameSpace[devConfig ? Config[15] : 5][devConfig ? Config[16] : 1]);
-	celestialMap.celestialPoints.add(gameSpace[devConfig ? Config[17] : 6][devConfig ? Config[18] : 5]);
+	loadPlanets(devConfig);
   
   // Display starting CM with the 3 planets on it
   celestialMap.display();
@@ -322,6 +320,12 @@ window.onload = function() {
   //Correctly displays data on dev menu exit
   setData();
 };
+
+function loadPlanets(devConfig) {
+  celestialMap.celestialPoints.add(gameSpace[devConfig ? Config[13] : 2][devConfig ? Config[14] : 0]);
+  celestialMap.celestialPoints.add(gameSpace[devConfig ? Config[15] : 5][devConfig ? Config[16] : 1]);
+  celestialMap.celestialPoints.add(gameSpace[devConfig ? Config[17] : 6][devConfig ? Config[18] : 5]);
+}
 
 function celestialPoint(location) {
   this.location = location;
