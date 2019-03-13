@@ -34,12 +34,14 @@
 
   <section>
     <article class="col-left">
+      <p class="no-margin-bottom">the only source of entertainment you'll get</p>
+      <div class="border" id="youtubeContainer"></div>
       <p class="no-margin-bottom">Celestial gazetteer</p>  
       <div class="border vertical-scrollbar" id="gazetteerContainer">
         <table id="gazetteer"></table>
       </div>
     </article>
-    <article class="col-right">
+    <article>
       <center><form id="newTurn">
         <label for="distance">Distance </label>
         <select name="distance" id="distance"><br>
@@ -90,6 +92,16 @@
       </div>
     
       <div id="nearbyCPs"></div>
+    </article>
+    <article class="col-right">
+      <p class="no-margin-bottom">status</p>
+      <div class="border" id="statusContainer"></div>
+      <p class="no-margin-bottom">current celestial point</p>
+      <div class="border" id="currentCPContainer"></div>
+      <p class="no-margin-bottom">nearby celestial points</p>
+      <div class="border vertical-scrollbar" id="nearbyCPsContainer">
+        <table id="nearbyCPsTemp"></table>
+      </div>
     </article>
   </section>
 
