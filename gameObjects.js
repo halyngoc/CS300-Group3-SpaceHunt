@@ -239,7 +239,7 @@ var celestialMap = {
     var html = "<tr><th>Celestial object</th><th>Location</th></tr>";
     this.celestialPoints.forEach(function(cp) {
       cp.celestialObjects.forEach(function(co) {
-        html += "<tr><td>" + co + "</td><td>" + cp.location[0] + ", " + cp.location[1] + "</td></tr>";
+        html += "<tr><td>" + co + "</td><td>" + cp.location.toString() + "</td></tr>";
       });
     });
     return html;
@@ -328,7 +328,7 @@ function celestialPoint(location) {
   this.celestialObjects = [];
 
   this.toHTML = function() {
-    var html = "<h2>Location: (" + this.location[0] + ", " + this.location[1] + ")</h2>";
+    var html = "<h2>Location: (" + this.location.toString() + ")</h2>";
 
     if (this.celestialObjects.length === 0) {
       html += "<p>Empty space...</p>";
