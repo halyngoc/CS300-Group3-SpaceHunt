@@ -47,11 +47,27 @@
         <option> 4 <option> 5 <option> 6 <option> 7
         <option> 8 <option> 9 <option> 10
         </select> <br><br>
-    
-        <input class="button" type="button" id="up" value="Up"><br>
-        <input class="button" type="button" id="left" value="Left">
-        <input class="button" type="button" id="right" value="Right"><br>
-        <input class="button" type="button" id="down" value="Down"><br><br>
+
+        <div class="diamond-btn-group-container">
+          <div class="diamond-btn-group">
+            <div class="diamond-btn-row">
+              <button type="button" class="diamond-btn button" id="up">
+                <p>up</p>
+              </button>
+              <button type="button" class="diamond-btn button" id="right">
+                <p>right</p>
+              </button>
+            </div>
+            <div class="diamond-btn-row">
+              <button type="button" class="diamond-btn button" id="left">
+                <p>left</p>
+              </button>
+              <button type="button" class="diamond-btn button" id="down">
+                <p>down</p>
+              </button>
+            </div>
+          </div>
+        </div>
     
     	<input class="button hidden" type="button" id="gambleBtn" value="Gamble!">
         <input class="button" type="button" id="sensorsBtn" value="Deploy sensors">
