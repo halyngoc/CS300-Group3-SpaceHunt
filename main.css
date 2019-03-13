@@ -5,6 +5,10 @@
     background: var(--background-color);
 }
 
+.no-margin-bottom {
+    margin-bottom: 0;
+}
+
 body, select, .button {
     font-family: "Comic Sans MS", cursive, sans-serif;
     font-weight: normal;
@@ -30,14 +34,16 @@ section {
     display: flex;
 }
 
+.col-left, .col-right {
+    width: 15em;
+}
+
 .col-left {
     margin-right: auto;
-
-    border-right: 1px solid var(--primary-color);
 }
 
 .col-right {
-    margin-left: 1em;
+    margin-left: auto;
 }
 
 @keyframes btn-click {
