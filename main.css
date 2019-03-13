@@ -67,11 +67,34 @@ td {
     padding: 0 1em;
 }
 
+.vertical-scrollbar {
+    overflow-y: auto;
+}
+
+#nearbyCPsContainer {
+    max-height: 15em;
+}
+
 #gazetteerContainer {
-    height: 30em;
-    overflow-y: scroll;
+    max-height: 30em;
 }
 
 .hidden {
     display: none;
+}
+
+::-webkit-scrollbar-track
+{
+	background-color: var(--background-color);
+}
+
+::-webkit-scrollbar
+{
+	width: 0.5em;
+	background-color: var(--background-color);
+}
+
+::-webkit-scrollbar-thumb
+{
+	background-color: var(--primary-color);	
 }
