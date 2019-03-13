@@ -340,6 +340,10 @@ function celestialPoint(location) {
 
     return html;
   };
+
+  this.toHTMLTableRow = function() {
+    return "<tr><td>" + this.location.toString() + "</td><td>" + this.celestialObjects.toString() + "</td>"
+  };
 }
 
 document.getElementById("sensorsBtn").onclick = function() {
@@ -369,13 +373,13 @@ document.getElementById("sensorsBtn").onclick = function() {
   }
 
   function displayNearbyCPs(range) {
-    // Header
-    document.getElementById("nearbyCPs").innerHTML = "<h1><em>Nearby Celestial Points</em></h1>";
+    var html = "<tr><th>location</th><th>objects</th></tr>";
 
-    // All nearby CPs
     getNearbyCPCoords(range).forEach(function(CPCoords) {
-      document.getElementById("nearbyCPs").innerHTML += gameSpace[CPCoords[0]][CPCoords[1]].toHTML();
+      html += gameSpace[CPCoords[0]][CPCoords[1]].toHTMLTableRow();
     });
+
+    document.getElementById("nearbyCPsTemp").innerHTML = html;
   }
 
   // Range can be improved to 5, for now it's hardcoded to be 2
