@@ -342,7 +342,7 @@ function celestialPoint(location) {
   };
 
   this.toHTMLTableRow = function() {
-    return "<tr><td>" + this.location.toString() + "</td><td>" + this.celestialObjects.toString() + "</td>"
+    return "<tr><td>" + this.location.toString() + "</td><td>" + this.celestialObjects.toString() + "</td>";
   };
 }
 
