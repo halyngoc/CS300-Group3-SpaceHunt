@@ -241,7 +241,7 @@ var celestialMap = {
 
   // Returns formatted HTML of CM
   toHTML : function() {
-    var html = "<tr><th>Celestial object</th><th>Location</th></tr>";
+    var html = "<tr><th>celestial object</th><th>location</th></tr>";
     this.celestialPoints.forEach(function(cp) {
       cp.celestialObjects.forEach(function(co) {
         html += "<tr><td>" + co + "</td><td>" + cp.location.toString() + "</td></tr>";
@@ -333,10 +333,10 @@ function celestialPoint(location) {
   this.celestialObjects = [];
 
   this.toHTML = function() {
-    var html = "<h2>Location (" + this.location.toString() + ")</h2>";
+    var html = "<h2>location (" + this.location.toString() + ")</h2>";
 
     if (this.celestialObjects.length === 0) {
-      html += "<p>Empty space...</p>";
+      html += "<p>empty space...</p>";
     } else {
       this.celestialObjects.forEach(function(co) {
         html += "<p>" + co + "</p>";
