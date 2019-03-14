@@ -87,10 +87,7 @@ function checkEvents(x, y){
       }
       //Bad Max blows up your ship, everyone dies, game over
       else{
-        alert("BAD MAX HAS ATTACKED AND DESTROYED YOUR SHIP! EVERYONE HAS DIED. GAME OVER.");
-        document.getElementById("overlay").classList.add("black-overlay-animatable");
-        document.getElementById("overlay").classList.remove("hidden");
-        window.location.reload();
+        death("BADMAX");
       }
     }, 1000);
     
