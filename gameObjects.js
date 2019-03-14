@@ -327,7 +327,7 @@ function celestialPoint(location) {
   this.celestialObjects = [];
 
   this.toHTML = function() {
-    var html = "<h2>Location: (" + this.location.toString() + ")</h2>";
+    var html = "<h2>Location (" + this.location.toString() + ")</h2>";
 
     if (this.celestialObjects.length === 0) {
       html += "<p>Empty space...</p>";
