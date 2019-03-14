@@ -1,5 +1,8 @@
+// Look up table to get the right music, the format is event: [["song name", offset]] where offset is the number of seconds to skip to get to the good parts
 var eventToMusic = {
-    win: ["rick roll", "trololo"]
+    win: [["rick roll", 0], ["trololo", 0]],
+    die: [["windows xp shutdown", 0], ["my heart will go on recorder", 19], ["why are we still here", 0]],
+    "bad max": [["star wars", 0]]
 };
 
 function playMusic(event) {
@@ -8,8 +11,11 @@ function playMusic(event) {
 
     musicControls.classList.remove("hidden");
 
-    musicSource.src = "./music/" + eventToMusic[event][Math.floor(Math.random() * eventToMusic[event].length)] + ".mp3";
+    var song = eventToMusic[event][Math.floor(Math.random() * eventToMusic[event].length)];
+
+    musicSource.src = "./music/" + song[0] + ".mp3";
 
     musicControls.load();
+    musicControls.currentTime = parseInt(song[1]);
     musicControls.play();
 }
