@@ -110,6 +110,7 @@ var Save_Game_Module = {
     localStorage.removeItem("maxcoordy"+user);
     localStorage.removeItem("damaged"+user);
     localStorage.removeItem("sensor"+user);
+    localStorage.removeItem("Mortal"+user);
     console.log("cleared user data for: " + user);
 
     // call secondary function to clear map memory associated with this user
@@ -169,6 +170,12 @@ var Save_Game_Module = {
     localStorage.setItem("maxcoordx"+username, spaceship.maxCoordX);
     localStorage.setItem("maxcoordy"+username, spaceship.maxCoordY);
     localStorage.setItem("sensor"+username, spaceship.sensor);
+    if (Mortal == false) {
+      localStorage.setItem("Mortal"+username, "false");
+    }
+    else {
+      localStorage.setItem("Mortal"+username, "true");
+    }
 
     // store damaged variable as 1 or 0 since everything is saved as strings
     if (spaceship.damaged == true) {
@@ -203,6 +210,13 @@ var Save_Game_Module = {
       spaceship.maxCoordX = parseInt(localStorage.getItem("maxcoordx"+username));
       spaceship.maxCoordY = parseInt(localStorage.getItem("maxcoordy"+username));
       spaceship.sensor = parseInt(localStorage.getItem("sensor"+username, spaceship.sensor));
+      if (localStorage.getItem("Mortal"+username) == "false") {
+        Mortal = false;
+      }
+      else {
+        Mortal = true;
+      }
+
       if (localStorage.getItem("damaged"+username) == 1) {
         spaceship.damaged = true;
       }
@@ -267,6 +281,7 @@ var Save_Game_Module = {
 
     // clear outdated gameSpace grid
     gameSpace = [];
+    celestialMap.celestialPoints.clear();
 
     // fill gameSpace grid with appropriate number of celestialPoints
     for (var i = 0; i <= x_dimension; ++i) {
@@ -296,12 +311,15 @@ var Save_Game_Module = {
       var array_index = parseInt(index_string_split[2]);
       var item_loaded = localStorage.getItem(String(x_coord) + "," + String(y_coord) + "," + String(array_index) + "," + user);
       console.log("Item loaded for location ["+x_coord+"]["+y_coord+"] : " + item_loaded);
-
+      if (item_loaded === "Planet Ryzen" || item_loaded === "Planet Celeron" || item_loaded === "Planet Xeon") {
+        celestialMap.celestialPoints.add(gameSpace[x_coord][y_coord]);
+      }
       // add string corresponding to celestial object to celestialObject array
       gameSpace[x_coord][y_coord].celestialObjects.push(item_loaded);
     }
   setData();
   spaceship.displayCurrentCP();
+  celestialMap.display();
   }
 };
 
