@@ -35,7 +35,14 @@
   <section>
     <article class="col-left">
       <p class="no-margin-bottom">the only source of entertainment you'll get</p>
-      <div class="border" id="youtubeContainer"></div>
+      <div class="border" id="youtubeContainer">
+        <img src="https://upload.wikimedia.org/wikipedia/en/5/5f/Original_Doge_meme.jpg" width="100%" alt="nothing">
+        <audio controls id="musicControls"  class="hidden">
+          <source id="musicSource" src="" type="audio/mpeg">
+          browser no support audio
+        </audio>
+      </div>
+      
       <p class="no-margin-bottom">celestial gazetteer</p>  
       <div class="border vertical-scrollbar" id="gazetteerContainer">
         <table width="100%" id="gazetteer"></table>
@@ -107,6 +114,7 @@
   <script src="checkEvents.js"></script>
   <script src="death.js"></script>
   <script src="buttonAnimation.js"></script>
+  <script src="musicPlayer.js"></script>
 
 </body>
 </html>
