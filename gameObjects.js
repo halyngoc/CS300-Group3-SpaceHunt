@@ -225,10 +225,9 @@ function supplyDecrease() {
 }
 
 function setData() {
-  document.getElementById("location").innerHTML = "Current Location: (" + spaceship.location[0] + ", " + spaceship.location[1] + ")";
-  document.getElementById("energy").innerHTML = "Energy: " + spaceship.energy;
-  document.getElementById("supplies").innerHTML = "Supplies: " + spaceship.supplies;
-  document.getElementById("credits").innerHTML = "Credits: " + spaceship.credits;
+  document.getElementById("energy").innerHTML = spaceship.energy;
+  document.getElementById("supplies").innerHTML = spaceship.supplies;
+  document.getElementById("credits").innerHTML = spaceship.credits;
 }
 
 var celestialMap = {
