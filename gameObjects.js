@@ -190,7 +190,7 @@ function checkCollision(intDistance, direction) {
         return i+1;
     	}
     }
-    if(Config == null && (xCoor == 6 && yCoor == 5 || xCoor == 0 && yCoor == 1 || xCoor == 3 && yCoor == 2) ) {
+    if(Config == null && (xCoor == 6 && yCoor == 5 || xCoor == 18 && yCoor == 6 || xCoor == 3 && yCoor == 2) ) {
       return i+1;
     }
   }
