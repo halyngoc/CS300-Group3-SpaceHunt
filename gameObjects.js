@@ -148,15 +148,21 @@ function WinningRecipeCheck() {
 	
 	if(Config != null) {
 		if(spaceship.location[0] == Config[11] && spaceship.location[1] == Config[12]) {
-			window.alert("YOU FOUND THE SECRET KOCA-KOLA RECIPE!!! YOU WIN!!!");
-			window.location.reload();
+			alertWin();
 		}
 	}
 
 	if(Config == null && spaceship.location[0] == 25 && spaceship.location[1] == 25) {
-		window.alert("YOU FOUND THE SECRET KOCA-KOLA RECIPE!!! YOU WIN!!!");
-		window.location.reload();
+		alertWin();
 	}
+}
+
+function alertWin() {
+  playMusic("win");
+  setTimeout(function() {
+    window.alert("YOU FOUND THE SECRET KOCA-KOLA RECIPE!!! YOU WIN!!!");
+    window.location.reload();
+  }, 1000);
 }
 
 function checkCollision(intDistance, direction) {

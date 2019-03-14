@@ -1,10 +1,13 @@
 function handleSpaceStationEvent() {
   // There's a random chance that a Casinian is here
   if (Math.random() <= 0.5) {
-    window.alert("Casinian is here and wanting to gamble with you, press the Gamble button below to test your luck.");
+    playMusic("casinian");
+    setTimeout(function() {
+      window.alert("Casinian is here and wanting to gamble with you, press the Gamble button below to test your luck.");
 
-    // Display the gamble button
-    document.getElementById("gambleBtn").classList.remove("hidden");
+      // Display the gamble button
+      document.getElementById("gambleBtn").classList.remove("hidden");
+    }, 1000);
   } else {
     window.alert("Docking fee: 10 credits");
     if (spaceship.credits < 10) {
