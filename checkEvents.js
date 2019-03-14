@@ -10,7 +10,10 @@ function checkEvents(x, y){
   }
 
   if(gameSpace[x][y].celestialObjects.includes("Meteor Storm")){
-    alert("Meteor Storm. Ship damaged! Energy will now deplete at 5 time the usual.");
+    playMusic("meteor storm");
+    setTimeout(function() {
+      alert("Meteor Storm. Ship damaged! Energy will now deplete at 5 time the usual.");
+    }, 1000);
     spaceship.damaged = true;
     return 2;
   }
