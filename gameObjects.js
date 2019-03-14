@@ -148,15 +148,25 @@ function WinningRecipeCheck() {
 	
 	if(Config != null) {
 		if(spaceship.location[0] == Config[11] && spaceship.location[1] == Config[12]) {
-			window.alert("YOU FOUND THE SECRET KOCA-KOLA RECIPE!!! YOU WIN!!!");
-			window.location.reload();
+			document.getElementById("overlay").classList.add("black-overlay-animatable");
+    		document.getElementById("overlay").classList.remove("hidden");
+			alertWin();
 		}
 	}
 
 	if(Config == null && spaceship.location[0] == 25 && spaceship.location[1] == 25) {
-		window.alert("YOU FOUND THE SECRET KOCA-KOLA RECIPE!!! YOU WIN!!!");
-		window.location.reload();
+		document.getElementById("overlay").classList.add("black-overlay-animatable");
+    	document.getElementById("overlay").classList.remove("hidden");
+		alertWin();
 	}
+}
+
+function alertWin() {
+  playMusic("win");
+  setTimeout(function() {
+    window.alert("YOU FOUND THE SECRET KOCA-KOLA RECIPE!!! YOU WIN!!!");
+    window.location.reload();
+  }, 1000);
 }
 
 function checkCollision(intDistance, direction) {
@@ -180,7 +190,7 @@ function checkCollision(intDistance, direction) {
         return i+1;
     	}
     }
-    if(Config == null && (xCoor == 6 && yCoor == 5 || xCoor == 0 && yCoor == 1 || xCoor == 3 && yCoor == 2) ) {
+    if(Config == null && (xCoor == 6 && yCoor == 5 || xCoor == 18 && yCoor == 6 || xCoor == 3 && yCoor == 2) ) {
       return i+1;
     }
   }
@@ -225,10 +235,9 @@ function supplyDecrease() {
 }
 
 function setData() {
-  document.getElementById("location").innerHTML = "Current Location: (" + spaceship.location[0] + ", " + spaceship.location[1] + ")";
-  document.getElementById("energy").innerHTML = "Energy: " + spaceship.energy;
-  document.getElementById("supplies").innerHTML = "Supplies: " + spaceship.supplies;
-  document.getElementById("credits").innerHTML = "Credits: " + spaceship.credits;
+  document.getElementById("energy").innerHTML = spaceship.energy;
+  document.getElementById("supplies").innerHTML = spaceship.supplies;
+  document.getElementById("credits").innerHTML = spaceship.credits;
 }
 
 var celestialMap = {
@@ -236,10 +245,10 @@ var celestialMap = {
 
   // Returns formatted HTML of CM
   toHTML : function() {
-    var html = "<tr><th>Celestial object</th><th>Location</th></tr>";
+    var html = "<tr><th>celestial object</th><th>location</th></tr>";
     this.celestialPoints.forEach(function(cp) {
       cp.celestialObjects.forEach(function(co) {
-        html += "<tr><td>" + co + "</td><td>" + cp.location[0] + ", " + cp.location[1] + "</td></tr>";
+        html += "<tr><td>" + co + "</td><td>" + cp.location.toString() + "</td></tr>";
       });
     });
     return html;
@@ -278,7 +287,7 @@ window.onload = function() {
   spaceship.displayCurrentCP();
   
   //Default Map items
-  Default = [25, 25, 2, 0, 5, 1, 6, 5, 30, 48, 83, 14, 19, 65, 24, 39, 62, 11, 33, 2, 6, 12, 24, 35, 78, 26, 90, 5, 0, 1, 3, 2, 5, 20, 14, 8, 32, 0, 2, 25, 0, 30 ,71, 25, 55, 76, 102, 82, 20, 37, 7, 7];
+  Default = [25, 25, 2, 0, 5, 1, 6, 5, 30, 48, 83, 14, 19, 65, 24, 39, 62, 11, 33, 2, 6, 12, 24, 35, 78, 26, 90, 5, 18, 6, 3, 2, 5, 20, 14, 8, 32, 0, 2, 25, 0, 30 ,71, 25, 55, 76, 102, 82, 20, 37, 7, 7];
   MapItemNames = ["Winning Recipe", "Planet Celeron", "Planet Xeon", "Planet Ryzen", "Space Station", "Space Station", "Space Station", "Freighter", "Freighter", "Freighter", "Meteor Storm", "Meteor Storm","Meteor Storm", "Asteroid", "Asteroid", "Asteroid", "Venus", "Mars", "Jupiter", "Mercury", "Sun", "Saturn", "Uranus", "Neptune", "Moon", "Bad Max"];
 
   //Map population
@@ -328,10 +337,10 @@ function celestialPoint(location) {
   this.celestialObjects = [];
 
   this.toHTML = function() {
-    var html = "<h2>Location: (" + this.location[0] + ", " + this.location[1] + ")</h2>";
+    var html = "<h2>location (" + this.location.toString() + ")</h2>";
 
     if (this.celestialObjects.length === 0) {
-      html += "<p>Empty space...</p>";
+      html += "<p>empty space...</p>";
     } else {
       this.celestialObjects.forEach(function(co) {
         html += "<p>" + co + "</p>";
@@ -339,6 +348,10 @@ function celestialPoint(location) {
     }
 
     return html;
+  };
+
+  this.toHTMLTableRow = function() {
+    return "<tr><td>" + this.location.toString() + "</td><td>" + this.celestialObjects.toString() + "</td>";
   };
 }
 
@@ -369,13 +382,13 @@ document.getElementById("sensorsBtn").onclick = function() {
   }
 
   function displayNearbyCPs(range) {
-    // Header
-    document.getElementById("nearbyCPs").innerHTML = "<h1><em>Nearby Celestial Points</em></h1>";
+    var html = "<tr><th>location</th><th>objects</th></tr>";
 
-    // All nearby CPs
     getNearbyCPCoords(range).forEach(function(CPCoords) {
-      document.getElementById("nearbyCPs").innerHTML += gameSpace[CPCoords[0]][CPCoords[1]].toHTML();
+      html += gameSpace[CPCoords[0]][CPCoords[1]].toHTMLTableRow();
     });
+
+    document.getElementById("nearbyCPsTemp").innerHTML = html;
   }
 
   // Range can be improved to 5, for now it's hardcoded to be 2

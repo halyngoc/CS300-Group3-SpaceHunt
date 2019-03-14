@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="stylesheet" href="user_profile_menu_style.css" type="text/css">
   <link rel="stylesheet" href="./main.css">
   <title>
   SpaceHunt Dream Team 3
@@ -10,24 +9,25 @@
 </head>
 
 <body>
+  <div id="overlay" class="hidden"></div>
   <header>
 
     <h1>
-      <b>Galactic Schooner OldSpice Bridge Display</b>
+      <b class="rainbow-text">GaLaCtIc ScHoOnEr OlDsPiCe BrIdGe DiSpLaY</b>
     </h1>
       
     <!-- US_2.5_Nameable Persistent State -->
     <script src="Save_Game_Module.js"></script>
       <form>
-        <fieldset id="profile_menu">
+        <fieldset class="border" id="profile_menu">
           <select id="user_select">
-            <option> Select Profile </option>
+            <option>select profile</option>
           </select>
-          <button type="button" id="save_game" onclick="Save_Game_Module.store_user_data()"> Save Game </button>
-          <button type="button" id="load_game" onclick="Save_Game_Module.load_user_data()"> Load Game </button>
-          <span id="new_username_text"> &nbsp &nbsp &nbsp New Username: </span> <input type="text" id="new_user">
-          <button type="button" id="add_profile" onclick="Save_Game_Module.add_user()"> Add Profile </button>
-          <button type="button" id="clear_profiles" onclick="Save_Game_Module.clear_users()"> Clear Profiles </button>
+          <button class="button" type="button" id="save_game" onclick="Save_Game_Module.store_user_data()">save</button>
+          <button class="button" type="button" id="load_game" onclick="Save_Game_Module.load_user_data()">load</button>
+          <span id="new_username_text"> &nbsp &nbsp &nbsp new username: </span> <input type="text" class="border" id="new_user">
+          <button class="button" type="button" id="add_profile" onclick="Save_Game_Module.add_user()">add profile</button>
+          <button class="button" type="button" id="clear_profiles" onclick="Save_Game_Module.clear_users()">clear profiles</button>
         </fieldset>
       </form>
     <script> Save_Game_Module.load_users(); </script>
@@ -35,57 +35,78 @@
 
   <section>
     <article class="col-left">
-      <p>Celestial gazetteer</p>  
-      <div id="gazetteerContainer">
-        <table id="gazetteer"></table>
+      <p class="no-margin-bottom">the only source of entertainment you'll get</p>
+      <div class="border" id="youtubeContainer">
+        <img src="http://www.bromygod.com/wp-content/uploads/2013/11/dodge-meme-014-11132013.jpg" width="100%" alt="nothing">
+        <audio controls id="musicControls"  class="hidden">
+          <source id="musicSource" src="" type="audio/mpeg">
+          browser no support audio
+        </audio>
+      </div>
+      
+      <p class="no-margin-bottom">celestial gazetteer</p>  
+      <div class="border vertical-scrollbar" id="gazetteerContainer">
+        <table width="100%" id="gazetteer"></table>
       </div>
     </article>
-    <article class="col-right">
+    <article>
       <center><form id="newTurn">
-        <label for="distance">Distance </label>
+        <label for="distance">i can go the distance</label>
         <select name="distance" id="distance"><br>
         <option> 0 <option> 1 <option> 2 <option> 3
         <option> 4 <option> 5 <option> 6 <option> 7
         <option> 8 <option> 9 <option> 10
         </select> <br><br>
+
+        <div class="diamond-btn-group-container">
+          <div class="diamond-btn-group">
+            <div class="diamond-btn-row">
+              <button type="button" class="diamond-btn button" id="up">
+                <p>uppity</p>
+              </button>
+              <button type="button" class="diamond-btn button" id="right">
+                <p>roight</p>
+              </button>
+            </div>
+            <div class="diamond-btn-row">
+              <button type="button" class="diamond-btn button" id="left">
+                <p>leff</p>
+              </button>
+              <button type="button" class="diamond-btn button" id="down">
+                <p>dunn</p>
+              </button>
+            </div>
+          </div>
+        </div>
     
-        <input type="button" id="up" value="Up"><br>
-        <input type="button" id="left" value="Left">
-        <input type="button" id="right" value="Right"><br>
-        <input type="button" id="down" value="Down"><br><br>
-    
-    	<input type="button" class="hidden" id="gambleBtn" value="Gamble!">
-        <input type="button" id="sensorsBtn" value="Deploy sensors">
+    	<input class="button hidden" type="button" id="gambleBtn" value="gamble">
+        <input class="button" type="button" id="sensorsBtn" value="sensors">
       </form></center>
+    </article>
     
-      <hr>
-      
-      <div id="currentStatus">
-        <h1> 
-          <em>Current Status</em>
-        </h1>
-        <p id="location">Current Location: (0, 0)</p>
-        <p id="energy">Energy: 1000</p>	
-        <p id="supplies">Supplies: 100</p>
-        <p id="credits">Credits: 1000</p>
-        <p id="All systems ready">Message: All systems ready</p>
+    <article class="col-right">
+      <p class="no-margin-bottom">status</p>
+      <div class="border" id="statusContainer">
+        <table width="100%">
+          <tr><td>energy</td><td id="energy" align="right">1000</td></tr>
+          <tr><td>supplies</td><td id="supplies" align="right">100</td></tr>
+          <tr><td>credits</td><td id="credits" align="right">1000</td></tr>
+        </table>
       </div>
-    
-      <div id="currentCP">
-        <h1><em>Current Celestial Point</em></h1>
-        <div id="currentCPcontent"></div>
+      <p class="no-margin-bottom">current celestial point</p>
+      <div class="border" id="currentCPContainer">
+        <div id="currentCPcontent" align="center"></div>
       </div>
-    
-      <div id="nearbyCPs"></div>
+      <p class="no-margin-bottom">nearby celestial points</p>
+      <div class="border vertical-scrollbar" id="nearbyCPsContainer">
+        <table width="100%" id="nearbyCPsTemp"></table>
+      </div>
     </article>
   </section>
 
   <footer>
-    <h2>
-       <em>Developer Option</em>
-     </h2>
-    <p>Are you a Developer?</p>
-    <a href="devOptions.html"><button>I'm a Dev</button></a>
+    <p class="no-margin-bottom">yew a D e V e L o P e R?</p>
+    <a href="devOptions.html"><button class="button">im dev</button></a>
   </footer>
 
   <script src="gameObjects.js"></script>
@@ -93,7 +114,8 @@
   <script src="gamble.js"></script>
   <script src="checkEvents.js"></script>
   <script src="death.js"></script>
-
+  <script src="buttonAnimation.js"></script>
+  <script src="musicPlayer.js"></script>
 
 </body>
 </html>
