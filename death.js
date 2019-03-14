@@ -18,6 +18,8 @@ else {
 function death(causeOfDeath)
 {
   if(Mortal == true) {
+    document.getElementById("overlay").classList.add("black-overlay-animatable");
+    document.getElementById("overlay").classList.remove("hidden");
     playMusic("die");
     setTimeout(function() {
       alertDeath(causeOfDeath);

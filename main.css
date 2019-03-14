@@ -5,6 +5,18 @@
     background: var(--background-color);
 }
 
+#overlay {
+    margin: 0;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0; 
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+}
+
 .no-margin-bottom {
     margin-bottom: 0;
 }
@@ -56,9 +68,23 @@ section {
     }
 }
 
+@keyframes black-overlay {
+    from {
+        background-color: rgba(0, 0, 0, 0);
+    }
+    to {
+        background-color: rgba(0, 0, 0, 1);
+    }
+}
+
 .btn-click-animatable {
     animation-name: btn-click;
     animation-duration: 0.5s;
+}
+
+.black-overlay-animatable {
+    animation-name: black-overlay;
+    animation-duration: 2s;
 }
 
 select, .button {
@@ -123,13 +149,13 @@ td {
 
 ::-webkit-scrollbar-track
 {
-	background-color: var(--background-color);
+	background-color: transparent;
 }
 
 ::-webkit-scrollbar
 {
 	width: 0.5em;
-	background-color: var(--background-color);
+	background-color: transparent;
 }
 
 ::-webkit-scrollbar-thumb
