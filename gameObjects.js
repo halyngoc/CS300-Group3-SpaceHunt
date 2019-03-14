@@ -148,11 +148,15 @@ function WinningRecipeCheck() {
 	
 	if(Config != null) {
 		if(spaceship.location[0] == Config[11] && spaceship.location[1] == Config[12]) {
+			document.getElementById("overlay").classList.add("black-overlay-animatable");
+    		document.getElementById("overlay").classList.remove("hidden");
 			alertWin();
 		}
 	}
 
 	if(Config == null && spaceship.location[0] == 25 && spaceship.location[1] == 25) {
+		document.getElementById("overlay").classList.add("black-overlay-animatable");
+    	document.getElementById("overlay").classList.remove("hidden");
 		alertWin();
 	}
 }
@@ -283,7 +287,7 @@ window.onload = function() {
   spaceship.displayCurrentCP();
   
   //Default Map items
-  Default = [25, 25, 2, 0, 5, 1, 6, 5, 30, 48, 83, 14, 19, 65, 24, 39, 62, 11, 33, 2, 6, 12, 24, 35, 78, 26, 90, 5, 0, 1, 3, 2, 5, 20, 14, 8, 32, 0, 2, 25, 0, 30 ,71, 25, 55, 76, 102, 82, 20, 37, 7, 7];
+  Default = [25, 25, 2, 0, 5, 1, 6, 5, 30, 48, 83, 14, 19, 65, 24, 39, 62, 11, 33, 2, 6, 12, 24, 35, 78, 26, 90, 5, 18, 6, 3, 2, 5, 20, 14, 8, 32, 0, 2, 25, 0, 30 ,71, 25, 55, 76, 102, 82, 20, 37, 7, 7];
   MapItemNames = ["Winning Recipe", "Planet Celeron", "Planet Xeon", "Planet Ryzen", "Space Station", "Space Station", "Space Station", "Freighter", "Freighter", "Freighter", "Meteor Storm", "Meteor Storm","Meteor Storm", "Asteroid", "Asteroid", "Asteroid", "Venus", "Mars", "Jupiter", "Mercury", "Sun", "Saturn", "Uranus", "Neptune", "Moon", "Bad Max"];
 
   //Map population
