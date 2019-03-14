@@ -3,7 +3,9 @@ var eventToMusic = {
     win: [["rick roll", 0], ["trololo", 0]],
     die: [["windows xp shutdown", 0], ["my heart will go on recorder", 19], ["why are we still here", 0]],
     "bad max": [["star wars", 0]],
-    "meteor storm": [["darude sandstorm", 30]]
+    freighter: [["dial up", 6]],
+    "meteor storm": [["darude sandstorm", 30]],
+    planet: [["russian anthem", 4]]
 };
 
 function playMusic(event) {
