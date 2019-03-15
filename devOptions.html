@@ -32,7 +32,7 @@
     <input type="text" name="energy" id="Energy" style="width: 75%;" value="1000"><br>
 
     <!-- Supplies -->
-    <label "supplies"><b>Supplies: </b></label><br>
+    <label for="supplies"><b>Supplies: </b></label><br>
     <input type="text" name="supplies" id="Supplies" style="width: 75%;" value="100"><br>
 
     <!-- Credits -->
@@ -52,14 +52,6 @@
         <input type="radio" name="playtype" id="Mortal" checked> Mortal <br>
         <input type="radio" name="playtype" id="Immortal"> Immortal <br></br><br>
 
-    <!-- Winning Recipe Location -->
-    <label for=recipe><b>Winning Recipe Location: </b></label><br>
-    <input type="radio" name="recipe" id="RandomRecipe" checked> Random <br>
-    <input type="radio" name="recipe" id="FixedRecipe"> Fixed <br><br>
-
-    &nbsp;&nbsp;&nbsp;&nbsp;
-    <label for=recipe><b>Winning Recipe Fixed Location: </b></label><br>
-    <input type="text" name="recipe" id="RecipeLocation" style="margin-left: 1.5%; width: 35%;" value="25,25"><br>
 
     <!-- Map Items -->
     <label><b>Map Items: </b></label><br>
@@ -79,6 +71,14 @@
     &nbsp;&nbsp;&nbsp;&nbsp;
     <label for=fixplanet><b>Planet Ryzen Location: </b></label><br>
     <input type="text" name="planetRyzen" id="planetRyzen" style="margin-left: 1.5%; width: 35%;" value="6,5"><br><br>
+
+ 	<!-- Winning Recipe Location -->
+    <label for=recipe><b>Winning Recipe Location: </b></label><br>
+    <input type="radio" name="recipe" id="RandomRecipe" checked> Random <br><br>
+    
+    <input type="radio" name="recipe" id="CeleronRecipe"> Celeron <br>
+    <input type="radio" name="recipe" id="XeonRecipe"> Xeon <br>
+    <input type="radio" name="recipe" id="RyzenRecipe"> Ryzen <br><br>
 
 
      <!-- SPACE STATIONS -->
