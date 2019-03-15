@@ -154,7 +154,7 @@ function WinningRecipeCheck() {
 		}
 	}
 
-	if(Config == null && spaceship.location[0] == 25 && spaceship.location[1] == 25) {
+	if(Config == null && spaceship.location[0] == 6 && spaceship.location[1] == 5) {
 		document.getElementById("overlay").classList.add("black-overlay-animatable");
     	document.getElementById("overlay").classList.remove("hidden");
 		alertWin();
@@ -164,7 +164,7 @@ function WinningRecipeCheck() {
 function alertWin() {
   playMusic("win");
   setTimeout(function() {
-    window.alert("YOU FOUND THE SECRET KOCA-KOLA RECIPE!!! YOU WIN!!!");
+    window.alert("YOU FOUND THE SECRET KOCA-KOLA RECIPE!!! YOU WIN AND GAIN A ZILLION CREDITS!!!");
     window.location.reload();
   }, 1000);
 }
@@ -287,19 +287,24 @@ window.onload = function() {
   spaceship.displayCurrentCP();
   
   //Default Map items
-  Default = [25, 25, 2, 0, 5, 1, 6, 5, 30, 48, 83, 14, 19, 65, 24, 39, 62, 11, 33, 2, 6, 12, 24, 35, 78, 26, 90, 5, 18, 6, 3, 2, 5, 20, 14, 8, 32, 0, 2, 25, 0, 30 ,71, 25, 55, 76, 102, 82, 20, 37, 7, 7];
-  MapItemNames = ["Winning Recipe", "Planet Celeron", "Planet Xeon", "Planet Ryzen", "Space Station", "Space Station", "Space Station", "Freighter", "Freighter", "Freighter", "Meteor Storm", "Meteor Storm","Meteor Storm", "Asteroid", "Asteroid", "Asteroid", "Venus", "Mars", "Jupiter", "Mercury", "Sun", "Saturn", "Uranus", "Neptune", "Moon", "Bad Max"];
+  Default = [ 6, 5, 2, 0, 5, 1, 6, 5, 30, 48, 83, 14, 19, 65, 24, 39, 62, 11, 33, 2, 6, 12, 24, 35, 78, 26, 90, 5, 18, 6, 3, 2, 5, 20, 14, 8, 32, 0, 2, 25, 0, 30 ,71, 25, 55, 76, 102, 82, 20, 37, 7, 7];
+  MapItemNames = ["Planet Celeron", "Planet Xeon", "Planet Ryzen", "Space Station", "Space Station", "Space Station", "Freighter", "Freighter", "Freighter", "Meteor Storm", "Meteor Storm","Meteor Storm", "Asteroid", "Asteroid", "Asteroid", "Venus", "Mars", "Jupiter", "Mercury", "Sun", "Saturn", "Uranus", "Neptune", "Moon", "Bad Max"];
 
   //Map population
 
   if(devConfig) {	//dev Config items
     j = 0;
   	for(i = 11; i < Config.length; i += 2) {     
-      if(Config[i] != 0.5 && Config[i+1] != 0.5) {
-        gameSpace[Config[i]][Config[i+1]].celestialObjects.push(MapItemNames[j]);	
+      if(i == 11) {
+        //console.log("Recipe: ", Config[i], " ", Config[i+1]);
+        gameSpace[Default[i]][Default[i+1]].celestialObjects.push();
+      } else {
+        if(Config[i] != 0.5 && Config[i+1] != 0.5) {
+          gameSpace[Config[i]][Config[i+1]].celestialObjects.push(MapItemNames[j]);	
+        }
+        j += 1; 
+        //onsole.log("ConfigX: ", Config[i], " ConfigY: ", Config[i+1], "Name: ", MapItemNames[j] );
   		} 
-  		//console.log("ConfigX: ", Config[i], " ConfigY: ", Config[i+1], "Name: ", MapItemNames[j] );
-  		j += 1;	
   	}
   	
   	j = 16;
@@ -313,9 +318,13 @@ window.onload = function() {
 
     j = 0;
   	for(i = 0; i < Default.length; i += 2) {
-  		gameSpace[Default[i]][Default[i+1]].celestialObjects.push(MapItemNames[j]);	
-  		//console.log("DefaultX: ", Default[i], " DefaultY: ", Default[i+1], "Name: ", MapItemNames[j] );
-  		j += 1;
+      if(i == 0) {
+        gameSpace[Default[i]][Default[i+1]].celestialObjects.push();
+      } else {
+  		  gameSpace[Default[i]][Default[i+1]].celestialObjects.push(MapItemNames[j]);	
+  		  //console.log("DefaultX: ", Default[i], " DefaultY: ", Default[i+1], "Name: ", MapItemNames[j] );
+  		  j += 1;
+      }
   	}
   }
   

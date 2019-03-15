@@ -3,7 +3,6 @@ function setStateData()
     var RandWrm;
     var FixWrmLocation = ['0.5', '0.5'];
     var PlayStyleMor;
-    var RecipeLoc = ['0.5', '0.5'];
 
     //textbox value pulls
     var MapSize = document.getElementById("Dimensions").value;
@@ -29,15 +28,6 @@ function setStateData()
     } else if (document.getElementById("Immortal").checked) {
       PlayStyleMor = '0';
     }
-
-    if(document.getElementById("RandomRecipe").checked){
-      RecipeLoc[0] = Math.floor((Math.random() * MapSize[0] + 1));
-      RecipeLoc[1] = Math.floor((Math.random() * MapSize[1] + 1));
-
-    } else if (document.getElementById("FixedRecipe").checked) {
-      RecipeLoc = document.getElementById("RecipeLocation").value;
-      RecipeLoc = RecipeLoc.split(',');
-    }
  
     //bounds checking
     if(Number(MapSize[0]) < 9 || Number(MapSize[0]) > 255 || Number(MapSize[1]) < 9 || Number(MapSize[1]) > 255){
@@ -55,16 +45,11 @@ function setStateData()
       FixWrmLocation[0] = StartLocation[0]; 
       FixWrmLocation[1] = StartLocation[1];
     }
-    if(Number(MapSize[0]) < Number(RecipeLoc[0]) || Number(MapSize[1]) < Number(RecipeLoc[1]) || Number(RecipeLoc[0]) < 0 || Number(RecipeLoc[1]) < 0) {
-      window.alert("Fixed recipe location must be within the range of the map. Setting Fixed recipe location to the default location 25,25");
-      RecipeLoc[0] = '25'; 
-      RecipeLoc[1] = '25';
-    }
 
     //localStorage string set up
     var parser = "#";
 
-    var StateConfig = MapSize[0].concat(parser, MapSize[1], parser, StartLocation[0], parser, StartLocation[1], parser, Eng, parser, Supl, parser, Cred, parser, RandWrm, parser, FixWrmLocation[0], parser, FixWrmLocation[1], parser, PlayStyleMor, parser, RecipeLoc[0], parser, RecipeLoc[1]);
+    var StateConfig = MapSize[0].concat(parser, MapSize[1], parser, StartLocation[0], parser, StartLocation[1], parser, Eng, parser, Supl, parser, Cred, parser, RandWrm, parser, FixWrmLocation[0], parser, FixWrmLocation[1], parser, PlayStyleMor);
     
     setMapData(StateConfig, MapSize, parser);
 }
@@ -74,7 +59,9 @@ function setStateData()
 function setMapData(StateConfig, MapSize, parser) {
 
     var i;
+    var RecipeRand;
     var PlanetCeleron = ['0.5', '0.5']; PlanetXeon = ['0.5', '0.5']; PlanetRyzen = ['0.5', '0.5'];
+    var RecipeLoc = ['0.5', '0.5'];
     var Planets = [ PlanetCeleron[0], PlanetCeleron[1], PlanetXeon[0], PlanetXeon[1], PlanetRyzen[0], PlanetRyzen[1] ];
 
     var NumberofStations = document.getElementById("StationNum").value;
@@ -107,7 +94,34 @@ function setMapData(StateConfig, MapSize, parser) {
       Planets = [ PlanetCeleron[0], PlanetCeleron[1], PlanetXeon[0], PlanetXeon[1], PlanetRyzen[0], PlanetRyzen[1] ];
     }
     
-    
+    if(document.getElementById("RandomRecipe").checked) { RecipeRand = Math.floor((Math.random() * 3) + 1); }
+
+    if(document.getElementById("CeleronRecipe").checked || RecipeRand == 1) {
+      if(document.getElementById("RandomPlanet").checked){
+        RecipeLoc[0] = Planets[0];
+        RecipeLoc[1] = Planets[1];
+      } else {
+        RecipeLoc[0] = PlanetCeleron[0];
+        RecipeLoc[1] = PlanetCeleron[1];
+      }
+    } else if(document.getElementById("XeonRecipe").checked || RecipeRand == 2) {
+      if(document.getElementById("RandomPlanet").checked){
+        RecipeLoc[0] = Planets[2];
+        RecipeLoc[1] = Planets[3];
+      } else {
+        RecipeLoc[0] = PlanetXeon[0];
+        RecipeLoc[1] = PlanetXeon[1];
+      }
+    } else if(document.getElementById("RyzenRecipe").checked || RecipeRand == 3) {
+      if(document.getElementById("RandomPlanet").checked){
+        RecipeLoc[0] = Planets[4];
+        RecipeLoc[1] = Planets[5];
+      } else {
+        RecipeLoc[0] = PlanetRyzen[0];
+        RecipeLoc[1] = PlanetRyzen[1];
+      }
+    }
+
     //Space stations
     if(NumberofStations != 0) {
       if(document.getElementById("RandomStation").checked) {
@@ -184,8 +198,8 @@ function setMapData(StateConfig, MapSize, parser) {
     }
     
 
-    //all 30 Map Items loaded (Planets, Space Stations, Abandoned Freighter, Meteor Storms, or Asteroids)
-    var MapItems = [Planets[0], Planets[1], Planets[2], Planets[3], Planets[4], Planets[5], SpaceStations[0], SpaceStations[1], SpaceStations[2], SpaceStations[3], SpaceStations[4], SpaceStations[5], AbandonedFreighter[0], AbandonedFreighter[1], AbandonedFreighter[2], AbandonedFreighter[3], AbandonedFreighter[4], AbandonedFreighter[5], MeteorStorms[0], MeteorStorms[1], MeteorStorms[2], MeteorStorms[3], MeteorStorms[4], MeteorStorms[5], Asteroids[0], Asteroids[1], Asteroids[2], Asteroids[3], Asteroids[4], Asteroids[5] ];
+    //all 32 Map Items loaded (Recipe, Planets, Space Stations, Abandoned Freighter, Meteor Storms, or Asteroids)
+    var MapItems = [RecipeLoc[0], RecipeLoc[1], Planets[0], Planets[1], Planets[2], Planets[3], Planets[4], Planets[5], SpaceStations[0], SpaceStations[1], SpaceStations[2], SpaceStations[3], SpaceStations[4], SpaceStations[5], AbandonedFreighter[0], AbandonedFreighter[1], AbandonedFreighter[2], AbandonedFreighter[3], AbandonedFreighter[4], AbandonedFreighter[5], MeteorStorms[0], MeteorStorms[1], MeteorStorms[2], MeteorStorms[3], MeteorStorms[4], MeteorStorms[5], Asteroids[0], Asteroids[1], Asteroids[2], Asteroids[3], Asteroids[4], Asteroids[5] ];
     //window.alert(MapItems.join("\n"));
 
     BoundsChecking(StateConfig, MapItems, MapSize, parser);
@@ -217,20 +231,20 @@ function BoundsChecking(StateConfig, MapItems, MapSize, parser) {
   }
   
 
-  //Planets added to overall string
-  StateConfig = StateConfig.concat(parser, MapItems[0], parser, MapItems[1], parser, MapItems[2], parser, MapItems[3], parser, MapItems[4], parser, MapItems[5]);
+  //Recipe and Planets added to overall string
+  StateConfig = StateConfig.concat(parser, MapItems[0], parser, MapItems[1], parser, MapItems[2], parser, MapItems[3], parser, MapItems[4], parser, MapItems[5], parser, MapItems[6], parser, MapItems[7]);
   
   //Space stations added
-  StateConfig = StateConfig.concat(parser, MapItems[6], parser, MapItems[7], parser, MapItems[8], parser, MapItems[9], parser, MapItems[10], parser, MapItems[11]);
+  StateConfig = StateConfig.concat(parser, MapItems[8], parser, MapItems[9], parser, MapItems[10], parser, MapItems[11], parser, MapItems[12], parser, MapItems[13]);
   
   //Abandoned Freighters added
-  StateConfig = StateConfig.concat(parser, MapItems[12], parser, MapItems[13], parser, MapItems[14], parser, MapItems[15], parser, MapItems[16], parser, MapItems[17]);
+  StateConfig = StateConfig.concat(parser, MapItems[14], parser, MapItems[15], parser, MapItems[16], parser, MapItems[17], parser, MapItems[18], parser, MapItems[19]);
   
   //Meteors Storms added
-  StateConfig = StateConfig.concat(parser, MapItems[18], parser, MapItems[19], parser, MapItems[20], parser, MapItems[21], parser, MapItems[22], parser, MapItems[23]);
+  StateConfig = StateConfig.concat(parser, MapItems[20], parser, MapItems[21], parser, MapItems[22], parser, MapItems[23], parser, MapItems[24], parser, MapItems[25]);
   
   //Asteroids added
-  StateConfig = StateConfig.concat(parser, MapItems[24], parser, MapItems[25], parser, MapItems[26], parser, MapItems[27], parser, MapItems[28], parser, MapItems[29]);
+  StateConfig = StateConfig.concat(parser, MapItems[26], parser, MapItems[27], parser, MapItems[28], parser, MapItems[29], parser, MapItems[30], parser, MapItems[31]);
   
 
   //window.alert(StateConfig);
